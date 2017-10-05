@@ -1,0 +1,11 @@
+{
+  "source": "./src",
+  "destination": "./generated_docs",
+  "index": "./README.md",
+  "undocumentIdentifier": true,
+  "unexportIdentifier": true,
+  "includes": ["\\.(js|es6)$"],
+  "plugins": [
+    {"name": "esdoc-es7-plugin"}
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "name": "@ctg-ui/Navbar-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/Navbar-ui.js",
+  "scripts": {
+    "build": "webpack --config webpack.production.config.js --progress --profile --colors",
+    "start": "webpack-dev-server --progress --profile --colors",
+    "lint": "eslint --fix ./src",
+    "precommit": "npm run lint",
+    "prepush": "npm test && npm run docs-deploy",
+    "dev": " webpack-dashboard -- webpack-dev-server --progress --profile --colors",
+    "docs": "mkdirp generated_docs && rimraf generated_docs && esdoc -c esdoc.json",
+    "docs-deploy": "npm run docs && gh-pages -d generated_docs -m '[STAR-1560] gh-pages docs updated.'",
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.intuit.com/CTG-UI/Navbar-ui"
+  },
+  "engines": {
+    "node": "6.9.2"
+  },
+  "author": "Avanish Pathak",
+  "license": "ISC",
+  "dependencies": {
+    "react": "15.6.1",
+    "react-dom": "15.4.2"
+  },
+  "ava": {
+    "require": [
+      "babel-register",
+      "./tools/setup-browser-env.js",
+      "ignore-styles"
+    ],
+    "babel": "inherit",
+    "concurrency": 5,
+		"failFast": true,
+		"tap": true,
+    "verbose": true
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "babel-core": "^6.23.1",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1",
+    "babel-plugin-transform-class-properties": "^6.22.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-runtime": "^6.22.0",
+    "babel-preset-es2015": "6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-runtime": "^6.22.0",
+    "browser-env": "~3.1.2",
+    "css-loader": "0.26.1",
+    "enzyme": "^2.9.1",
+    "esdoc": "^0.4.8",
+    "esdoc-es7-plugin": "0.0.3",
+    "eslint": "^4.3.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.10.0",
+    "gh-pages": "^1.0.0",
+    "html-webpack-plugin": "^2.26.0",
+    "ignore-styles": "~5.0.1",
+    "loglevel": "^1.4.1",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.3.0",
+    "postcss-loader": "^1.2.2",
+    "react-addons-test-utils": "^15.6.0",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "react-test-renderer": "^15.6.1",
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.2",
+    "style-loader": "0.13.1",
+    "url-loader": "0.5.7",
+    "webpack": "^3.3.0",
+    "webpack-cleanup-plugin": "^0.4.2",
+    "webpack-dashboard": "^0.3.0",
+    "webpack-dev-server": "^2.4.1"
+  }
+}

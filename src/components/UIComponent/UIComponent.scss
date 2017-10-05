@@ -1,0 +1,29 @@
+@import './../_variables.scss';
+
+ .container {
+   position: absolute;
+   text-align: center;
+   top: 46%;
+   left: 45%;
+   background-color: $containerGrey;
+   font-size: 14px;
+   font-weight: 100;
+   letter-spacing: 1px;
+   color: white;
+   user-select: none;
+   width: 129px;
+   height: 60px;
+
+   &:hover {
+     background-color: $containerGreyHover;
+     cursor: cell;
+   }
+
+   &:active {
+     font-size: 16px;
+   }
+
+   .text {
+     padding-top: 5%;
+   }
+ }

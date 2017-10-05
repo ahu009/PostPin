@@ -1,0 +1,8 @@
+.git
+node_modules
+src
+.babelrc
+.eslintrc
+.gitignore
+webpack.config.js
+docs
