@@ -1,4 +1,7 @@
-# Starter Kit Guide
+Technologies we will be using:
+- Firebase for backend (ez af)
+- React for front end
+
 ### Shit you need
 - Yarn and npm (google how to install with brew)
 - node version 6.9.2 (```npm install -g n; n 6.9.2```)
