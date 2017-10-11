@@ -29,12 +29,14 @@ npm start;
 - Search screen (Search engine, filters, post button)
 - Post screen (Post your shit, upload images)
 
-### Features
-- Location/School based searching
-- Auto email (confirmation after post)
-- Search Engine
-- Filters for products
-- Upload images
-- Edit existing post
-- Create existing post
-- Password protection for posts
+### Features (Add whatever you want, need to narrow to 8)
+1. Location/School based searching
+2. Auto email (confirmation after post)
+3. Search Engine
+4. Product filters
+5. Upload images
+6. Edit existing post
+7. Create new post
+8. Password protection
+9. Account creation
+10. Comment posting
