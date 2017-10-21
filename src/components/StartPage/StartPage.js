@@ -2,7 +2,7 @@ import React from 'react';
 import style from './StartPage.scss';
 
 import Dropdown from './Dropdown';
-import SubmitButton from './SubmitButton';
+
 /**
  * UI Component
  * @type {Class}
