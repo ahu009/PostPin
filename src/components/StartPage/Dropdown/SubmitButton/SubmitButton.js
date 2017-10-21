@@ -33,10 +33,18 @@ class SubmitButton extends React.Component {
    const clicked = this.state.clicked;
 
    return (
-     <div className={style.container} onClick={this.toggle}>
-       <p className={style.text}>
-         Submit
-       </p>
+     <div>
+       {
+         this.props.shouldHide
+         ?
+         null
+       :
+         <div className={style.container} onClick={this.toggle}>
+          <p className={style.text}>
+             Submit
+          </p>
+         </div>
+       }
      </div>
    );
  }

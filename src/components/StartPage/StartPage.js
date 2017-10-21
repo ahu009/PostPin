@@ -14,12 +14,9 @@ class StartPage extends React.Component {
    */
   render () {
     return (
-      <div>
-        <div className={style.container}>
-          <div className={style.text}> What School Do You Attend?
-            <Dropdown />
-            <SubmitButton />
-          </div>
+      <div className={style.container}>
+        <div className={style.text}> What School Do You Attend?
+          <Dropdown />
         </div>
       </div>
 

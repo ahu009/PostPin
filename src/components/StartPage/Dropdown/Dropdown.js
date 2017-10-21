@@ -1,8 +1,9 @@
 import React from 'react';
-import style from './Dropdown.scss';
+import s from './Dropdown.scss';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
+import SubmitButton from './SubmitButton';
 /**
  * UI Component
  * @type {Class}
@@ -16,7 +17,7 @@ class Dropdown extends React.Component {
    constructor (props) {
      super(props);
      this.state = {
-       placeHolder: 'Select...'
+       placeHolder: null
      };
    }
 
@@ -36,17 +37,18 @@ class Dropdown extends React.Component {
 
     return (
       <div>
-        <Select className={style.dropDown}
+        <Select className={s.dropDown}
         name="University"
         value="one"
         options={options}
         resetValue=''
-        placeholder={value}
+        placeholder={value ? value : 'Select...'}
         onChange={(val) => {
           console.log(val);
           this.setState({placeHolder: val.label})
         }}
         />
+        <SubmitButton shouldHide={value ? false : true}/>
       </div>
     );
   }
