@@ -24,8 +24,9 @@
   "author": "Avanish Pathak",
   "license": "ISC",
   "dependencies": {
-    "react": "15.6.1",
-    "react-dom": "15.4.2"
+    "react": "15.6.2",
+    "react-dom": "15.4.2",
+    "react-select": "^1.0.0-rc.10"
   },
   "ava": {
     "require": [
@@ -35,8 +36,8 @@
     ],
     "babel": "inherit",
     "concurrency": 5,
-		"failFast": true,
-		"tap": true,
+    "failFast": true,
+    "tap": true,
     "verbose": true
   },
   "devDependencies": {

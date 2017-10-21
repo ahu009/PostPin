@@ -2,6 +2,7 @@ import React from 'react';
 
 import style from './App.scss';
 import UIComponent from './../UIComponent';
+import StartPage from './../StartPage';
 
 /**
  * App Component
@@ -15,7 +16,7 @@ export default class App extends React.Component {
   render () {
     return (
       <div className={style.container}>
-        <UIComponent />
+        <StartPage />
       </div>
     );
   }
