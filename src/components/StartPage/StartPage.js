@@ -16,10 +16,10 @@ class StartPage extends React.Component {
   render () {
     const options = [
       {value: 'Stanford University', label: 'Stanford'},
-      {value: 'Stanford University', label: 'Stanford'},
-      {value: 'Stanford University', label: 'Stanford'},
-      {value: 'Stanford University', label: 'Stanford'},
-      {value: 'Stanford University', label: 'Stanford'}
+      {value: 'Stanford University', label: 'UC Berkeley'},
+      {value: 'Stanford University', label: 'UCLA'},
+      {value: 'Stanford University', label: 'UC San Diego'},
+      {value: 'Stanford University', label: 'UC Riverside'}
     ];
 
     return (
