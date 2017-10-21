@@ -1,38 +1,25 @@
 import React from 'react';
 import style from './StartPage.scss';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
+import Dropdown from './Dropdown';
+import SubmitButton from './SubmitButton';
 /**
  * UI Component
  * @type {Class}
- */
+ */5
 class StartPage extends React.Component {
-
   /**
    * Render function for UIComponent Component
    * @return {JSX} Component to render
    */
   render () {
-    const options = [
-      {value: 'Stanford University', label: 'Stanford'},
-      {value: 'Stanford University', label: 'UC Berkeley'},
-      {value: 'Stanford University', label: 'UCLA'},
-      {value: 'Stanford University', label: 'UC San Diego'},
-      {value: 'Stanford University', label: 'UC Riverside'}
-    ];
-
     return (
       <div>
         <div className={style.container}>
-          <p className={style.text}> What School Do You Attend?
-          <Select className={style.dropDown}
-          name="University"
-          value="one"
-          options={options}
-          onChange={val => console.log(val)}
-          />
-          </p>
+          <div className={style.text}> What School Do You Attend?
+            <Dropdown />
+            <SubmitButton />
+          </div>
         </div>
       </div>
 
