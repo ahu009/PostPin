@@ -1,5 +1,7 @@
 import React from 'react';
 import style from './SubmitButton.scss';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+
 
 /**
  * UI Component
@@ -39,11 +41,14 @@ class SubmitButton extends React.Component {
          ?
          null
        :
+       <div>
+        <Link to="/some/where">
          <div className={style.container} onClick={this.toggle}>
-          <p className={style.text}>
-             Submit
-          </p>
+            <p className={style.text}> Submit </p>
          </div>
+         </Link>
+       </div>
+
        }
      </div>
    );

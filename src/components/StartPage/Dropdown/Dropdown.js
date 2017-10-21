@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Dropdown.scss';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+import './Dropdown2.css';
 
 import SubmitButton from './SubmitButton';
 /**

@@ -1,8 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 import style from './App.scss';
-import UIComponent from './../UIComponent';
+import SearchPage from './../SearchPage';
 import StartPage from './../StartPage';
+
 
 /**
  * App Component
@@ -15,9 +17,16 @@ export default class App extends React.Component {
    */
   render () {
     return (
-      <div className={style.container}>
-        <StartPage />
-      </div>
+      <Router>
+        <div className={style.container}>
+          <Route exact={true} path="/" render={()=> (
+            <StartPage />
+          )} />
+          <main>
+            <Route path="/some/where" component={SearchPage} />
+          </main>
+        </div>
+      </Router>
     );
   }
 }

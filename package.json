@@ -26,6 +26,8 @@
   "dependencies": {
     "react": "15.6.2",
     "react-dom": "15.4.2",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-select": "^1.0.0-rc.10"
   },
   "ava": {
