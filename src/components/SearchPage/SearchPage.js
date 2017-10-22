@@ -3,6 +3,9 @@ import style from './SearchPage.scss';
 import SearchBar from 'material-ui-search-bar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import auto from './TempAutoFill';
+import Button from './../Button';
+import { Link } from 'react-router-dom';
+import school from './../../shared/school';
 
 /**
  * UI Component
@@ -18,7 +21,16 @@ class SearchPage extends React.Component {
 
     return (
       <div className={style.container}>
-        <div className={style.text}> Search for an Item </div>
+        <div className={style.school}> Pins in {school.name} </div>
+        <div className={style.text}> Search for Pins </div>
+        <div className={style.button}>
+          <Link to="/">
+            <Button buttonText={'Back'} />
+          </Link>
+          <div className={style.create}>
+            <Button buttonText={'Create Pin'} />
+          </div>
+        </div>
         <MuiThemeProvider>
           <SearchBar
             dataSource={auto}
@@ -26,9 +38,8 @@ class SearchPage extends React.Component {
             onRequestSearch={() => console.log('onRequestSearch')}
             style={{
               width: 700,
-              top: '37%',
-              left: '33%',
-              position: 'absolute'
+              position: 'absolute',
+              left: '33%'
             }}
           />
         </MuiThemeProvider>

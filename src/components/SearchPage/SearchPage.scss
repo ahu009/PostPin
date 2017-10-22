@@ -1,15 +1,27 @@
 @import './../_variables.scss';
 
 .container {
-   .text {
-     left: 33%;
-     margin: auto;
-     margin-top: -100px;
-     position: absolute;
-     top: 40%;
-     width: 700px;
+   .school {
      text-align: center;
      font-family: Arial;
      font-size: 50px;
+   }
+
+   .text {
+     text-align: center;
+     font-family: Arial;
+     font-size: 50px;
+     margin-top: 10%;
+   }
+
+   .button {
+     top: 46%;
+     left: 33%;
+     position: absolute;
+
+     .create {
+       left: 573px;
+       position: relative;
+     }
    }
 }
