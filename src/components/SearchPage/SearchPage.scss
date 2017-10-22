@@ -1,5 +1,30 @@
 @import './../_variables.scss';
 
+
+.inputContainer {
+  top: 55%;
+  left: 30%;
+  position: absolute;
+  .inputText {
+    display: table-cell;
+    font-size: 30px;
+  }
+  .input2 {
+    position: relative;
+  }
+  .dash {
+    font-size: 30px;
+    display: inline;
+  }
+}
+
+.buttonContainer {
+  margin-top: 45%;
+  .modal2 {
+    margin-left: 86%;
+  }
+}
+
 .container {
    .school {
      text-align: center;
@@ -22,6 +47,17 @@
      .create {
        left: 573px;
        position: relative;
+     }
+
+     .filter {
+       left: 330px;
+       position: relative;
+       text-decoration: underline;
+       font-size: 18px;
+
+       &:hover {
+         cursor: pointer;
+       }
      }
    }
 }
