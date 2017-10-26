@@ -71,7 +71,9 @@ class SearchPage extends React.Component {
             <Button buttonText={'Back'} />
           </Link>
           <div className={style.create}>
-            <Button buttonText={'Create Pin'} />
+            <Link to="/some/where/else">
+              <Button buttonText={'Create Pin'} />
+            </Link>
           </div>
           <p onClick={this.openModal} className={style.filter}> Filter </p>
         </div>

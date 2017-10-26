@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import style from './App.scss';
 import SearchPage from './../SearchPage';
 import StartPage from './../StartPage';
+import PostingPage from './../PostingPage';
 
 
 /**
@@ -23,7 +24,12 @@ export default class App extends React.Component {
             <StartPage />
           )} />
           <main>
-            <Route path="/some/where" component={SearchPage} />
+          <Route exact={true} path="/some/where" render={()=> (
+            <SearchPage />
+          )} />
+            <Route exact={true} path="/some/where/else" render={()=> (
+              <PostingPage />
+            )} />
           </main>
         </div>
       </Router>
