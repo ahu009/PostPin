@@ -15,7 +15,7 @@ class StartPage extends React.Component {
   render () {
     return (
       <div className={style.container}>
-        <div className={style.text}> FUCK STEVEN?
+        <div className={style.text}> What School Do You Attend?
           <Dropdown />
         </div>
       </div>
