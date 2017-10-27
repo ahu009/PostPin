@@ -2,7 +2,7 @@ import React from 'react';
 import style from './PostingPage.scss';
 import { ReactTextField, validator  } from 'react-textfield';
 import Button from './../Button';
-import { Link } from 'react-router-dom';
+import { Link, Prompt } from 'react-router-dom';
 
 const priceValidator = [
     {
@@ -19,7 +19,7 @@ const alphaNumericValidator = [
           return true;
         let numOnly = parseInt(value.replace(/[^0-9\.]/g, ''), 10);
         numOnly = numOnly.toString();
-        if(numOnly.length > 6 && numOnly.length < 11)
+        if(numOnly.length > 6 && numOnly.length < 12)
           return true;
 
         return false;
@@ -54,19 +54,6 @@ const style1 = {
   },
 };
 
-const passwordValidator = [
-    {
-      message: 'Passwords must match',
-      validator: value => {
-         let password = document.querySelector('[name="Password"]').value;
-         let confirm = document.querySelector('[name="Confirm Password"]').value;
-         if(confirm != password)
-          return false;
-         return true;
-      },
-    },
-];
-
 
 /**
  * UI Component
@@ -74,10 +61,50 @@ const passwordValidator = [
  */
 class PostingPage extends React.Component {
   /**
+   * Constructor for UI Component
+   * @param  {Object} props  Props passed to this class
+   * @return {void}
+   */
+  constructor (props) {
+    super(props);
+    this.state = { canSubmit: true, showConfirm: false };
+    this.checkSubmit = this.checkSubmit.bind(this);
+  }
+
+   checkSubmit () {
+     let canSubmit = document.querySelector('[class="ReactTextField-message ReactTextField--error"]') ? false : true;
+     this.setState({ canSubmit: canSubmit });
+     return canSubmit;
+   }
+
+  /**
    * Render function for UIComponent Component
    * @return {JSX} Component to render
    */
   render () {
+    const passwordValidator = [
+        {
+          message: 'Passwords must match',
+          validator: value => {
+             let password = document.querySelector('[name="Password"]').value;
+             let confirm = document.querySelector('[name="Confirm Password"]').value;
+             this.checkSubmit();
+             if(confirm != password)
+              return false;
+             return true;
+          },
+        },
+    ];
+
+    const showConfirm = [
+        {
+          message: '',
+          validator: value => {
+             value != '' ? this.setState({showConfirm: true}) : this.setState({showConfirm: false})
+          },
+        },
+    ];
+
     return (
       <div className={style.container}>
         <div>
@@ -136,9 +163,11 @@ class PostingPage extends React.Component {
             name="Password"
             type="password"
             placeholder="Password"
+            validators={showConfirm}
           />
         </div>
 
+        {this.state.showConfirm ?
         <div>
           Confirm Password
           <ReactTextField
@@ -148,6 +177,7 @@ class PostingPage extends React.Component {
             validators={passwordValidator}
           />
         </div>
+        : null}
 
         <div>
           Insert tags separated by commas
@@ -159,7 +189,7 @@ class PostingPage extends React.Component {
         </div>
 
         <div className={style.submit}>
-          <Link to="/some/where">
+          <Link to={this.state.canSubmit ? "/some/where" : "/some/where/else"}>
             <Button buttonText="Submit" />
           </Link>
         </div>
