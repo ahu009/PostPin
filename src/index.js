@@ -15,8 +15,6 @@ import * as firebase from 'firebase';
   };
   firebase.initializeApp(config);
 
-window.alert("fk u");
-
 render(<AppContainer><App/></AppContainer>, document.querySelector('#app'));
 
 if (module && module.hot) {
