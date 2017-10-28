@@ -1,0 +1,6 @@
+{
+  "name": "CreateAccountPage",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./CreateAccountPage.js"
+}
