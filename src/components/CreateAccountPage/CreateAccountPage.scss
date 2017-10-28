@@ -1,0 +1,32 @@
+@import './../_variables.scss';
+
+ .fields {
+   position: absolute;
+    top: 50%;
+    left: 49%;
+    margin-top: -174px;
+    margin-left: -98px;
+    .submit {
+      position: relative;
+      left: 16%;
+      margin-top: 10%;
+    }
+ }
+
+ .back {
+   position: absolute;
+   left: 1.5%;
+   bottom: 9%;
+ }
+
+ .signin {
+   top: 0px;
+   right: 1.5%;
+   position: absolute;
+   text-decoration: underline;
+   font-size: 18px;
+
+   &:hover {
+     cursor: pointer;
+   }
+ }

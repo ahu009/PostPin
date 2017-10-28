@@ -13,4 +13,26 @@
       font-size: 50px;
       padding-bottom: 1%;
     }
+
+    .accounts {
+      top: 0px;
+      right: 1.5%;
+      position: absolute;
+      text-decoration: underline;
+      font-size: 18px;
+      display: inline-flex;
+
+      .signin {
+        margin-left: 1em;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .create {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
 }

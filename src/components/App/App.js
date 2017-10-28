@@ -5,6 +5,8 @@ import style from './App.scss';
 import SearchPage from './../SearchPage';
 import StartPage from './../StartPage';
 import PostingPage from './../PostingPage';
+import CreateAccountPage from './../CreateAccountPage';
+import SignInPage from './../SignInPage';
 import * as firebase from 'firebase';
 
 /**
@@ -26,11 +28,17 @@ export default class App extends React.Component {
             <StartPage />
           )} />
           <main>
-          <Route exact={true} path="/some/where" render={()=> (
-            <SearchPage />
-          )} />
+            <Route exact={true} path="/some/where" render={()=> (
+              <SearchPage />
+            )} />
             <Route exact={true} path="/some/where/else" render={()=> (
               <PostingPage />
+            )} />
+            <Route exact={true} path="/create-account" render={()=> (
+              <CreateAccountPage />
+            )} />
+            <Route exact={true} path="/sign-in" render={()=> (
+              <SignInPage />
             )} />
           </main>
         </div>
