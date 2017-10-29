@@ -1,6 +1,15 @@
 @import './../_variables.scss';
 
  .container {
+     .logo {
+       left: 36% ;
+       margin: auto ;
+       width: 325px ;
+       margin-top: -100px ;
+       position: absolute ;
+       top: 40% ;
+       padding-bottom: 1% ;
+     }
     .text {
       left: 21%;
       margin: auto;
@@ -33,6 +42,18 @@
         &:hover {
           cursor: pointer;
         }
+      }
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .container{
+      .logo{
+        margin: auto;
+        left: 1.5%;
+        width: 150px;
+        position: absolute;
+        top: 1.5%;
       }
     }
 }

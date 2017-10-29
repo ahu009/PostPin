@@ -100,7 +100,7 @@ class CreateAccountPage extends React.Component {
 
     return (
       <div>
-        <Link to="/">
+        <Link to="/accounts/sign-in">
           <p className={style.signin}> Sign in </p>
         </Link>
         <div className={style.fields}>
