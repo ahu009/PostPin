@@ -1,0 +1,13 @@
+@import './../_variables.scss';
+
+ .container {
+    .logo {
+      width: 100%;
+      position: relative;
+      margin: auto;
+      left: 1.5%;
+      width: 150px;
+      position: absolute;
+      top: 1.5%;
+    }
+ }
