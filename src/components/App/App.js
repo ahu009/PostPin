@@ -9,6 +9,7 @@ import CreateAccountPage from './../CreateAccountPage';
 import SignInPage from './../SignInPage';
 import firebase from 'firebase';
 import Logo from './../Logo';
+import SearchResultsPage from './../SearchResultsPage';
 
 /**
  * App Component
@@ -57,6 +58,9 @@ class App extends React.Component {
             )} />
             <Route exact={true} path="/accounts/sign-in" render={()=> (
               <SignInPage />
+            )} />
+            <Route exact={true} path="/some/where/search" render={()=> (
+              <SearchResultsPage />
             )} />
           </main>
         </div>

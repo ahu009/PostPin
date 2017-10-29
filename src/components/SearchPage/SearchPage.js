@@ -7,6 +7,7 @@ import Button from './../Button';
 import { Link } from 'react-router-dom';
 import school from './../../shared/school';
 import Modal from 'react-modal';
+import PostPin_Info from './../../shared/PostPin_Info';
 
 
 const modalStyle = {
@@ -35,12 +36,14 @@ class SearchPage extends React.Component {
     super();
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      enterClicked: false
     };
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
   }
 
   openModal() {
@@ -56,6 +59,11 @@ class SearchPage extends React.Component {
     this.setState({modalIsOpen: false});
   }
 
+  toggleEnterClicked () {
+    document.getElementById("navigate").click();
+    PostPin_Info.searchString = document.querySelector('input[autocomplete="off"]').value;
+  }
+
   /**
    * Render function for UIComponent Component
    * @return {JSX} Component to render
@@ -63,6 +71,9 @@ class SearchPage extends React.Component {
   render () {
     return (
       <div className={style.container}>
+        <Link to="/some/where/search">
+          <button id="navigate" className={style.navigate}/>
+        </Link>
         <div className={style.school}> Pins in {school.name} </div>
         <div className={style.text}> Search for Pins </div>
 
@@ -83,7 +94,7 @@ class SearchPage extends React.Component {
           <SearchBar
             dataSource={auto}
             onChange={() => console.log('onChange')}
-            onRequestSearch={() => console.log('onRequestSearch')}
+            onRequestSearch={() => this.toggleEnterClicked()}
             style={{
               width: 700,
               position: 'absolute',
