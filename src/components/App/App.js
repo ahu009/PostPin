@@ -39,14 +39,12 @@ class App extends React.Component {
     return (
       <Router>
         <div className={style.container}>
+          <Route path='/some/where' component={Logo} />
+          <Route path='/accounts/' component={Logo} />
           <Route exact={true} path="/" render={()=> (
             <StartPage />
           )} />
           <main>
-
-            <Route path='/some/where' component={Logo} />
-            <Route path='/accounts/' component={Logo} />
-
             <Route exact={true} path="/some/where" render={()=> (
               <SearchPage />
             )} />

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import style from './StartPage.scss';
 import Dropdown from './Dropdown';
-import Logo from './../Logo';
 
 /**
  * UI Component
