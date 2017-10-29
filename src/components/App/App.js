@@ -8,6 +8,7 @@ import PostingPage from './../PostingPage';
 import CreateAccountPage from './../CreateAccountPage';
 import SignInPage from './../SignInPage';
 import * as firebase from 'firebase';
+import Logo from './../Logo';
 
 /**
  * App Component
@@ -28,16 +29,20 @@ export default class App extends React.Component {
             <StartPage />
           )} />
           <main>
+
+            <Route path='/some/where' component={Logo} />
+            <Route path='/accounts/' component={Logo} />
+
             <Route exact={true} path="/some/where" render={()=> (
               <SearchPage />
             )} />
             <Route exact={true} path="/some/where/else" render={()=> (
               <PostingPage />
             )} />
-            <Route exact={true} path="/create-account" render={()=> (
+            <Route exact={true} path="/accounts/create-account" render={()=> (
               <CreateAccountPage />
             )} />
-            <Route exact={true} path="/sign-in" render={()=> (
+            <Route exact={true} path="/accounts/sign-in" render={()=> (
               <SignInPage />
             )} />
           </main>
