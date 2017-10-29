@@ -193,7 +193,7 @@ class PostingPage extends React.Component {
             <Button buttonText="Submit" />
           </Link>
         </div>
-        <div className={style.back}>
+        <div>
           <Link to="/some/where">
             <Button buttonText="Back" />
           </Link>
