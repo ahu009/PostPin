@@ -7,15 +7,28 @@ import StartPage from './../StartPage';
 import PostingPage from './../PostingPage';
 import CreateAccountPage from './../CreateAccountPage';
 import SignInPage from './../SignInPage';
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 import Logo from './../Logo';
 
 /**
  * App Component
  * @type {Class}
  */
-export default class App extends React.Component {
+class App extends React.Component {
 
+  // Initialize Firebase
+  constructor(props) {
+    super(props);
+    var config = {
+      apiKey: "AIzaSyC5QbpGLGC2MxpXn8ODBDWcXCPl3mFdG-o",
+      authDomain: "postpin-c9e80.firebaseapp.com",
+      databaseURL: "https://postpin-c9e80.firebaseio.com",
+      projectId: "postpin-c9e80",
+      storageBucket: "postpin-c9e80.appspot.com",
+      messagingSenderId: "172723892563"
+    };
+    firebase.initializeApp(config);
+  }
 
   /**
    * Render function for App Component
@@ -40,7 +53,7 @@ export default class App extends React.Component {
               <PostingPage />
             )} />
             <Route exact={true} path="/accounts/create-account" render={()=> (
-              <CreateAccountPage />
+              <CreateAccountPage db ={firebase} />
             )} />
             <Route exact={true} path="/accounts/sign-in" render={()=> (
               <SignInPage />
@@ -51,3 +64,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default App;

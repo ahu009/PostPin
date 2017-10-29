@@ -63,6 +63,7 @@ class CreateAccountPage extends React.Component {
     this.checkSubmit = this.checkSubmit.bind(this);
   }
 
+
    checkSubmit () {
      let canSubmit = document.querySelector('[class="ReactTextField-message ReactTextField--error"]') ? false : true;
      this.setState({ canSubmit: canSubmit });
