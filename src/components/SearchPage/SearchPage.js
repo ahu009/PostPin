@@ -96,7 +96,7 @@ class SearchPage extends React.Component {
             onChange={() => console.log('onChange')}
             onRequestSearch={() => this.toggleEnterClicked()}
             style={{
-              width: 700,
+              width: '55%',
               position: 'absolute',
               left: '33%'
             }}
@@ -122,7 +122,7 @@ class SearchPage extends React.Component {
               onChange={() => console.log('onChange')}
               onRequestSearch={() => console.log('onRequestSearch')}
               style={{
-                width: 550,
+                width: '70%',
                 position: 'absolute',
                 left: '20%',
                 top: '20%'
