@@ -2,8 +2,8 @@
 
 
 .inputContainer {
-  top: 55%;
-  left: 30%;
+  top: 50%;
+  left: 25%;
   position: absolute;
   .inputText {
     display: table-cell;
@@ -21,11 +21,13 @@
 .buttonContainer {
   margin-top: 45%;
   .modal2 {
-    margin-left: 86%;
+    margin-bottom: -5%;
+    margin-left: 79%;
   }
 }
 
 .container {
+
   .navigate {
     display: none;
   }
@@ -43,12 +45,14 @@
    }
 
    .button {
-     top: 46%;
+     top: 49%;
      left: 33%;
+     width: 100px;
      position: absolute;
 
      .create {
        left: 573px;
+       width: 100%;
        position: relative;
      }
 
