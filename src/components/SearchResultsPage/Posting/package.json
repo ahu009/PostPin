@@ -1,0 +1,6 @@
+{
+  "name": "Posting",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./Posting.js"
+}

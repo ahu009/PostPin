@@ -1,0 +1,14 @@
+@import './../../_variables.scss';
+
+ .container {
+    height: 0px;
+    display: inline;
+    font-size: 20px;
+    position: relative;
+    color: blue;
+    display: inline-block;
+   &:hover {
+     text-decoration: underline;
+     cursor: pointer;
+   }
+ }
