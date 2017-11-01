@@ -41,8 +41,26 @@ const style1 = {
     textAlign: 'left',
   },
   input: {
-    paddingRight: '180px',
+    paddingRight: '700px',
     paddingBottom: '180px',
+  },
+  successMessage: {
+    fontSize: '20px',
+    color: '#3949AB',
+  },
+  errorMessage: {
+    fontSize: '20px',
+    color: '#E91E63',
+  },
+};
+
+const style2 = {
+  container: {
+    textAlign: 'left',
+  },
+  input: {
+    paddingRight: '700px',
+    paddingBottom: '20px',
   },
   successMessage: {
     fontSize: '20px',
@@ -107,7 +125,7 @@ class PostingPage extends React.Component {
 
     return (
       <div className={style.container}>
-        <div>
+        <div className={style.title}>
           Title
           <ReactTextField
             name="Title"
@@ -116,19 +134,17 @@ class PostingPage extends React.Component {
           />
         </div>
 
-        <div>
+        <div className={style.description}>
           Description
           <ReactTextField
             name="Body"
             type="text"
             placeholder="Body"
-            style={style1}
           />
         </div>
 
-        <div>
-          Price
-          <p> $ </p>
+        <div className={style.price}>
+          Price ($):
           <ReactTextField
             name="Price"
             type="text"
@@ -137,7 +153,7 @@ class PostingPage extends React.Component {
           />
         </div>
 
-        <div>
+        <div className={style.phone_number}>
           Phone Number:
           <ReactTextField
             name="Phone Number"
@@ -147,7 +163,7 @@ class PostingPage extends React.Component {
           />
         </div>
 
-        <div>
+        <div className={style.email}>
           Email:
           <ReactTextField
             name="E-mail"
@@ -157,7 +173,7 @@ class PostingPage extends React.Component {
           />
         </div>
 
-        <div>
+        <div className={style.pword}>
           Password
           <ReactTextField
             name="Password"
@@ -168,7 +184,7 @@ class PostingPage extends React.Component {
         </div>
 
         {this.state.showConfirm ?
-        <div>
+        <div className={style.confirm_pword}>
           Confirm Password
           <ReactTextField
             name="Confirm Password"
@@ -179,7 +195,7 @@ class PostingPage extends React.Component {
         </div>
         : null}
 
-        <div>
+        <div className={style.tags}>
           Insert tags separated by commas
           <ReactTextField
             name="Tags"
@@ -193,7 +209,7 @@ class PostingPage extends React.Component {
             <Button buttonText="Submit" />
           </Link>
         </div>
-        <div>
+        <div className={style.back}>
           <Link to="/some/where">
             <Button buttonText="Back" />
           </Link>

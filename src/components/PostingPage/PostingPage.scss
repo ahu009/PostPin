@@ -2,9 +2,52 @@
 
  .container {
    margin-top: 6%;
-   margin-left: 0.7%;
+   font-size: 25px;
+   font-family: sans-serif;
+   letter-spacing: 1px;
+   //margin-left: 0.7%;
+
+   .title {
+     margin-bottom: 2%;
+     margin-left: 20%;
+   }
+
+   .description {
+     margin-bottom: 2%;
+     margin-left: 20%;
+   }
+
+   .price {
+     margin-left: 50%;
+   }
+
+   .phone_number {
+     margin-left: 50%;
+   }
+
+   .email {
+     margin-left: 50%;
+   }
+
+   .pword {
+     margin-left: 50%;
+   }
+
+   .confirm_pword {
+     margin-left: 50%;
+   }
+
+   .tags {
+     margin-left: 50%;
+   }
+
+   .back {
+     margin-left: 50%;
+   }
+
    .submit {
-     left: 86%;
+     left: 70%;
      position: absolute;
    }
+
  }

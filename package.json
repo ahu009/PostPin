@@ -24,6 +24,7 @@
   "author": "Avanish Pathak",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer": "^7.1.6",
     "firebase": "^4.6.0",
     "material-ui": "^0.19.4",
     "material-ui-search-bar": "^0.4.0",
