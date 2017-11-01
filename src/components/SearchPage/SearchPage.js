@@ -69,25 +69,25 @@ class SearchPage extends React.Component {
    * @return {JSX} Component to render
    */
   render () {
+    let placeHolderText = `Search for Pins in ${school.name}`;
     return (
       <div className={style.container}>
         <Link to="/some/where/search">
           <button id="navigate" className={style.navigate}/>
         </Link>
-        <div className={style.school}> Pins in {school.name} </div>
-        <div className={style.text}> Search for Pins </div>
 
         <div className={style.button}>
           <Link to="/">
             <Button buttonText={'Back'} />
           </Link>
-          <div className={style.create}>
-            <Link to="/some/where/else">
-              <Button buttonText={'Create Pin'} />
-            </Link>
-          </div>
-          <p onClick={this.openModal} className={style.filter}> Filter </p>
         </div>
+        <div className={style.create}>
+          <Link to="/some/where/else">
+            <Button buttonText={'Create Pin'} />
+          </Link>
+        </div>
+        <p onClick={this.openModal} className={style.filter}> Filter </p>
+
 
 
         <MuiThemeProvider>
@@ -95,10 +95,12 @@ class SearchPage extends React.Component {
             dataSource={auto}
             onChange={() => console.log('onChange')}
             onRequestSearch={() => this.toggleEnterClicked()}
+            placeholder={placeHolderText}
             style={{
               width: '55%',
               position: 'absolute',
-              left: '33%'
+              left: '23%',
+              top: '1.7%'
             }}
           />
         </MuiThemeProvider>
@@ -129,14 +131,14 @@ class SearchPage extends React.Component {
               }}
             />
           </MuiThemeProvider>
-          <div className={style.inputContainer}>
-            <p className={style.inputText}> Enter Price Range </p>
-            <p className={style.dash}> $ </p>
-            <input className={style.input1} type="text" name="txt" />
-            <p className={style.dash}> - </p>
-            <p className={style.dash}> $ </p>
-            <input className={style.input2} type="text" name="txt" />
-          </div>
+            <div className={style.inputContainer}>
+              <p className={style.inputText}> Enter Price Range </p>
+              <p className={style.dash}> $ </p>
+              <input className={style.input1} type="text" name="txt" />
+              <p className={style.dash}> - </p>
+              <p className={style.dash}> $ </p>
+              <input className={style.input2} type="text" name="txt" />
+            </div>
         </Modal>
 
       </div>

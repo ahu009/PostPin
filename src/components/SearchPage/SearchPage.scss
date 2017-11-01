@@ -27,44 +27,33 @@
 }
 
 .container {
-
-  .navigate {
-    display: none;
-  }
-   .school {
-     text-align: center;
-     font-family: Arial;
-     font-size: 50px;
-   }
-
-   .text {
-     text-align: center;
-     font-family: Arial;
-     font-size: 50px;
-     margin-top: 10%;
+  overflow: hidden;
+   .navigate {
+      display: none;
    }
 
    .button {
-     top: 49%;
-     left: 33%;
-     width: 100px;
+     bottom: 10%;
+     left: 1.5%;
      position: absolute;
+   }
 
-     .create {
-       left: 573px;
-       width: 100%;
-       position: relative;
-     }
+   .create {
+     right: 9%;
+     bottom: 10%;
+     position: absolute;
+   }
 
-     .filter {
-       left: 330px;
-       position: relative;
-       text-decoration: underline;
-       font-size: 18px;
+   .filter {
+     position: absolute;
+     text-decoration: underline;
+     font-size: 18px;
+     width: 100%;
+     text-align: center;
+     top: 7%;
 
-       &:hover {
-         cursor: pointer;
-       }
+     &:hover {
+       cursor: pointer;
      }
    }
 }
