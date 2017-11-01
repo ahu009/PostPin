@@ -41,8 +41,7 @@ const style1 = {
     textAlign: 'left',
   },
   input: {
-    paddingRight: '180px',
-    paddingBottom: '180px',
+    width: '700px',
   },
   successMessage: {
     fontSize: '20px',
@@ -54,6 +53,56 @@ const style1 = {
   },
 };
 
+const style2 = {
+  container: {
+    textAlign: 'left',
+  },
+  input: {
+    width: '400px',
+  },
+  successMessage: {
+    fontSize: '20px',
+    color: '#3949AB',
+  },
+  errorMessage: {
+    fontSize: '20px',
+    color: '#E91E63',
+  },
+};
+
+const style3 = {
+  container: {
+    textAlign: 'left',
+  },
+  input: {
+    width: '250px',
+  },
+  successMessage: {
+    fontSize: '20px',
+    color: '#3949AB',
+  },
+  errorMessage: {
+    fontSize: '20px',
+    color: '#E91E63',
+  },
+};
+
+const style4 = {
+  container: {
+    textAlign: 'left',
+  },
+  input: {
+    width: '324px',
+  },
+  successMessage: {
+    fontSize: '20px',
+    color: '#3949AB',
+  },
+  errorMessage: {
+    fontSize: '20px',
+    color: '#E91E63',
+  },
+};
 
 /**
  * UI Component
@@ -107,84 +156,90 @@ class PostingPage extends React.Component {
 
     return (
       <div className={style.container}>
-        <div>
+        <div className={style.title}>
           Title
           <ReactTextField
             name="Title"
             type="text"
             placeholder="Title"
+            style = {style2}
           />
         </div>
 
-        <div>
+        <div className={style.description}>
           Description
           <ReactTextField
             name="Body"
             type="text"
             placeholder="Body"
-            style={style1}
+            style = {style1}
           />
         </div>
 
-        <div>
+        <div className={style.price}>
           Price
-          <p> $ </p>
           <ReactTextField
             name="Price"
             type="text"
             validators={priceValidator}
             placeholder="Price"
+            style = {style3}
           />
         </div>
 
-        <div>
-          Phone Number:
+        <div className={style.phone_number}>
+          Phone Number
           <ReactTextField
             name="Phone Number"
             type="tel"
             placeholder="Phone Number"
             validators={alphaNumericValidator}
+            style = {style3}
           />
         </div>
 
-        <div>
-          Email:
+        <div className={style.email}>
+          Email
           <ReactTextField
             name="E-mail"
             type="email"
             placeholder="E-mail"
             validators={emailValidator}
+            style = {style2}
           />
         </div>
 
-        <div>
+        <div className={style.pword}>
           Password
           <ReactTextField
             name="Password"
             type="password"
             placeholder="Password"
             validators={showConfirm}
+            style = {style4}
           />
         </div>
 
         {this.state.showConfirm ?
-        <div>
+        <div className={style.confirm_pword}>
           Confirm Password
           <ReactTextField
             name="Confirm Password"
             type="password"
             placeholder="Confirm Password"
             validators={passwordValidator}
+            style = {style4}
           />
         </div>
         : null}
 
-        <div>
+        <div className={style.tags}>
           Insert tags separated by commas
           <ReactTextField
             name="Tags"
             type="text"
             placeholder="Tags separated by commas (e.g Art, Cars, Phones)"
+            style = {style1}
           />
         </div>
 
@@ -193,7 +248,7 @@ class PostingPage extends React.Component {
             <Button buttonText="Submit" />
           </Link>
         </div>
-        <div>
+        <div className={style.back}>
           <Link to="/some/where">
             <Button buttonText="Back" />
           </Link>
