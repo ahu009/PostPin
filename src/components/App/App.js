@@ -10,6 +10,9 @@ import SignInPage from './../SignInPage';
 import firebase from 'firebase';
 import Logo from './../Logo';
 import SearchResultsPage from './../SearchResultsPage';
+import HomeIcon from './../GlyphIcons/HomeIcon';
+import AccountIcon from './../GlyphIcons/AccountIcon';
+
 
 /**
  * App Component
@@ -41,6 +44,9 @@ class App extends React.Component {
         <div className={style.container}>
           <Route path='/some/where' component={Logo} />
           <Route path='/accounts/' component={Logo} />
+          <Route path='/' component={HomeIcon} />
+          <Route path='/' component={AccountIcon} />
+
           <Route exact={true} path="/" render={()=> (
             <StartPage />
           )} />

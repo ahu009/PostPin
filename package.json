@@ -24,11 +24,13 @@
   "author": "Avanish Pathak",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "firebase": "^4.6.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.19.4",
     "material-ui-search-bar": "^0.4.0",
     "react": "15.6.2",
+    "react-bootstrap": "^0.31.5",
     "react-dom": "15.4.2",
     "react-modal": "^3.0.4",
     "react-router": "^4.2.0",

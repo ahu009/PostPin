@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import style from './StartPage.scss';
 import Dropdown from './Dropdown';
+import { Glyphicon } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 
 /**
  * UI Component

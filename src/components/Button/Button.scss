@@ -9,7 +9,7 @@
    letter-spacing: 1px;
    color: white;
    user-select: none;
-   width: 115px;
+   width: 100px;
    height: 50px;
 
    &:hover {
@@ -22,6 +22,6 @@
    }
 
    .text {
-     padding: 2.5%;
+     position: relative;
    }
  }
