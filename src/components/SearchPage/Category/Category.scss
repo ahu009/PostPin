@@ -1,0 +1,42 @@
+@import './../../_variables.scss';
+
+ .container {
+   position: fixed;
+   width: 23%;
+
+
+   .header {
+     text-align: center;
+     background-color: $containerGrey;
+     font-size: 15px;
+     color: white;
+     font-weight: 100;
+     padding: 10px;
+   }
+
+   .tags {
+     background-color: white;
+     font-size: 15px;
+     overflow-y: scroll;
+     max-height: 60%;
+     position: fixed;
+     width: 23%;
+     .tag {
+       color: black;
+       border-color: #e1e7ef;
+       border-style: solid;
+       border-width: 1px;
+       border-top-width: 0px;
+       border-right-width: 0px;
+       border-left-width: 0px;
+       margin: auto;
+       padding-top: 0.5em;
+       padding-bottom: 0.5em;
+       padding-left: 0.5em;
+       &:hover {
+         cursor: pointer;
+         background-color: #dadde5;
+       }
+     }
+   }
+ }
