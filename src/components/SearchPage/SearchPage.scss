@@ -28,32 +28,54 @@
 
 .container {
   overflow: hidden;
+
    .navigate {
       display: none;
    }
 
    .button {
-     bottom: 10%;
-     left: 1.5%;
+     bottom: 12%;
+     left: 25px;
      position: absolute;
    }
 
    .create {
-     right: 9%;
-     bottom: 10%;
+     bottom: 12%;
      position: absolute;
+     right: 155px;
    }
 
    .filter {
      position: absolute;
      text-decoration: underline;
-     font-size: 18px;
+     font-size: 13px;
      width: 100%;
      text-align: center;
-     top: 7%;
+     top: 10%;
 
      &:hover {
        cursor: pointer;
      }
+   }
+
+   .community {
+     top: 20%;
+     left: 1.5%;
+     position: absolute;
+   }
+   .housing {
+     top: 20%;
+     left: 26.1%;
+     position: absolute;
+   }
+   .forsale {
+     top: 20%;
+     left: 50.7%;
+     position: absolute;
+   }
+   .jobs {
+     top: 20%;
+     left: 75.3%;
+     position: absolute;
    }
 }

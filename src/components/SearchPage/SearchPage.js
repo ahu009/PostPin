@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import school from './../../shared/school';
 import Modal from 'react-modal';
 import PostPin_Info from './../../shared/PostPin_Info';
-
+import Category from './Category';
 
 const modalStyle = {
   overlay : {
@@ -70,8 +70,26 @@ class SearchPage extends React.Component {
    */
   render () {
     let placeHolderText = `Search for Pins in ${school.name}`;
+    const community = ['Activities', 'Lost + Found', 'RideShare', 'Events', 'General', 'Groups', 'Volunteers', 'Clubs', 'Classes', 'Intramural Sports'];
+    const housing = ['Housing Swap', 'Office', 'Commercial', 'Parking', 'Storage', 'Rooms', 'Sublets', 'Rental'];
+    const jobs = ['Tutoring', 'Internships', 'Club Position', 'Retail', 'Film', 'Gigs', 'Legal', 'General Labor', 'On-Campus', 'Off-Campus'];
+    const forSale = ['Books', 'School Supplies', 'Clothes + Acc', 'Electronics', 'Arts & Crafts', 'Collectibles', 'Wanted', 'Cars + Motorcycles', 'General'];
+
     return (
       <div className={style.container}>
+        <div className={style.housing}>
+          <Category name="Housing" tags={housing} />
+        </div>
+        <div className={style.forsale}>
+          <Category name="For Sale" tags={forSale} />
+        </div>
+        <div className={style.jobs}>
+          <Category name="Jobs" tags={jobs} />
+        </div>
+        <div className={style.community}>
+          <Category name="Community" tags={community} />
+        </div>
+
         <Link to="/some/where/search">
           <button id="navigate" className={style.navigate}/>
         </Link>
@@ -100,7 +118,7 @@ class SearchPage extends React.Component {
               width: '55%',
               position: 'absolute',
               left: '23%',
-              top: '1.7%'
+              top: '3%'
             }}
           />
         </MuiThemeProvider>
