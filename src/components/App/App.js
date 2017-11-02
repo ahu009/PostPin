@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
-
+import AccountIcon from './../GlyphIcons/AccountIcon';
+import HomeIcon from './../GlyphIcons/HomeIcon';
 import style from './App.scss';
 import SearchPage from './../SearchPage';
 import StartPage from './../StartPage';
@@ -10,6 +11,7 @@ import SignInPage from './../SignInPage';
 import firebase from 'firebase';
 import Logo from './../Logo';
 import SearchResultsPage from './../SearchResultsPage';
+
 
 /**
  * App Component
@@ -39,14 +41,15 @@ class App extends React.Component {
     return (
       <Router>
         <div className={style.container}>
+          <Route path='/' component={AccountIcon} />
+          <Route path='/' component={HomeIcon} />
+          <Route path='/some/where' component={Logo} />
+          <Route path='/accounts/' component={Logo} />
+
           <Route exact={true} path="/" render={()=> (
             <StartPage />
           )} />
           <main>
-
-            <Route path='/some/where' component={Logo} />
-            <Route path='/accounts/' component={Logo} />
-
             <Route exact={true} path="/some/where" render={()=> (
               <SearchPage />
             )} />

@@ -1,15 +1,22 @@
 @import './../_variables.scss';
 
  .container {
+   overflow: hidden;
    .header {
      top: 5%;
      width: 100%;
      text-align: center;
-     position: absolute;
+     position: relative;
      font-size: 20px;
      .line {
-       width: 600px;
+       width: 100%;
        border-color: grey;
+       position: relative;
      }
+   }
+   .postingContainer {
+      position: relative;
+      margin-top: 2em;
+      text-align: left;
    }
  }

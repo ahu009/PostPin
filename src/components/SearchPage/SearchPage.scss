@@ -2,8 +2,8 @@
 
 
 .inputContainer {
-  top: 55%;
-  left: 30%;
+  top: 50%;
+  left: 25%;
   position: absolute;
   .inputText {
     display: table-cell;
@@ -21,46 +21,61 @@
 .buttonContainer {
   margin-top: 45%;
   .modal2 {
-    margin-left: 86%;
+    margin-bottom: -5%;
+    margin-left: 79%;
   }
 }
 
 .container {
-  .navigate {
-    display: none;
-  }
-   .school {
-     text-align: center;
-     font-family: Arial;
-     font-size: 50px;
-   }
+  overflow: hidden;
 
-   .text {
-     text-align: center;
-     font-family: Arial;
-     font-size: 50px;
-     margin-top: 10%;
+   .navigate {
+      display: none;
    }
 
    .button {
-     top: 46%;
-     left: 33%;
+     bottom: 12%;
+     left: 25px;
      position: absolute;
+   }
 
-     .create {
-       left: 573px;
-       position: relative;
+   .create {
+     bottom: 12%;
+     position: absolute;
+     right: 125px;
+   }
+
+   .filter {
+     position: absolute;
+     text-decoration: underline;
+     font-size: 13px;
+     text-align: center;
+     left: 50%;
+     top: 10%;
+
+     &:hover {
+       cursor: pointer;
      }
+   }
 
-     .filter {
-       left: 330px;
-       position: relative;
-       text-decoration: underline;
-       font-size: 18px;
-
-       &:hover {
-         cursor: pointer;
-       }
-     }
+   .community {
+     top: 20%;
+     left: 1.5%;
+     position: absolute;
+   }
+   .housing {
+     top: 20%;
+     left: 26.1%;
+     position: absolute;
+   }
+   .forsale {
+     top: 20%;
+     left: 50.7%;
+     position: absolute;
+   }
+   .jobs {
+     top: 20%;
+     left: 75.3%;
+     position: absolute;
    }
 }

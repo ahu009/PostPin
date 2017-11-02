@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 import style from './StartPage.scss';
 import Dropdown from './Dropdown';
-import Logo from './../Logo';
+import { Glyphicon } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap-theme.css';
 
 /**
  * UI Component
@@ -22,14 +23,6 @@ class StartPage extends React.Component {
         </div>
         <div className={style.text}> What School Do You Attend?
           <Dropdown />
-        </div>
-        <div className={style.accounts}>
-          <Link to="/accounts/create-account">
-            <p className={style.create}> Create Account </p>
-          </Link>
-          <Link to="/accounts/sign-in">
-            <p className={style.signin}> Sign In </p>
-          </Link>
         </div>
       </div>
 

@@ -1,12 +1,70 @@
 @import './../_variables.scss';
 
  .container {
-   .submit {
-     left: 86%;
+   margin-top: 5%;
+   font-size: 20px;
+   font-family: sans-serif;
+   letter-spacing: 1px;
+   //margin-left: 0.7%;
+
+   .title {
+     top: 11%;
+     left: 23%;
+     position: absolute;
+   }
+
+   .description {
+     top: 26%;
+     left: 23%;
+     position: absolute;
+   }
+
+   .price {
+     top: 11%;
+     left: 56%;
+     position: absolute;
+   }
+
+   .phone_number {
+     top: 56%;
+     left: 56%;
+     position: absolute;
+   }
+
+   .email {
+     top: 56%;
+     left: 23%;
+     position: absolute;
+   }
+
+   .pword {
+     top: 71%;
+     left: 23%;
+     position: absolute;
+   }
+
+   .confirm_pword {
+     top: 71%;
+     left: 51%;
+     position: absolute;
+   }
+
+   .tags {
+     top: 41%;
+     left: 23%;
      position: absolute;
    }
 
    .back {
-
+     left: 3%;
+     top: 90%;
+     position: absolute;
    }
+
+   .submit {
+     left: 87%;
+     top: 90%;
+     position: absolute;
+   }
+
  }

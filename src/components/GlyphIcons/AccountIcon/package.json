@@ -1,0 +1,6 @@
+{
+  "name": "AccountIcon",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./AccountIcon.js"
+}

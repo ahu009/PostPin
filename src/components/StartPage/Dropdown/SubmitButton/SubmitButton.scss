@@ -11,8 +11,8 @@
    letter-spacing: 1px;
    color: white;
    user-select: none;
-   width: 129px;
-   height: 60px;
+   width: 100px;
+   height: 50px;
    line-height: 21px;
 
    &:hover {
@@ -25,6 +25,6 @@
    }
 
    .text {
-     padding-top: 5%;
+     position: relative;
    }
  }

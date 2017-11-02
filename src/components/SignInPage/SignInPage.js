@@ -25,9 +25,6 @@ class SignInPage extends React.Component {
   render () {
     return (
       <div>
-        <Link to="/accounts/create-account">
-          <p className={style.create}> Create Account </p>
-        </Link>
         <div className={style.fields}>
           <div>
             Email:
