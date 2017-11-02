@@ -25,7 +25,7 @@
     border-style: groove;
     border-color: #393a3d;
     &:hover {
-      background-color: grey !important;
+      cursor: pointer;
     }
 }
 
