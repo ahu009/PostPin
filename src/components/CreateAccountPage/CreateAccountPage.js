@@ -100,9 +100,6 @@ class CreateAccountPage extends React.Component {
 
     return (
       <div>
-        <Link to="/accounts/sign-in">
-          <p className={style.signin}> Sign in </p>
-        </Link>
         <div className={style.fields}>
           <div>
             Email:
@@ -147,7 +144,7 @@ class CreateAccountPage extends React.Component {
           : null}
           <div className={style.submit}>
             <Link to={"/"}>
-              <Button buttonText="Create Account" />
+              <Button buttonText="Submit" />
             </Link>
           </div>
           </div>

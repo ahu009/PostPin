@@ -1,13 +1,16 @@
 import React from 'react';
-import style from './Logo.scss';
-
+import { Glyphicon } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap-theme.css';
+import style from './HomeIcon.scss';
+
 
 /**
  * UI Component
  * @type {Class}
  */
-class Logo extends React.Component {
+class HomeIcon extends React.Component {
   /**
    * Render function for UIComponent Component
    * @return {JSX} Component to render
@@ -15,12 +18,12 @@ class Logo extends React.Component {
   render () {
     return (
       <div className={style.container}>
-        <Link to={"/"}>
-          <img className={style.logo} src={require('./../../../logo.png')} />
+        <Link to="/">
+          <Glyphicon glyph="home" style={{color:'#393a3d'}}/>
         </Link>
       </div>
     );
   }
 }
 
-export default Logo;
+export default HomeIcon;
