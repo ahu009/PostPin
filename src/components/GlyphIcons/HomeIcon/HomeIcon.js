@@ -19,7 +19,7 @@ class HomeIcon extends React.Component {
     return (
       <div className={style.container}>
         <Link to="/">
-          <Glyphicon glyph="home" />
+          <Glyphicon glyph="home" style={{color:'#393a3d'}}/>
         </Link>
       </div>
     );

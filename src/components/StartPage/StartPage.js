@@ -24,14 +24,6 @@ class StartPage extends React.Component {
         <div className={style.text}> What School Do You Attend?
           <Dropdown />
         </div>
-        <div className={style.accounts}>
-          <Link to="/accounts/create-account">
-            <p className={style.create}> Create Account </p>
-          </Link>
-          <Link to="/accounts/sign-in">
-            <p className={style.signin}> Sign In </p>
-          </Link>
-        </div>
       </div>
 
     );
