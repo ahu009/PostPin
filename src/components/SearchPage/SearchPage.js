@@ -2,6 +2,7 @@ import React from 'react';
 import style from './SearchPage.scss';
 import SearchBar from 'material-ui-search-bar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { ReactTextField,validator} from 'react-textfield';
 import auto from './TempAutoFill';
 import Button from './../Button';
 import { Link } from 'react-router-dom';
@@ -27,6 +28,30 @@ const modalStyle = {
     transform             : 'translate(-50%, -50%)'
   }
 };
+const styleOne = {
+  container: {
+    textAlign: 'left',
+  },
+  input: {
+    width: '60%',
+  },
+};
+
+const styleTwo = {
+  container: {
+    textAlign: 'left',
+  },
+  input: {
+    width: '60%',
+  },
+};
+
+const numValidator = [
+    {
+      message: 'must be a number',
+      validator: value => !isNaN(value),
+    },
+];
 /**
  * UI Component
  * @type {Class}
@@ -151,11 +176,23 @@ class SearchPage extends React.Component {
           </MuiThemeProvider>
             <div className={style.inputContainer}>
               <p className={style.inputText}> Enter Price Range </p>
-              <p className={style.dash}> $ </p>
-              <input className={style.input1} type="text" name="txt" />
+              <p className = {style.dollar1}> $ </p>
               <p className={style.dash}> - </p>
-              <p className={style.dash}> $ </p>
-              <input className={style.input2} type="text" name="txt" />
+              <div className={style.input1}>
+                <ReactTextField
+                    type="text"
+                    validators={numValidator}
+                    style = {styleOne}
+                  />
+              </div>
+              <p className = {style.dollar2}> $ </p>
+              <div className={style.input2}>
+                <ReactTextField
+                    type="text"
+                    validators={numValidator}
+                    style = {styleTwo}
+                  />
+              </div>
             </div>
         </Modal>
 

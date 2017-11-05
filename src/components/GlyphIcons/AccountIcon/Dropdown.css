@@ -8,6 +8,7 @@
 }
 
 .dropdown--active .dropdown__content {
+    position: fixed;
     display: block;
 }
 
@@ -25,7 +26,7 @@
     border-style: groove;
     border-color: #393a3d;
     &:hover {
-      cursor: pointer;
+      background-color: grey !important;
     }
 }
 
