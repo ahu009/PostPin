@@ -3,26 +3,35 @@
 
 .inputContainer {
   top: 50%;
-  left: 25%;
+  left: 20%;
   position: absolute;
+  overflow: hidden;
   .inputText {
+    left: 70%;
+    position: relative;
     display: table-cell;
-    font-size: 30px;
+    font-size: 20px;
   }
   .input2 {
     position: relative;
   }
   .dash {
-    font-size: 30px;
+    font-size: 20px;
     display: inline;
   }
 }
 
 .buttonContainer {
   margin-top: 45%;
+  .modal1 {
+    position: absolute;
+    margin-bottom: 5%;
+    margin-left: 3%;
+  }
   .modal2 {
-    margin-bottom: -5%;
-    margin-left: 79%;
+    position: absolute;
+    margin-bottom: 5%;
+    margin-left: 75%;
   }
 }
 

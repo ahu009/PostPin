@@ -41,65 +41,16 @@ const style1 = {
     textAlign: 'left',
   },
   input: {
-    width: '700px',
+    //width: '700px',
+    width: '100%',
+    fontSize: '14px',
   },
   successMessage: {
-    fontSize: '20px',
+    fontSize: '10px',
     color: '#3949AB',
   },
   errorMessage: {
-    fontSize: '20px',
-    color: '#E91E63',
-  },
-};
-
-const style2 = {
-  container: {
-    textAlign: 'left',
-  },
-  input: {
-    width: '400px',
-  },
-  successMessage: {
-    fontSize: '20px',
-    color: '#3949AB',
-  },
-  errorMessage: {
-    fontSize: '20px',
-    color: '#E91E63',
-  },
-};
-
-const style3 = {
-  container: {
-    textAlign: 'left',
-  },
-  input: {
-    width: '250px',
-  },
-  successMessage: {
-    fontSize: '20px',
-    color: '#3949AB',
-  },
-  errorMessage: {
-    fontSize: '20px',
-    color: '#E91E63',
-  },
-};
-
-const style4 = {
-  container: {
-    textAlign: 'left',
-  },
-  input: {
-    width: '324px',
-  },
-  successMessage: {
-    fontSize: '20px',
-    color: '#3949AB',
-  },
-  errorMessage: {
-    fontSize: '20px',
+    fontSize: '10px',
     color: '#E91E63',
   },
 };
@@ -156,13 +107,25 @@ class PostingPage extends React.Component {
 
     return (
       <div className={style.container}>
-        <div className={style.title}>
+
+        <div className = {style.title}>
           Title
           <ReactTextField
             name="Title"
             type="text"
             placeholder="Title"
-            style = {style2}
+            style = {style1}
+          />
+        </div>
+
+        <div className={style.price}>
+          Price
+          <ReactTextField
+            name="Price"
+            type="text"
+            validators={priceValidator}
+            placeholder="Price"
+            style = {style1}
           />
         </div>
 
@@ -176,25 +139,13 @@ class PostingPage extends React.Component {
           />
         </div>
 
-        <div className={style.price}>
-          Price
+        <div className={style.tags}>
+          Insert tags separated by commas
           <ReactTextField
-            name="Price"
+            name="Tags"
             type="text"
-            validators={priceValidator}
-            placeholder="Price"
-            style = {style3}
-          />
-        </div>
-
-        <div className={style.phone_number}>
-          Phone Number
-          <ReactTextField
-            name="Phone Number"
-            type="tel"
-            placeholder="Phone Number"
-            validators={alphaNumericValidator}
-            style = {style3}
+            placeholder="Tags separated by commas (e.g Art, Cars, Phones)"
+            style = {style1}
           />
         </div>
 
@@ -205,7 +156,18 @@ class PostingPage extends React.Component {
             type="email"
             placeholder="E-mail"
             validators={emailValidator}
-            style = {style2}
+            style = {style1}
+          />
+        </div>
+
+        <div className={style.phone_number}>
+          Phone Number
+          <ReactTextField
+            name="Phone Number"
+            type="tel"
+            placeholder="Phone Number"
+            validators={alphaNumericValidator}
+            style = {style1}
           />
         </div>
 
@@ -216,7 +178,7 @@ class PostingPage extends React.Component {
             type="password"
             placeholder="Password"
             validators={showConfirm}
-            style = {style4}
+            style = {style1}
           />
         </div>
 
@@ -228,20 +190,10 @@ class PostingPage extends React.Component {
             type="password"
             placeholder="Confirm Password"
             validators={passwordValidator}
-            style = {style4}
-          />
-        </div>
-        : null}
-
-        <div className={style.tags}>
-          Insert tags separated by commas
-          <ReactTextField
-            name="Tags"
-            type="text"
-            placeholder="Tags separated by commas (e.g Art, Cars, Phones)"
             style = {style1}
           />
         </div>
+        : null}
 
         <div className={style.submit}>
           <Link to={this.state.canSubmit ? "/some/where" : "/some/where/else"}>
