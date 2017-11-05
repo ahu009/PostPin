@@ -14,7 +14,7 @@ class Posting extends React.Component {
     let hasImageText = this.props.hasImage ? "w/ img" : "no img";
     return (
       <div className={style.container}>
-        <p className={style.text}> {this.props.title} -- {this.props.price} [{hasImageText}] </p>
+        <p className={style.text}> {this.props.title} -- {`$${this.props.price}`} [{hasImageText}] </p>
       </div>
     );
   }
