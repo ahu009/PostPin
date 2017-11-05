@@ -131,7 +131,7 @@ class SearchPage extends React.Component {
           contentLabel="Modal"
         >
           <div className={style.buttonContainer}>
-            <div onClick={this.closeModal}> <Button buttonText={'Close'} /> </div>
+            <div className={style.modal1} onClick={this.closeModal} > <Button buttonText={'Close'} /> </div>
             <div className={style.modal2} onClick={this.closeModal}> <Button buttonText={'Apply'} /> </div>
           </div>
           <MuiThemeProvider>
@@ -144,7 +144,7 @@ class SearchPage extends React.Component {
               style={{
                 width: '70%',
                 position: 'absolute',
-                left: '20%',
+                left: '15%',
                 top: '20%'
               }}
             />
