@@ -41,9 +41,6 @@ li.account-dropdown__link:hover{
     border: 1px;
     border-style: groove;
     border-color: #393a3d;
-    &:hover {
-      background-color: grey !important;
-    }
     background-color: #e8ebef;
     text-decoration: none !important;
 }
