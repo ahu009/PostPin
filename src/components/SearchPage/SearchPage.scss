@@ -7,17 +7,40 @@
   position: absolute;
   overflow: hidden;
   .inputText {
-    left: 70%;
-    position: relative;
+    top: 45%;
+    left: 33%;
+    position: fixed;
     display: table-cell;
-    font-size: 20px;
+    font-size: 25px;
+  }
+  .input1 {
+    top: 60%;
+    left: 35.2%;
+    position: fixed;
   }
   .input2 {
-    position: relative;
+    top: 60%;
+    left: 53.1%;
+    position: fixed;
+  }
+  .dollar1  {
+    top: 53%;
+    left: 32.9%;
+    position: fixed;
+    font-size: 25px;
+  }
+  .dollar2 {
+    top: 53%;
+    left: 50.8%;
+    position: fixed;
+    font-size: 25px;
   }
   .dash {
-    font-size: 20px;
+    top: 53%;
+    left: 48%;
+    font-size: 25px;
     display: inline;
+    position: fixed;
   }
 }
 
