@@ -1,9 +1,8 @@
 import React from 'react';
 import s from './Dropdown.scss';
 import Select from 'react-select';
-import './Dropdown2.css';
-
 import SubmitButton from './SubmitButton';
+import './Dropdown2.css';
 /**
  * UI Component
  * @type {Class}
