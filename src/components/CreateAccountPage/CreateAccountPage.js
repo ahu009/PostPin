@@ -59,8 +59,14 @@ class CreateAccountPage extends React.Component {
    */
   constructor (props) {
     super(props);
-    this.state = { canSubmit: true, showConfirm: false };
+    this.state = {
+      canSubmit: true,
+      showConfirm: false,
+      emailin: '',
+      pwin: '',
+    };
     this.checkSubmit = this.checkSubmit.bind(this);
+    this.userSubmit = this.userSubmit.bind(this);
   }
 
 
@@ -68,6 +74,16 @@ class CreateAccountPage extends React.Component {
      let canSubmit = document.querySelector('[class="ReactTextField-message ReactTextField--error"]') ? false : true;
      this.setState({ canSubmit: canSubmit });
      return canSubmit;
+   }
+
+   userSubmit () {
+     let em = document.querySelector('input[type="email"]').value;
+     let pw = document.querySelector('input[type="password"]').value;
+     firebase.auth().createUserWithEmailAndPassword(em, pw);
+
+     this.setState({emailin: em});
+     this.setState({pwin: pw});
+     return userInput;
    }
 
   /**
@@ -117,6 +133,7 @@ class CreateAccountPage extends React.Component {
               name="Phone Number"
               type="tel"
               placeholder="Phone Number"
+
               validators={alphaNumericValidator}
             />
           </div>
@@ -127,6 +144,7 @@ class CreateAccountPage extends React.Component {
               name="Password"
               type="password"
               placeholder="Password"
+              value={this.state.pwin}
               validators={showConfirm}
             />
           </div>
@@ -144,6 +162,11 @@ class CreateAccountPage extends React.Component {
           : null}
           <div className={style.submit}>
             <Link to={"/"}>
+              <div onClick={this.userSubmit}>
+                <Button
+                  buttonText="Create Account"
+                />
+              </div>
               <Button buttonText="Submit" />
             </Link>
           </div>
