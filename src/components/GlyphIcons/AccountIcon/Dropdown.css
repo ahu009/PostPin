@@ -1,5 +1,5 @@
 .dropdown {
-    display: inline;
+    display: inline-block;
 }
 
 .dropdown__content {
@@ -21,13 +21,34 @@
     /*overflow: hidden;*/
 }
 
-.account-dropdown__link {
+.account-dropdown__quick-links {
+    display: block;
+    position: relative;
+    right: 57%;
+    margin-top: 0px !important;
+    width: 180px;
+    /*overflow: hidden;*/
+}
+
+.account-dropdown__link{
     border: 1px;
     border-style: groove;
     border-color: #393a3d;
+    background-color: white;
+}
+
+li.account-dropdown__link:hover{
+    border: 1px;
+    border-style: groove;
+    border-color: #393a3d;
+<<<<<<< HEAD
     &:hover {
       background-color: grey !important;
     }
+=======
+    background-color: #e8ebef;
+    text-decoration: none !important;
+>>>>>>> 7399fe1521d231eae7b79b2bf7108d2e26f28ccf
 }
 
 .arrow {
