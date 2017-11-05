@@ -4,7 +4,7 @@
 .inputContainer {
   top: 50%;
   left: 20%;
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   .inputText {
     top: 45%;
@@ -47,14 +47,14 @@
 .buttonContainer {
   margin-top: 45%;
   .modal1 {
-    position: absolute;
-    margin-bottom: 5%;
-    margin-left: 3%;
+    position: fixed;
+    bottom: 20%;
+    left: 25px;
   }
   .modal2 {
-    position: absolute;
-    margin-bottom: 5%;
-    margin-left: 75%;
+    position: fixed;
+    bottom: 20%;
+    right: 125px;
   }
 }
 
