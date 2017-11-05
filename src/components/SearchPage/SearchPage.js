@@ -5,9 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import auto from './TempAutoFill';
 import Button from './../Button';
 import { Link } from 'react-router-dom';
-import school from './../../shared/school';
 import Modal from 'react-modal';
-import PostPin_Info from './../../shared/PostPin_Info';
 import Category from './Category';
 
 const modalStyle = {
@@ -61,7 +59,7 @@ class SearchPage extends React.Component {
 
   toggleEnterClicked () {
     document.getElementById("navigate").click();
-    PostPin_Info.searchString = document.querySelector('input[autocomplete="off"]').value;
+    sessionStorage.setItem("userSearch",`'${document.querySelector('input[autocomplete="off"]').value}'`);
   }
 
   /**
@@ -69,7 +67,7 @@ class SearchPage extends React.Component {
    * @return {JSX} Component to render
    */
   render () {
-    let placeHolderText = `Search for Pins in ${school.name}`;
+    let placeHolderText = `Search for Pins in ${sessionStorage.getItem("schoolName")}`;
     const community = ['Activities', 'Lost + Found', 'RideShare', 'Events', 'General', 'Groups', 'Volunteers', 'Clubs', 'Classes', 'Intramural Sports'];
     const housing = ['Housing Swap', 'Office', 'Commercial', 'Parking', 'Storage', 'Rooms', 'Sublets', 'Rental'];
     const jobs = ['Tutoring', 'Internships', 'Club Position', 'Retail', 'Film', 'Gigs', 'Legal', 'General Labor', 'On-Campus', 'Off-Campus'];

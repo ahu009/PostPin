@@ -4,7 +4,6 @@ import Select from 'react-select';
 import './Dropdown2.css';
 
 import SubmitButton from './SubmitButton';
-import school from './../../../shared/school';
 /**
  * UI Component
  * @type {Class}
@@ -35,7 +34,7 @@ class Dropdown extends React.Component {
       {value: 'Stanford University', label: 'UC Riverside'}
     ];
     let value = this.state.placeHolder;
-    school.name = value;
+    sessionStorage.setItem("schoolName", value);
 
     return (
       <div>
