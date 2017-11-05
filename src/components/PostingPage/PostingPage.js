@@ -3,36 +3,12 @@ import style from './PostingPage.scss';
 import { ReactTextField, validator  } from 'react-textfield';
 import Button from './../Button';
 import { Link, Prompt } from 'react-router-dom';
+import ImageUploader from 'react-images-upload';
 
 const priceValidator = [
     {
       message: 'Price must be a number',
       validator: value => !isNaN(value),
-    },
-];
-
-const alphaNumericValidator = [
-    {
-      message: 'Not a phone number',
-      validator: value => {
-        if (value === "")
-          return true;
-        let numOnly = parseInt(value.replace(/[^0-9\.]/g, ''), 10);
-        numOnly = numOnly.toString();
-        if(numOnly.length > 6 && numOnly.length < 12)
-          return true;
-
-        return false;
-      },
-    },
-];
-
-const emailValidator = [
-    {
-      message: 'Not an email',
-      validator: value => {
-        return value != "" ? validator.isEmail(value) : true
-      },
     },
 ];
 
@@ -67,9 +43,16 @@ class PostingPage extends React.Component {
    */
   constructor (props) {
     super(props);
-    this.state = { canSubmit: true, showConfirm: false };
+    this.state = { canSubmit: true, pictures: [] };
     this.checkSubmit = this.checkSubmit.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
+
+  onDrop(picture) {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
+    }
 
    checkSubmit () {
      let canSubmit = document.querySelector('[class="ReactTextField-message ReactTextField--error"]') ? false : true;
@@ -82,29 +65,6 @@ class PostingPage extends React.Component {
    * @return {JSX} Component to render
    */
   render () {
-    const passwordValidator = [
-        {
-          message: 'Passwords must match',
-          validator: value => {
-             let password = document.querySelector('[name="Password"]').value;
-             let confirm = document.querySelector('[name="Confirm Password"]').value;
-             this.checkSubmit();
-             if(confirm != password)
-              return false;
-             return true;
-          },
-        },
-    ];
-
-    const showConfirm = [
-        {
-          message: '',
-          validator: value => {
-             value != '' ? this.setState({showConfirm: true}) : this.setState({showConfirm: false})
-          },
-        },
-    ];
-
     return (
       <div className={style.container}>
 
@@ -149,51 +109,17 @@ class PostingPage extends React.Component {
           />
         </div>
 
-        <div className={style.email}>
-          Email
-          <ReactTextField
-            name="E-mail"
-            type="email"
-            placeholder="E-mail"
-            validators={emailValidator}
-            style = {style1}
-          />
-        </div>
-
-        <div className={style.phone_number}>
-          Phone Number
-          <ReactTextField
-            name="Phone Number"
-            type="tel"
-            placeholder="Phone Number"
-            validators={alphaNumericValidator}
-            style = {style1}
-          />
-        </div>
-
-        <div className={style.pword}>
-          Password
-          <ReactTextField
-            name="Password"
-            type="password"
-            placeholder="Password"
-            validators={showConfirm}
-            style = {style1}
-          />
-        </div>
-
-        {this.state.showConfirm ?
-        <div className={style.confirm_pword}>
-          Confirm Password
-          <ReactTextField
-            name="Confirm Password"
-            type="password"
-            placeholder="Confirm Password"
-            validators={passwordValidator}
-            style = {style1}
-          />
-        </div>
-        : null}
+        <div className={style.upload}>
+          <ImageUploader
+                  withPreview={true}
+                  withIcon={true}
+                  buttonText='Choose images'
+                  onChange={this.onDrop}
+                  imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                  maxFileSize={5242880}
+                  label='Max file size: 5mb, Accepted: jpg, gif, png, gif'
+            />
+          </div>
 
         <div className={style.submit}>
           <Link to={this.state.canSubmit ? "/some/where" : "/some/where/else"}>
@@ -206,9 +132,6 @@ class PostingPage extends React.Component {
           </Link>
         </div>
       </div>
-
-
-
     );
   }
 }

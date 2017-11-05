@@ -37,6 +37,14 @@
      position: absolute;
    }
 
+   .upload {
+     position: absolute;
+     width: 100%;
+     background-color: white;
+     top: 60%;
+     box-shadow: none !important;
+   }
+
    .email {
      top: 56%;
      left: 19%;
@@ -68,13 +76,13 @@
    .back {
      left: 3%;
      top: 90%;
-     position: absolute;
+     position: fixed;
    }
 
    .submit {
-     left: 88%;
      top: 90%;
-     position: absolute;
+     right: 125px;
+     position: fixed;
    }
 
  }
