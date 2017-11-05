@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './SearchResultsPage.scss';
-import PostPin_Info from './../../shared/PostPin_Info';
 import Posting from './Posting';
 
 /**
@@ -16,9 +15,9 @@ class SearchResultsPage extends React.Component {
     return (
       <div className={style.container}>
         <div className={style.header}>
-          <p> There are x results for {PostPin_Info.searchString} </p>
-          <hr className={style.line}/>
+          <p> There are x results for {sessionStorage.getItem("userSearch")} </p>
         </div>
+        <hr className={style.line}/>
         <div className={style.postingContainer}>
           <ul> <Posting title="Shit for sell" price="69420" hasImage={false}/> </ul>
         </div>
