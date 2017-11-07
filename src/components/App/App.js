@@ -8,7 +8,6 @@ import StartPage from './../StartPage';
 import PostingPage from './../PostingPage';
 import CreateAccountPage from './../CreateAccountPage';
 import SignInPage from './../SignInPage';
-import firebase from 'firebase';
 import Logo from './../Logo';
 import SearchResultsPage from './../SearchResultsPage';
 
@@ -22,15 +21,6 @@ class App extends React.Component {
   // Initialize Firebase
   constructor(props) {
     super(props);
-    var config = {
-      apiKey: "AIzaSyC5QbpGLGC2MxpXn8ODBDWcXCPl3mFdG-o",
-      authDomain: "postpin-c9e80.firebaseapp.com",
-      databaseURL: "https://postpin-c9e80.firebaseio.com",
-      projectId: "postpin-c9e80",
-      storageBucket: "postpin-c9e80.appspot.com",
-      messagingSenderId: "172723892563"
-    };
-    firebase.initializeApp(config);
   }
 
   /**
@@ -57,7 +47,7 @@ class App extends React.Component {
               <PostingPage />
             )} />
             <Route exact={true} path="/accounts/create-account" render={()=> (
-              <CreateAccountPage db ={firebase} />
+              <CreateAccountPage />
             )} />
             <Route exact={true} path="/accounts/sign-in" render={()=> (
               <SignInPage />
