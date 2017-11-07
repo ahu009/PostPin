@@ -48,12 +48,6 @@ const styleTwo = {
   },
 };
 
-const numValidator = [
-    {
-      message: 'must be a number',
-      validator: value => !isNaN(value),
-    },
-];
 /**
  * UI Component
  * @type {Class}
@@ -64,12 +58,16 @@ class SearchPage extends React.Component {
 
     this.state = {
       modalIsOpen: false,
-      enterClicked: false
+      enterClicked: false,
+      canApply: true,
+      showError: false
     };
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.rejectSubmit = this.rejectSubmit.bind(this);
+    this.setCanApply = this.setCanApply.bind(this);
     this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
   }
 
@@ -126,6 +124,16 @@ class SearchPage extends React.Component {
     }
   }
 
+  setCanApply () {
+    document.querySelector('span[class="ReactTextField-message ReactTextField--error"]')
+    ? this.setState({canApply: false})
+    : this.setState({canApply: true, showError: false});
+  }
+
+  rejectSubmit () {
+    return this.setState({showError: true});
+  }
+
   /**
    * Render function for UIComponent Component
    * @return {JSX} Component to render
@@ -136,6 +144,13 @@ class SearchPage extends React.Component {
     const housing = ['Housing Swap', 'Office', 'Commercial', 'Parking', 'Storage', 'Rooms', 'Sublets', 'Rental'];
     const jobs = ['Tutoring', 'Internships', 'Club Position', 'Retail', 'Film', 'Gigs', 'Legal', 'General Labor', 'On-Campus', 'Off-Campus'];
     const forSale = ['Books', 'School Supplies', 'Clothes + Acc', 'Electronics', 'Arts & Crafts', 'Collectibles', 'Wanted', 'Cars + Motorcycles', 'General'];
+
+    const numValidator = [
+        {
+          message: 'must be a number',
+          validator: value => !isNaN(value)
+        },
+    ];
 
     return (
       <div className={style.container}>
@@ -200,7 +215,12 @@ class SearchPage extends React.Component {
 
           <div className={style.buttonContainer}>
             <div className={style.modal1} onClick={this.closeModal} > <Button buttonText={'Close'} /> </div>
-            <div className={style.modal2} onClick={()=>this.retrieveTags()}> <Button buttonText={'Apply'} /> </div>
+            <div className={style.modal2} onClick={() => {
+              this.state.canApply ? this.retrieveTags() : this.rejectSubmit();
+            }}>
+              <Button buttonText={'Apply'} />
+              {this.state.showError ? (<div className={style.error}> Errors Exist on Page </div>) : null}
+            </div>
           </div>
 
 
@@ -222,6 +242,7 @@ class SearchPage extends React.Component {
                     placeholder = "min"
                     validators={numValidator}
                     style = {styleOne}
+                    afterValidate = {this.setCanApply}
                   />
               </div>
               <p className = {style.dollar2}> $ </p>
@@ -232,6 +253,7 @@ class SearchPage extends React.Component {
                     placeholder = "max"
                     validators={numValidator}
                     style = {styleOne}
+                    afterValidate = {this.setCanApply}
                   />
               </div>
             </div>

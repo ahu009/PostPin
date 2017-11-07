@@ -68,7 +68,19 @@ class PostingPage extends React.Component {
           message: 'Price must be a number',
           validator: value => !isNaN(value)
         },
+        {
+          message: '*Required',
+          validator: value => value.replace(/\s+/, "")  != ''
+        }
     ];
+
+    const emptyValidator = [
+        {
+          message: '*Required',
+          validator: value => value.replace(/\s+/, "")  != ''
+        },
+    ];
+
     return (
       <div className={style.container}>
 
@@ -77,8 +89,10 @@ class PostingPage extends React.Component {
           <ReactTextField
             name="Title"
             type="text"
+            validators={emptyValidator}
             placeholder="Title"
             style = {style1}
+            afterValidate={this.checkSubmit}
           />
         </div>
 
@@ -99,8 +113,10 @@ class PostingPage extends React.Component {
           <ReactTextField
             name="Body"
             type="text"
+            validators={emptyValidator}
             placeholder="Body"
             style = {style1}
+            afterValidate={this.checkSubmit}
           />
         </div>
 
@@ -126,7 +142,7 @@ class PostingPage extends React.Component {
             />
           </div>
 
-        <div className={style.submit} onClick={this.rejectSubmit}>
+        <div className={style.submit} onClick={this.state.canSubmit ? null : this.rejectSubmit}>
           {this.state.showError ? <div className={style.error}> Errors Exist on Page </div> : null}
           <Link to={this.state.canSubmit ? "/some/where" : "/some/where/else"}>
             <Button buttonText="Submit" />
