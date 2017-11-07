@@ -68,7 +68,19 @@ class PostingPage extends React.Component {
           message: 'Price must be a number',
           validator: value => !isNaN(value)
         },
+        {
+          message: '*Required',
+          validator: value => value.replace(/\s+/, "")  != ''
+        }
     ];
+
+    const emptyValidator = [
+        {
+          message: '*Required',
+          validator: value => value.replace(/\s+/, "")  != ''
+        },
+    ];
+
     return (
       <div className={style.container}>
 
@@ -77,6 +89,7 @@ class PostingPage extends React.Component {
           <ReactTextField
             name="Title"
             type="text"
+            validators={emptyValidator}
             placeholder="Title"
             style = {style1}
           />
@@ -99,6 +112,7 @@ class PostingPage extends React.Component {
           <ReactTextField
             name="Body"
             type="text"
+            validators={emptyValidator}
             placeholder="Body"
             style = {style1}
           />
