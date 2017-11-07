@@ -55,6 +55,14 @@
     position: fixed;
     bottom: 20%;
     right: 125px;
+    display: inline-flex;
+    .error {
+      margin-top: 5px;
+      position: fixed;
+      color: #ff3860;
+      font-size: 10px;
+      margin-right: 10px;
+    }
   }
 }
 
