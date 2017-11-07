@@ -5,13 +5,6 @@ import Button from './../Button';
 import { Link, Prompt } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 
-const priceValidator = [
-    {
-      message: 'Price must be a number',
-      validator: value => !isNaN(value),
-    },
-];
-
 const style1 = {
   container: {
     textAlign: 'left',
@@ -43,9 +36,10 @@ class PostingPage extends React.Component {
    */
   constructor (props) {
     super(props);
-    this.state = { canSubmit: true, pictures: [] };
+    this.state = { canSubmit: false, pictures: [], showError: false };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.onDrop = this.onDrop.bind(this);
+    this.rejectSubmit = this.rejectSubmit.bind(this);
   }
 
   onDrop(picture) {
@@ -55,9 +49,13 @@ class PostingPage extends React.Component {
     }
 
    checkSubmit () {
-     let canSubmit = document.querySelector('[class="ReactTextField-message ReactTextField--error"]') ? false : true;
-     this.setState({ canSubmit: canSubmit });
-     return canSubmit;
+    document.querySelector('span[class="ReactTextField-message ReactTextField--error"]')
+     ? this.setState({canSubmit: false})
+     : this.setState({canSubmit: true, showError: false})
+   }
+
+   rejectSubmit () {
+     return this.setState({showError: true});
    }
 
   /**
@@ -65,6 +63,12 @@ class PostingPage extends React.Component {
    * @return {JSX} Component to render
    */
   render () {
+    const priceValidator = [
+        {
+          message: 'Price must be a number',
+          validator: value => !isNaN(value)
+        },
+    ];
     return (
       <div className={style.container}>
 
@@ -86,6 +90,7 @@ class PostingPage extends React.Component {
             validators={priceValidator}
             placeholder="Price"
             style = {style1}
+            afterValidate={this.checkSubmit}
           />
         </div>
 
@@ -121,7 +126,8 @@ class PostingPage extends React.Component {
             />
           </div>
 
-        <div className={style.submit}>
+        <div className={style.submit} onClick={this.rejectSubmit}>
+          {this.state.showError ? <div className={style.error}> Errors Exist on Page </div> : null}
           <Link to={this.state.canSubmit ? "/some/where" : "/some/where/else"}>
             <Button buttonText="Submit" />
           </Link>

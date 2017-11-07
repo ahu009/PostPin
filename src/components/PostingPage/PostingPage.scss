@@ -83,6 +83,12 @@
      top: 90%;
      right: 125px;
      position: fixed;
+     display: inline-flex;
+     .error {
+       color: #ff3860;
+       font-size: 10px;
+       margin-right: 10px;
+     }
    }
 
  }
