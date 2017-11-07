@@ -2,17 +2,18 @@
 
  .container {
    overflow: hidden;
+   width: 100%;
    .header {
-     top: 5%;
+     margin-top: 7%;
      width: 100%;
      text-align: center;
      position: relative;
      font-size: 20px;
-     .line {
-       width: 100%;
-       border-color: grey;
-       position: relative;
-     }
+   }
+   .line {
+     width: 100%;
+     border-color: grey;
+     position: relative;
    }
    .postingContainer {
       position: relative;

@@ -5845,6 +5845,10 @@ react-event-listener@^0.5.1:
     prop-types "^15.6.0"
     warning "^3.0.0"
 
+react-flip-move@^2.9.14:
+  version "2.9.17"
+  resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-2.9.17.tgz#849dc41f614a3d26dc229f4c930a0fb3a8f39441"
+
 react-hot-loader@^3.0.0-beta.6:
   version "3.0.0-beta.7"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-3.0.0-beta.7.tgz#d5847b8165d731c4d5b30d86d5d4716227a0fa83"
@@ -5855,6 +5859,13 @@ react-hot-loader@^3.0.0-beta.6:
     react-proxy "^3.0.0-alpha.0"
     redbox-react "^1.3.6"
     source-map "^0.4.4"
+
+react-images-upload@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-images-upload/-/react-images-upload-1.1.1.tgz#fd7ace49df43b414326cfc0ff7535665226a71f5"
+  dependencies:
+    react "^15.6.1"
+    react-flip-move "^2.9.14"
 
 react-input-autosize@^2.0.1:
   version "2.0.1"
@@ -5945,7 +5956,7 @@ react-transition-group@^1.2.1:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react@15.6.2:
+react@15.6.2, react@^15.6.1:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
   dependencies:

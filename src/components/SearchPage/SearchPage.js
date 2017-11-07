@@ -2,13 +2,13 @@ import React from 'react';
 import style from './SearchPage.scss';
 import SearchBar from 'material-ui-search-bar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { ReactTextField,validator} from 'react-textfield';
 import auto from './TempAutoFill';
 import Button from './../Button';
 import { Link } from 'react-router-dom';
-import school from './../../shared/school';
 import Modal from 'react-modal';
-import PostPin_Info from './../../shared/PostPin_Info';
 import Category from './Category';
+
 
 const modalStyle = {
   overlay : {
@@ -27,6 +27,27 @@ const modalStyle = {
     transform             : 'translate(-50%, -50%)'
   }
 };
+
+const styleOne = {
+  container: {
+    textAlign: 'left',
+  },
+  input: {
+    width: '60%',
+    fontSize: '12px',
+  },
+};
+
+const styleTwo = {
+  container: {
+    textAlign: 'left',
+  },
+  input: {
+    width: '100%',
+    fontSize: '20px',
+  },
+};
+
 /**
  * UI Component
  * @type {Class}
@@ -37,12 +58,16 @@ class SearchPage extends React.Component {
 
     this.state = {
       modalIsOpen: false,
-      enterClicked: false
+      enterClicked: false,
+      canApply: true,
+      showError: false
     };
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.rejectSubmit = this.rejectSubmit.bind(this);
+    this.setCanApply = this.setCanApply.bind(this);
     this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
   }
 
@@ -61,7 +86,52 @@ class SearchPage extends React.Component {
 
   toggleEnterClicked () {
     document.getElementById("navigate").click();
-    PostPin_Info.searchString = document.querySelector('input[autocomplete="off"]').value;
+    sessionStorage.setItem("userSearch",`'${document.querySelector('input[autocomplete="off"]').value}'`);
+  }
+
+  retrieveTags () {
+    var res = document.querySelector('input[name="Tags"]').value.split(",");
+    console.log(res.length);
+    console.log(res);
+    var min_val = document.querySelector('input[name="min_in"]').value;
+    var max_val = document.querySelector('input[name="max_in"]').value;
+
+    this.setState({modalIsOpen: false});
+
+    document.getElementById("taglist").innerHTML = "";
+
+    if(res[0] != ""){
+      var tag_l = "<li><div style=\"text-decoration:underline; font-size: 14px;\">Tags:</div></li>";
+      document.getElementById("taglist").innerHTML += tag_l;
+    }
+    for (var i = 0; i < res.length; i++)
+    {
+      var tag_l = "<li><div style=\"border: 2px solid #EEECF4; border-radius:4px; padding-left:2px; padding-right:2px\">" + res[i] + "</div></li>";
+      document.getElementById("taglist").innerHTML += tag_l;
+    }
+    res = "";
+
+    if(min_val != 0 || max_val != 0){
+      var tag_l = "<li><div style=\"text-decoration:underline; font-size: 14px;\">Price range:</div></li>";
+      document.getElementById("taglist").innerHTML += tag_l;
+
+
+      var min_max = "<li><div style=\"border: 2px solid #EEECF4; border-radius:4px; padding-left:2px; padding-right:2px\">" + "$" + min_val + " - $"+ max_val + "</div></li>";
+      document.getElementById("taglist").innerHTML += min_max;
+
+      min_val = "";
+      max_val = "";
+    }
+  }
+
+  setCanApply () {
+    document.querySelector('span[class="ReactTextField-message ReactTextField--error"]')
+    ? this.setState({canApply: false})
+    : this.setState({canApply: true, showError: false});
+  }
+
+  rejectSubmit () {
+    return this.setState({showError: true});
   }
 
   /**
@@ -69,11 +139,18 @@ class SearchPage extends React.Component {
    * @return {JSX} Component to render
    */
   render () {
-    let placeHolderText = `Search for Pins in ${school.name}`;
+    let placeHolderText = `Search for Pins in ${sessionStorage.getItem("schoolName")}`;
     const community = ['Activities', 'Lost + Found', 'RideShare', 'Events', 'General', 'Groups', 'Volunteers', 'Clubs', 'Classes', 'Intramural Sports'];
     const housing = ['Housing Swap', 'Office', 'Commercial', 'Parking', 'Storage', 'Rooms', 'Sublets', 'Rental'];
     const jobs = ['Tutoring', 'Internships', 'Club Position', 'Retail', 'Film', 'Gigs', 'Legal', 'General Labor', 'On-Campus', 'Off-Campus'];
     const forSale = ['Books', 'School Supplies', 'Clothes + Acc', 'Electronics', 'Arts & Crafts', 'Collectibles', 'Wanted', 'Cars + Motorcycles', 'General'];
+
+    const numValidator = [
+        {
+          message: 'must be a number',
+          validator: value => !isNaN(value)
+        },
+    ];
 
     return (
       <div className={style.container}>
@@ -101,7 +178,7 @@ class SearchPage extends React.Component {
         </div>
         <div className={style.create}>
           <Link to="/some/where/else">
-            <Button buttonText={'Create Pin'} />
+            <Button buttonText={'Create Post'} />
           </Link>
         </div>
         <p onClick={this.openModal} className={style.filter}> Filter </p>
@@ -123,39 +200,62 @@ class SearchPage extends React.Component {
           />
         </MuiThemeProvider>
 
+        <div className={style.tagList}>
+          <ul id="taglist" className={style.tlist}>
+
+          </ul>
+        </div>
+
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={modalStyle}
           shouldCloseOnOverlayClick={true}
-          contentLabel="Modal"
-        >
+          contentLabel="Modal">
+
           <div className={style.buttonContainer}>
-            <div onClick={this.closeModal}> <Button buttonText={'Close'} /> </div>
-            <div className={style.modal2} onClick={this.closeModal}> <Button buttonText={'Apply'} /> </div>
+            <div className={style.modal1} onClick={this.closeModal} > <Button buttonText={'Close'} /> </div>
+            <div className={style.modal2} onClick={() => {
+              this.state.canApply ? this.retrieveTags() : this.rejectSubmit();
+            }}>
+              <Button buttonText={'Apply'} />
+              {this.state.showError ? (<div className={style.error}> Errors Exist on Page </div>) : null}
+            </div>
           </div>
-          <MuiThemeProvider>
-            <SearchBar
-              autoFocus
-              dataSource={auto}
-              placeholder="Search for Tags separated by Commas. (e.g Electronics, Art, etc.)"
-              onChange={() => console.log('onChange')}
-              onRequestSearch={() => console.log('onRequestSearch')}
-              style={{
-                width: '70%',
-                position: 'absolute',
-                left: '20%',
-                top: '20%'
-              }}
-            />
-          </MuiThemeProvider>
+
+
             <div className={style.inputContainer}>
-              <p className={style.inputText}> Enter Price Range </p>
-              <p className={style.dash}> $ </p>
-              <input className={style.input1} type="text" name="txt" />
+              <div className={style.tagbar}>
+                <ReactTextField
+                    name = "Tags"
+                    placeholder = "Enter tags separated by commas"
+                    type="text"
+                    style = {styleTwo}
+                  />
+              </div>
+              <p className = {style.dollar1}> $ </p>
               <p className={style.dash}> - </p>
-              <p className={style.dash}> $ </p>
-              <input className={style.input2} type="text" name="txt" />
+              <div className={style.input1}>
+                <ReactTextField
+                    name = "min_in"
+                    type="text"
+                    placeholder = "min"
+                    validators={numValidator}
+                    style = {styleOne}
+                    afterValidate = {this.setCanApply}
+                  />
+              </div>
+              <p className = {style.dollar2}> $ </p>
+              <div className={style.input2}>
+                <ReactTextField
+                    name = "max_in"
+                    type="text"
+                    placeholder = "max"
+                    validators={numValidator}
+                    style = {styleOne}
+                    afterValidate = {this.setCanApply}
+                  />
+              </div>
             </div>
         </Modal>
 

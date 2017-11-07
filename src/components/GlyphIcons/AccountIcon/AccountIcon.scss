@@ -4,7 +4,11 @@
    font-size: 20px;
    top: 3%;
    right: 7%;
+   z-index: 2;
    position: absolute;
    list-style-type: none;
    color: $containerGrey;
+   &:hover {
+     cursor: pointer;
+   }
  }
