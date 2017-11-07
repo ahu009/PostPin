@@ -6,58 +6,82 @@
   left: 20%;
   position: fixed;
   overflow: hidden;
-  .inputText {
-    top: 45%;
-    left: 33%;
+
+  .tagbar {
+    top: 18%;
+    left: 20%;
+    width: 65%;
     position: fixed;
-    display: table-cell;
-    font-size: 25px;
   }
   .input1 {
-    top: 60%;
-    left: 35.2%;
+    top: 50%;
+    left: 34%;
     position: fixed;
   }
   .input2 {
-    top: 60%;
-    left: 53.1%;
+    top: 50%;
+    left: 55%;
     position: fixed;
   }
   .dollar1  {
-    top: 53%;
-    left: 32.9%;
+    top: 43%;
+    left: 31%;
     position: fixed;
     font-size: 25px;
   }
   .dollar2 {
-    top: 53%;
-    left: 50.8%;
+    top: 43%;
+    left: 52%;
     position: fixed;
     font-size: 25px;
   }
   .dash {
-    top: 53%;
-    left: 48%;
+    top: 43%;
+    left: 50%;
     font-size: 25px;
     display: inline;
     position: fixed;
   }
 }
 
+.tagList {
+  top: 13%;
+  left: 23%;
+  width: 55%;
+  position: absolute;
+}
+
+.tlist {
+  margin:0;
+  padding: 0;
+  display: inline-flex;
+  list-style-type: none;
+  width: 100%;
+  font-size: 12px;
+}
+
+li {
+    margin-right: 2%;
+    text-align: center;
+    //padding-left: 3px;
+    //padding-right: 3px;
+}
+
+
 .buttonContainer {
   margin-top: 45%;
   .modal1 {
     position: fixed;
-    bottom: 20%;
+    bottom: 22%;
     left: 25px;
   }
   .modal2 {
     position: fixed;
-    bottom: 20%;
+    bottom: 22%;
     right: 125px;
     display: inline-flex;
     .error {
-      margin-top: 5px;
+      margin-top: 55px;
       position: fixed;
       color: #ff3860;
       font-size: 10px;
@@ -90,8 +114,8 @@
      text-decoration: underline;
      font-size: 13px;
      text-align: center;
-     left: 50%;
-     top: 10%;
+     left: 79%;
+     top: 4%;
 
      &:hover {
        cursor: pointer;
