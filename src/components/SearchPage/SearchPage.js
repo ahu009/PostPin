@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import Category from './Category';
 
+
 const modalStyle = {
   overlay : {
     position          : 'fixed',
@@ -26,12 +27,14 @@ const modalStyle = {
     transform             : 'translate(-50%, -50%)'
   }
 };
+
 const styleOne = {
   container: {
     textAlign: 'left',
   },
   input: {
     width: '60%',
+    fontSize: '12px',
   },
 };
 
@@ -40,7 +43,8 @@ const styleTwo = {
     textAlign: 'left',
   },
   input: {
-    width: '60%',
+    width: '100%',
+    fontSize: '20px',
   },
 };
 
@@ -87,6 +91,24 @@ class SearchPage extends React.Component {
     sessionStorage.setItem("userSearch",`'${document.querySelector('input[autocomplete="off"]').value}'`);
   }
 
+  retrieveTags () {
+    var res = document.querySelector('input[name="Tags"]').value.split(",");
+    var min_val = document.querySelector('input[name="min_in"]').value;
+    var max_val = document.querySelector('input[name="max_in"]').value;
+    var min_max = "<li>" + "$" + min_val + " - $"+ max_val + "</li>";
+    this.setState({modalIsOpen: false});
+
+    var tag_l = "<li>Tags:</li>"
+    document.getElementById("taglist").innerHTML += tag_l;
+    for (var i = 0; i < res.length; i++)
+    {
+      var tag_l = "<li>" + res[i] + "</li>";
+      document.getElementById("taglist").innerHTML += tag_l;
+    }
+
+    document.getElementById("taglist").innerHTML += min_max;
+  }
+
   /**
    * Render function for UIComponent Component
    * @return {JSX} Component to render
@@ -124,7 +146,7 @@ class SearchPage extends React.Component {
         </div>
         <div className={style.create}>
           <Link to="/some/where/else">
-            <Button buttonText={'Create Pin'} />
+            <Button buttonText={'Create Post'} />
           </Link>
         </div>
         <p onClick={this.openModal} className={style.filter}> Filter </p>
@@ -146,39 +168,44 @@ class SearchPage extends React.Component {
           />
         </MuiThemeProvider>
 
+        <div className={style.tagList}>
+          <ul id="taglist" className={style.tlist}>
+
+          </ul>
+        </div>
+
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={modalStyle}
           shouldCloseOnOverlayClick={true}
-          contentLabel="Modal"
-        >
+          contentLabel="Modal">
+
           <div className={style.buttonContainer}>
             <div className={style.modal1} onClick={this.closeModal} > <Button buttonText={'Close'} /> </div>
-            <div className={style.modal2} onClick={this.closeModal}> <Button buttonText={'Apply'} /> </div>
+            <div className={style.modal2} onClick={()=>this.retrieveTags()}> <Button buttonText={'Apply'} /> </div>
           </div>
-          <MuiThemeProvider>
-            <SearchBar
-              autoFocus
-              dataSource={auto}
-              placeholder="Search for Tags separated by Commas. (e.g Electronics, Art, etc.)"
-              onChange={() => console.log('onChange')}
-              onRequestSearch={() => console.log('onRequestSearch')}
-              style={{
-                width: '70%',
-                position: 'absolute',
-                left: '15%',
-                top: '20%'
-              }}
-            />
-          </MuiThemeProvider>
+
+
             <div className={style.inputContainer}>
-              <p className={style.inputText}> Enter Price Range </p>
+              <div className={style.tagbar}>
+                <ReactTextField
+                    name = "Tags"
+                    placeholder = "Enter tags separated by commas"
+                    type="text"
+                    style = {styleTwo}
+                  />
+              </div>
+
+              <p>test</p>
+
               <p className = {style.dollar1}> $ </p>
               <p className={style.dash}> - </p>
               <div className={style.input1}>
                 <ReactTextField
+                    name = "min_in"
                     type="text"
+                    placeholder = "min"
                     validators={numValidator}
                     style = {styleOne}
                   />
@@ -186,9 +213,11 @@ class SearchPage extends React.Component {
               <p className = {style.dollar2}> $ </p>
               <div className={style.input2}>
                 <ReactTextField
+                    name = "max_in"
                     type="text"
+                    placeholder = "max"
                     validators={numValidator}
-                    style = {styleTwo}
+                    style = {styleOne}
                   />
               </div>
             </div>
