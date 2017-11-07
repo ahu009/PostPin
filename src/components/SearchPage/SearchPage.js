@@ -93,20 +93,37 @@ class SearchPage extends React.Component {
 
   retrieveTags () {
     var res = document.querySelector('input[name="Tags"]').value.split(",");
+    console.log(res.length);
+    console.log(res);
     var min_val = document.querySelector('input[name="min_in"]').value;
     var max_val = document.querySelector('input[name="max_in"]').value;
-    var min_max = "<li>" + "$" + min_val + " - $"+ max_val + "</li>";
+
     this.setState({modalIsOpen: false});
 
-    var tag_l = "<li>Tags:</li>"
-    document.getElementById("taglist").innerHTML += tag_l;
-    for (var i = 0; i < res.length; i++)
-    {
-      var tag_l = "<li>" + res[i] + "</li>";
+    document.getElementById("taglist").innerHTML = "";
+
+    if(res[0] != ""){
+      var tag_l = "<li><div style=\"text-decoration:underline; font-size: 14px;\">Tags:</div></li>";
       document.getElementById("taglist").innerHTML += tag_l;
     }
+    for (var i = 0; i < res.length; i++)
+    {
+      var tag_l = "<li><div style=\"border: 2px solid #EEECF4; border-radius:4px; padding-left:2px; padding-right:2px\">" + res[i] + "</div></li>";
+      document.getElementById("taglist").innerHTML += tag_l;
+    }
+    res = "";
 
-    document.getElementById("taglist").innerHTML += min_max;
+    if(min_val != 0 || max_val != 0){
+      var tag_l = "<li><div style=\"text-decoration:underline; font-size: 14px;\">Price range:</div></li>";
+      document.getElementById("taglist").innerHTML += tag_l;
+
+
+      var min_max = "<li><div style=\"border: 2px solid #EEECF4; border-radius:4px; padding-left:2px; padding-right:2px\">" + "$" + min_val + " - $"+ max_val + "</div></li>";
+      document.getElementById("taglist").innerHTML += min_max;
+
+      min_val = "";
+      max_val = "";
+    }
   }
 
   /**
@@ -196,9 +213,6 @@ class SearchPage extends React.Component {
                     style = {styleTwo}
                   />
               </div>
-
-              <p>test</p>
-
               <p className = {style.dollar1}> $ </p>
               <p className={style.dash}> - </p>
               <div className={style.input1}>
