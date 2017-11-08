@@ -3,6 +3,7 @@ import style from './CreateAccountPage.scss';
 import { ReactTextField, validator  } from 'react-textfield';
 import Button from './../Button';
 import { Link, Prompt } from 'react-router-dom';
+import firebase from './../../firebase.js';
 
 const alphaNumericValidator = [
     {
@@ -64,9 +65,17 @@ class CreateAccountPage extends React.Component {
       showConfirm: false,
       emailin: '',
       pwin: '',
+      phonein: ''
     };
     this.checkSubmit = this.checkSubmit.bind(this);
-    this.userSubmit = this.userSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   }
 
 
@@ -76,14 +85,28 @@ class CreateAccountPage extends React.Component {
      return canSubmit;
    }
 
-   userSubmit () {
-     let em = document.querySelector('input[type="email"]').value;
-     let pw = document.querySelector('input[type="password"]').value;
-     firebase.auth().createUserWithEmailAndPassword(em, pw);
+   handleSubmit(e) {
+     e.preventDefault();
+     const usersRef = firebase.database().ref('users');
+     const user = {
+       user: document.querySelector('input[type="email"]').value,
+       password: document.querySelector('input[type="password"]').value,
+       phoneNumber: document.querySelector('input[type="tel"]').value
+     }
+     usersRef.push(user);
+     this.setState({
+       emailin: document.querySelector('input[type="email"]').value,
+       pwin: document.querySelector('input[type="password"]').value,
+       phonein: document.querySelector('input[type="password"]').value
+     });
 
-     this.setState({emailin: em});
-     this.setState({pwin: pw});
-     return userInput;
+    //  let em = document.querySelector('input[type="email"]').value;
+    //  let pw = document.querySelector('input[type="password"]').value;
+    //  firebase.auth().createUserWithEmailAndPassword(em, pw);
+     //
+    //  this.setState({emailin: em});
+    //  this.setState({pwin: pw});
+    //  return userInput;
    }
 
   /**
@@ -123,17 +146,20 @@ class CreateAccountPage extends React.Component {
               name="E-mail"
               type="email"
               placeholder="E-mail"
+              onChange={this.handleChange}
+              value = {this.state.emailin}
               validators={emailValidator}
             />
           </div>
 
           <div>
-            Phone Number:
+            PhoneNumber:
             <ReactTextField
               name="Phone Number"
               type="tel"
               placeholder="Phone Number"
-
+              onChange={this.handleChange}
+              value = {this.state.phonein}
               validators={alphaNumericValidator}
             />
           </div>
@@ -144,7 +170,8 @@ class CreateAccountPage extends React.Component {
               name="Password"
               type="password"
               placeholder="Password"
-              value={this.state.pwin}
+              onChange={this.handleChange}
+              value = {this.state.pwin}
               validators={showConfirm}
             />
           </div>
@@ -162,12 +189,11 @@ class CreateAccountPage extends React.Component {
           : null}
           <div className={style.submit}>
             <Link to={"/"}>
-              <div onClick={this.userSubmit}>
+              <div onClick={this.handleSubmit}>
                 <Button
-                  buttonText="Create Account"
+                  buttonText="Submit"
                 />
               </div>
-              <Button buttonText="Submit" />
             </Link>
           </div>
           </div>
