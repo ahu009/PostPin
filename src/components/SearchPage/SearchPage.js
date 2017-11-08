@@ -87,6 +87,7 @@ class SearchPage extends React.Component {
   toggleEnterClicked () {
     document.getElementById("navigate").click();
     sessionStorage.setItem("userSearch",`'${document.querySelector('input[autocomplete="off"]').value}'`);
+    sessionStorage.setItem("Category", '');
   }
 
   retrieveTags () {
