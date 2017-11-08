@@ -15,9 +15,6 @@ class Dropdown extends React.Component {
    */
    constructor (props) {
      super(props);
-     this.state = {
-       placeHolder: null
-     };
    }
 
   /**
@@ -32,8 +29,6 @@ class Dropdown extends React.Component {
       {value: 'Stanford University', label: 'UC San Diego'},
       {value: 'Stanford University', label: 'UC Riverside'}
     ];
-    let value = this.state.placeHolder;
-    sessionStorage.setItem("schoolName", value);
 
     return (
       <div>
@@ -42,13 +37,14 @@ class Dropdown extends React.Component {
         value="one"
         options={options}
         resetValue=''
-        placeholder={value ? value : 'Select...'}
+        placeholder={sessionStorage.getItem("schoolName") != null ? sessionStorage.getItem("schoolName") : 'Select...'}
         onChange={(val) => {
           console.log(val);
-          this.setState({placeHolder: val.label})
+          sessionStorage.setItem("schoolName", val.label);
+          this.forceUpdate();
         }}
         />
-        <SubmitButton shouldHide={value ? false : true}/>
+        <SubmitButton shouldHide={sessionStorage.getItem("schoolName") ? false : true}/>
       </div>
     );
   }

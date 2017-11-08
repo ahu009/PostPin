@@ -53,7 +53,7 @@ class App extends React.Component {
               <SignInPage />
             )} />
             <Route exact={true} path="/some/where/search" render={()=> (
-              <SearchResultsPage />
+              <SearchResultsPage userSearch={sessionStorage.getItem("userSearch")} />
             )} />
           </main>
         </div>
