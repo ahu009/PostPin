@@ -101,7 +101,7 @@ class PostingPage extends React.Component {
         </div>
 
         <div className={style.price}>
-          Price
+          Price ($)
           <ReactTextField
             name="Price"
             type="text"
