@@ -188,7 +188,7 @@ class CreateAccountPage extends React.Component {
           </div>
           : null}
           <div className={style.submit}>
-            <Link to={"/"}>
+            <Link to={"/some/where/AccountManagement"}>
               <div onClick={this.handleSubmit}>
                 <Button
                   buttonText="Submit"
