@@ -91,8 +91,6 @@ class SearchPage extends React.Component {
 
   retrieveTags () {
     var res = document.querySelector('input[name="Tags"]').value.split(",");
-    console.log(res.length);
-    console.log(res);
     var min_val = document.querySelector('input[name="min_in"]').value;
     var max_val = document.querySelector('input[name="max_in"]').value;
 
