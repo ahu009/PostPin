@@ -46,6 +46,10 @@ class PostingPage extends React.Component {
         this.setState({
             pictures: this.state.pictures.concat(picture),
         });
+        setTimeout(() => {
+          let elementtoscroll = document.querySelectorAll('div[class="uploadPictureContainer"]')[document.querySelectorAll('div[class="uploadPictureContainer"]').length - 1];
+          elementtoscroll.scrollIntoView({behavior: 'smooth'});
+        }, 50);
     }
 
    checkSubmit () {
