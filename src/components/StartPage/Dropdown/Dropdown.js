@@ -37,7 +37,7 @@ class Dropdown extends React.Component {
         value="one"
         options={options}
         resetValue=''
-        placeholder={sessionStorage.getItem("schoolName") != 'undefined' ? sessionStorage.getItem("schoolName") : 'Select...'}
+        placeholder={(sessionStorage.getItem("schoolName") != 'undefined' && sessionStorage.getItem("schoolName") != null) ? sessionStorage.getItem("schoolName") : 'Select...'}
         onChange={(val) => {
           console.log(val);
           sessionStorage.setItem("schoolName", val.label);

@@ -8,6 +8,7 @@ import Button from './../Button';
 import { Link, Route } from 'react-router-dom';
 import Modal from 'react-modal';
 import Category from './Category';
+import PrintFilters from './PrintFilters';
 
 
 const modalStyle = {
@@ -60,7 +61,9 @@ class SearchPage extends React.Component {
       modalIsOpen: false,
       enterClicked: false,
       canApply: true,
-      showError: false
+      showError: false,
+      tags: null,
+      priceRange: null
     };
 
     this.openModal = this.openModal.bind(this);
@@ -68,7 +71,26 @@ class SearchPage extends React.Component {
     this.closeModal = this.closeModal.bind(this);
     this.rejectSubmit = this.rejectSubmit.bind(this);
     this.setCanApply = this.setCanApply.bind(this);
+    this.retrieveTags = this.retrieveTags.bind(this);
     this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
+    this.tagRemoved = this.tagRemoved.bind(this);
+  }
+
+  tagRemoved (value, isTag) {
+    return isTag ? this.setState({tags: this.state.tags.filter(function(i) { return i != value })}) : this.setState({priceRange: this.state.priceRange.filter(function(i) { return i != value })});
+  }
+
+  retrieveTags () {
+    let tagArray = document.querySelector('input[name="Tags"]').value.split(",");
+    for(let i = 0; i < tagArray.length; i++) {
+      if (tagArray[i] != undefined && tagArray[i] != null)
+        tagArray[i] = tagArray[i].replace(/\s/g, '').toLowerCase();
+    }
+    tagArray = Array.from(new Set(tagArray));
+    this.setState({tags: tagArray,
+                  priceRange: [`$${document.querySelector('input[name="min_in"]').value} - $${document.querySelector('input[name="max_in"]').value}`]});
+    sessionStorage.setItem("filterTags", this.state.tags);
+    this.closeModal();
   }
 
   openModal() {
@@ -88,39 +110,6 @@ class SearchPage extends React.Component {
     document.getElementById("navigate").click();
     sessionStorage.setItem("userSearch",`'${document.querySelector('input[autocomplete="off"]').value}'`);
     sessionStorage.setItem("Category", '');
-  }
-
-  retrieveTags () {
-    var res = document.querySelector('input[name="Tags"]').value.split(",");
-    var min_val = document.querySelector('input[name="min_in"]').value;
-    var max_val = document.querySelector('input[name="max_in"]').value;
-
-    this.setState({modalIsOpen: false});
-
-    document.getElementById("taglist").innerHTML = "";
-
-    if(res[0] != ""){
-      var tag_l = "<li><div style=\"text-decoration:underline; font-size: 14px;\">Tags:</div></li>";
-      document.getElementById("taglist").innerHTML += tag_l;
-    }
-    for (var i = 0; i < res.length; i++)
-    {
-      var tag_l = "<li><div style=\"border: 2px solid #EEECF4; border-radius:4px; padding-left:2px; padding-right:2px\">" + res[i] + "</div></li>";
-      document.getElementById("taglist").innerHTML += tag_l;
-    }
-    res = "";
-
-    if(min_val != 0 || max_val != 0){
-      var tag_l = "<li><div style=\"text-decoration:underline; font-size: 14px;\">Price range:</div></li>";
-      document.getElementById("taglist").innerHTML += tag_l;
-
-
-      var min_max = "<li><div style=\"border: 2px solid #EEECF4; border-radius:4px; padding-left:2px; padding-right:2px\">" + "$" + min_val + " - $"+ max_val + "</div></li>";
-      document.getElementById("taglist").innerHTML += min_max;
-
-      min_val = "";
-      max_val = "";
-    }
   }
 
   setCanApply () {
@@ -153,7 +142,6 @@ class SearchPage extends React.Component {
 
     return (
       <div className={style.container}>
-        
         <div className={style.housing}>
           <Category name="Housing" tags={housing} />
         </div>
@@ -183,8 +171,14 @@ class SearchPage extends React.Component {
         </div>
         <p onClick={this.openModal} className={style.filter}> Filter </p>
 
-
-
+          {(this.state.tags != null && this.state.tags != '' && this.state.tags != undefined)
+          ? (<div className={style.tags}>
+              <PrintFilters callBack={this.tagRemoved} header="Tags:" content={this.state.tags} />
+            </div>) : null}
+          {(this.state.priceRange != null && this.state.priceRange[0] != undefined && this.state.priceRange[0].replace(/\s/g, '') != '$-$')
+          ? (<div className={style.priceRange}>
+              <PrintFilters callBack={this.tagRemoved} header="Price Range:" content={this.state.priceRange} />
+            </div>) : null}
         <MuiThemeProvider>
           <SearchBar
             dataSource={auto}
@@ -200,11 +194,6 @@ class SearchPage extends React.Component {
           />
         </MuiThemeProvider>
 
-        <div className={style.tagList}>
-          <ul id="taglist" className={style.tlist}>
-
-          </ul>
-        </div>
 
         <Modal
           isOpen={this.state.modalIsOpen}
