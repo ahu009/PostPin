@@ -46,7 +46,7 @@ class SignInPage extends React.Component {
           </div>
 
           <div className={style.submit}>
-            <Link to={"/"}>
+            <Link to={"/some/where/AccountManagement"}>
               <Button buttonText="Sign In" />
             </Link>
           </div>

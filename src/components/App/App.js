@@ -10,6 +10,7 @@ import CreateAccountPage from './../CreateAccountPage';
 import SignInPage from './../SignInPage';
 import Logo from './../Logo';
 import SearchResultsPage from './../SearchResultsPage';
+import AccountManagement from './../AccountManagement';
 
 
 /**
@@ -42,6 +43,9 @@ class App extends React.Component {
           <main>
             <Route exact={true} path="/some/where" render={()=> (
               <SearchPage />
+            )} />
+            <Route exact={true} path="/some/where/AccountManagement" render={()=> (
+              <AccountManagement />
             )} />
             <Route exact={true} path="/some/where/else" render={()=> (
               <PostingPage />
