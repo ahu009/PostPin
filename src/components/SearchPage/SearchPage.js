@@ -5,7 +5,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { ReactTextField,validator} from 'react-textfield';
 import auto from './TempAutoFill';
 import Button from './../Button';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import Modal from 'react-modal';
 import Category from './Category';
 
@@ -153,6 +153,7 @@ class SearchPage extends React.Component {
 
     return (
       <div className={style.container}>
+        
         <div className={style.housing}>
           <Category name="Housing" tags={housing} />
         </div>
