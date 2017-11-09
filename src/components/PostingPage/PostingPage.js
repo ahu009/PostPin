@@ -183,7 +183,7 @@ class PostingPage extends React.Component {
             />
           </div>
 
-        <div className={style.submit} onClick={this.handleSubmit}> //onClick={this.state.canSubmit ? null : this.rejectSubmit}>
+        <div className={style.submit} onClick={this.handleSubmit}>
           {this.state.showError ? <div className={style.error}> Errors Exist on Page </div> : null}
           <Link to={this.state.canSubmit ? "/some/where" : "/some/where/else"}>
             <Button buttonText="Submit" />
