@@ -28,18 +28,17 @@ class AccountManagement extends React.Component {
     // var user = firebase.auth().currentUser;
     // this.state.email = user.email;
     // this.state.password = user.password;
-    var user = firebase.auth().currentUser;
-    if(user)
-    {
-      console.log("user exists")
-      console.log(user.email)
-      console.log(user.password)
-      this.setState({accountInformation: {email: user.email, password: user.password}});
-
-    }
-    else {
-      console.log("does not exists")
-    }
+    var that = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log("user exists")
+        console.log(user.email)
+        console.log(user.password)
+        that.setState({accountInformation: {email: user.email, password: user.password}});
+      } else {
+        console.log("user does not exists")
+      }
+    });
   }
 
   /**
