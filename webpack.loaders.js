@@ -54,5 +54,5 @@ module.exports = [
     exclude: /(node_modules|bower_components)/,
     loader: 'url-loader?limit=10000&mimetype=image/png'
   },
-  { test: /\.(woff|woff2|ttf|eot|svg)$/, loader: 'url-loader?limit=100000' }
+  { test: /\.(woff|woff2|ttf|eot|svg|ico)$/, loader: 'url-loader?limit=100000' }
 ];

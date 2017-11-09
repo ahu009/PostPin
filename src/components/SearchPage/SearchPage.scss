@@ -44,13 +44,6 @@
   }
 }
 
-.tagList {
-  top: 13%;
-  left: 23%;
-  width: 55%;
-  position: absolute;
-}
-
 .tlist {
   margin:0;
   padding: 0;
@@ -91,11 +84,26 @@ li {
 }
 
 .container {
-  overflow: hidden;
+    .tags {
+      position: absolute;
+      top: 12%;
+      left: 23.5%;
+      height: 100%;
+    }
+
+    .priceRange {
+      position: absolute;
+      top: 12%;
+      left: 60%;
+      padding-left: 10px;
+    }
+
 
    .navigate {
       display: none;
    }
+
+
 
    .button {
      bottom: 12%;

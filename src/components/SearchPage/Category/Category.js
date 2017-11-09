@@ -17,8 +17,11 @@ class Category extends React.Component {
         <div className={style.header}> {this.props.name} </div>
         <div className={style.tags}>
           {this.props.tags.map((value) => (
-            <Link to="/some/where/search">
-              <p onClick={()=>sessionStorage.setItem("Category", value)} className={style.tag} key={value}>{value}</p>
+            <Link to="/some/where/search" key={value}>
+              <p onClick={()=>{
+                sessionStorage.setItem("Category", value);
+                sessionStorage.setItem("userSearch", '');
+              }} className={style.tag} key={value}>{value}</p>
             </Link>
           ))}
         </div>

@@ -46,7 +46,8 @@ module.exports = {
       template: './src/public/template.html',
       files: {
         js: [ 'bundle.js' ]
-      }
+      },
+      favicon: './favicon.ico'
     })
   ]
 };
