@@ -89,7 +89,6 @@ class SearchPage extends React.Component {
     tagArray = Array.from(new Set(tagArray));
     this.setState({tags: tagArray,
                   priceRange: [`$${document.querySelector('input[name="min_in"]').value} - $${document.querySelector('input[name="max_in"]').value}`]});
-    sessionStorage.setItem("filterTags", this.state.tags);
     this.closeModal();
   }
 

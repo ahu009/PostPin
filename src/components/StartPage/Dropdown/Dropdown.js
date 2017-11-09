@@ -44,7 +44,7 @@ class Dropdown extends React.Component {
           this.forceUpdate();
         }}
         />
-        <SubmitButton shouldHide={sessionStorage.getItem("schoolName") != 'undefined' ? false : true}/>
+        <SubmitButton shouldHide={(sessionStorage.getItem("schoolName") != 'undefined' && sessionStorage.getItem("schoolName") != null) ? false : true}/>
       </div>
     );
   }
