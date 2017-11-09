@@ -3,7 +3,7 @@ import style from './AccountManagement.scss';
 import Button from './../Button';
 import { Link } from 'react-router-dom';
 import Category from './Category';
-
+import firebase from './../../firebase.js';
 
 
 
@@ -21,9 +21,24 @@ class AccountManagement extends React.Component {
       userPosts: null
     };
   }
-
   componentWillMount () {
     // Populat accountInformation here
+    //emil =
+    //phone =
+    // var user = firebase.auth().currentUser;
+    // this.state.email = user.email;
+    // this.state.password = user.password;
+    var that = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log("user exists")
+        console.log(user.email)
+        console.log(user.password)
+        that.setState({accountInformation: {email: user.email, password: user.password}});
+      } else {
+        console.log("user does not exists")
+      }
+    });
   }
 
   /**
