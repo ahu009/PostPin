@@ -37,14 +37,14 @@ class AccountIcon extends React.Component {
             <li className="account-dropdown__link">
               <Link to ="/accounts/create-account">
                 <Glyphicon glyph="plus" style={{fontSize:'14px', display:'inline', paddingRight: '5px', color: '#393a3d'}}/>
-                  <div className="text"> Create Account </div>
+                  <div className="text" onClick={this.handleLinkClick}> Create Account </div>
                 </Link>
             </li>
             <li className="account-dropdown__link">
               <Glyphicon glyph="log-in" style={{fontSize:'14px', display:'inline', paddingRight: '5px', marginLeft: '-37px',
                 paddingRight: '27px'}}/>
                 <Link to = "/accounts/sign-in/">
-                  <div className="text"> Sign In </div>
+                  <div className="text" onClick={this.handleLinkClick}> Sign In </div>
                 </Link>
             </li>
           </ul>
