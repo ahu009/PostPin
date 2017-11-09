@@ -4,6 +4,7 @@ import { ReactTextField, validator  } from 'react-textfield';
 import Button from './../Button';
 import { Link, Prompt } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
+import firebase from './../../firebase.js';
 
 const style1 = {
   container: {
@@ -36,10 +37,12 @@ class PostingPage extends React.Component {
    */
   constructor (props) {
     super(props);
-    this.state = { canSubmit: false, pictures: [], showError: false };
+    this.state = { canSubmit: false, pictures: [], showError: false, titlein: '', pricein: '', descriptionin: '',tagsin: '' };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.rejectSubmit = this.rejectSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   onDrop(picture) {
@@ -47,6 +50,13 @@ class PostingPage extends React.Component {
             pictures: this.state.pictures.concat(picture),
         });
     }
+
+    handleChange(e) {
+      this.setState({
+        [e.target.name]: e.target.value
+      });
+    }
+
 
    checkSubmit () {
     document.querySelector('span[class="ReactTextField-message ReactTextField--error"]')
@@ -56,6 +66,25 @@ class PostingPage extends React.Component {
 
    rejectSubmit () {
      return this.setState({showError: true});
+   }
+
+   handleSubmit(e) {
+     e.preventDefault();
+     console.log("hello")
+     const usersPosts = firebase.database().ref('postings');
+     const Posts = {
+       title: document.querySelector('input[name="Title"]').value,
+       price: document.querySelector('input[name="Price"]').value,
+       description: document.querySelector('input[name="Body"]').value,
+       tags: document.querySelector('input[name="Tags"]').value
+     }
+     usersPosts.push(Posts);
+     this.setState({
+       titlein: document.querySelector('input[name="Title"]').value,
+       pricein: document.querySelector('input[name="Price"]').value,
+       descriptionin: document.querySelector('input[name="Body"]').value,
+       tagsin: document.querySelector('input[name="Tags"]').value
+     });
    }
 
   /**
@@ -92,6 +121,8 @@ class PostingPage extends React.Component {
             validators={emptyValidator}
             placeholder="Title"
             style = {style1}
+            onChange={this.handleChange}
+            value = {this.state.titlein}
             afterValidate={this.checkSubmit}
           />
         </div>
@@ -104,6 +135,8 @@ class PostingPage extends React.Component {
             validators={priceValidator}
             placeholder="Price"
             style = {style1}
+            onChange={this.handleChange}
+            value = {this.state.pricein}
             afterValidate={this.checkSubmit}
           />
         </div>
@@ -116,6 +149,8 @@ class PostingPage extends React.Component {
             validators={emptyValidator}
             placeholder="Body"
             style = {style1}
+            onChange={this.handleChange}
+            value = {this.state.descriptionin}
             afterValidate={this.checkSubmit}
           />
         </div>
@@ -126,6 +161,8 @@ class PostingPage extends React.Component {
             name="Tags"
             type="text"
             placeholder="Tags separated by commas (e.g Art, Cars, Phones)"
+            onChange={this.handleChange}
+            value = {this.state.tagsin}
             style = {style1}
           />
         </div>
@@ -142,7 +179,7 @@ class PostingPage extends React.Component {
             />
           </div>
 
-        <div className={style.submit} onClick={this.state.canSubmit ? null : this.rejectSubmit}>
+        <div className={style.submit} onClick={this.handleSubmit}> //onClick={this.state.canSubmit ? null : this.rejectSubmit}>
           {this.state.showError ? <div className={style.error}> Errors Exist on Page </div> : null}
           <Link to={this.state.canSubmit ? "/some/where" : "/some/where/else"}>
             <Button buttonText="Submit" />

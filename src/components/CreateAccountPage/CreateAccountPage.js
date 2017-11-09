@@ -65,7 +65,8 @@ class CreateAccountPage extends React.Component {
       showConfirm: false,
       emailin: '',
       pwin: '',
-      phonein: ''
+      submitLink: '/'
+
     };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -86,18 +87,23 @@ class CreateAccountPage extends React.Component {
    }
 
    handleSubmit(e) {
-     e.preventDefault();
-     const usersRef = firebase.database().ref('users');
-     const user = {
-       user: document.querySelector('input[type="email"]').value,
-       password: document.querySelector('input[type="password"]').value,
-       phoneNumber: document.querySelector('input[type="tel"]').value
-     }
-     usersRef.push(user);
+     //e.preventDefault();
+     let em = document.querySelector('input[type="email"]').value;
+     let pass = document.querySelector('input[type="password"]').value;
+     firebase.auth().createUserWithEmailAndPassword(em, pass).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage);
+      alert(errorMessage);
+      this.setState({
+        submitLink: '/accounts/create-account'
+      });
+     });
      this.setState({
        emailin: document.querySelector('input[type="email"]').value,
        pwin: document.querySelector('input[type="password"]').value,
-       phonein: document.querySelector('input[type="password"]').value
+       phonein: document.querySelector('input[type="password"]').value,
+       submitLink: '/'
      });
 
     //  let em = document.querySelector('input[type="email"]').value;
@@ -188,7 +194,7 @@ class CreateAccountPage extends React.Component {
           </div>
           : null}
           <div className={style.submit}>
-            <Link to={"/"}>
+            <Link to={this.state.submitLink}>
               <div onClick={this.handleSubmit}>
                 <Button
                   buttonText="Submit"
