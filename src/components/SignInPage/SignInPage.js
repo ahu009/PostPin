@@ -3,6 +3,7 @@ import style from './SignInPage.scss';
 import { ReactTextField, validator  } from 'react-textfield';
 import Button from './../Button';
 import { Link, Prompt } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import firebase from './../../firebase.js';
 
 const emailValidator = [
@@ -26,14 +27,18 @@ class SignInPage extends React.Component {
    constructor (props) {
      super(props);
      this.state = {
-       //canSubmit: true,
-       //showConfirm: false,
        emailin: '',
-       pwin: ''
+       pwin: '',
+       errorMessage: '',
+       shouldSignIn: false
      };
      //this.checkSubmit = this.checkSubmit.bind(this);
      this.handleSubmit = this.handleSubmit.bind(this);
      this.handleChange = this.handleChange.bind(this);
+   }
+
+   onComponentWillMount () {
+     this.setState({errorMessage: '', shouldSignIn: false});
    }
 
    handleChange(e) {
@@ -49,17 +54,19 @@ class SignInPage extends React.Component {
       return canSubmit;
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
       e.preventDefault();
-
       let em = document.querySelector('input[type="email"]').value;
       let pass = document.querySelector('input[type="password"]').value;
-      firebase.auth().signInWithEmailAndPassword(em, pass).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.log(errorMessage)
-        });
-      }
+      firebase.auth().signInWithEmailAndPassword(em, pass).then((response) => {
+        console.log(response);
+        this.setState({shouldSignIn: true});
+      })
+      .catch((error) => {
+        this.setState({errorMessage: error.message, shouldSignIn: false})
+
+      });
+    }
 
 
   render () {
@@ -88,7 +95,7 @@ class SignInPage extends React.Component {
           </div>
 
           <div className={style.submit}>
-            <Link to={"/some/where"}>
+            <Link to={"/some/where/AccountManagement"}>
               <div onClick={this.handleSubmit}>
                 <Button
                   buttonText="Sign In"
@@ -96,6 +103,8 @@ class SignInPage extends React.Component {
               </div>
             </Link>
           </div>
+          {this.state.errorMessage != '' ? (<p className={style.error}> {this.state.errorMessage} </p>) : null}
+          {this.state.shouldSignIn ? <Redirect push to="/some/where/AccountManagement" /> : null}
           </div>
           <div className={style.back}>
             <Link to="/some/where">

@@ -7,9 +7,18 @@
     margin-top: -174px;
     margin-left: -98px;
     .submit {
-      position: relative;
+      position: absolute;
       left: 16%;
       margin-top: 10%;
+    }
+    .error {
+      width: 260px;
+      position: absolute;
+      left: -18%;
+      text-align: left;
+      margin-top: 60%;
+      font-size: 10px;
+      color: #ff3860;
     }
  }
 
