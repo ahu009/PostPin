@@ -65,7 +65,7 @@ class CreateAccountPage extends React.Component {
       showConfirm: false,
       emailin: '',
       pwin: '',
-      phonein: ''
+
     };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -86,27 +86,20 @@ class CreateAccountPage extends React.Component {
    }
 
    handleSubmit(e) {
-     e.preventDefault();
-     const usersRef = firebase.database().ref('users');
-     const user = {
-       user: document.querySelector('input[type="email"]').value,
-       password: document.querySelector('input[type="password"]').value,
-       phoneNumber: document.querySelector('input[type="tel"]').value
-     }
-     usersRef.push(user);
+     //e.preventDefault();
+     let em = document.querySelector('input[type="email"]').value;
+     let pass = document.querySelector('input[type="password"]').value;
+     firebase.auth().createUserWithEmailAndPassword(em, pass).catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage);
+      alert(errorMessage);
+     });
      this.setState({
        emailin: document.querySelector('input[type="email"]').value,
        pwin: document.querySelector('input[type="password"]').value,
-       phonein: document.querySelector('input[type="password"]').value
+       phonein: document.querySelector('input[type="password"]').value,
      });
-
-    //  let em = document.querySelector('input[type="email"]').value;
-    //  let pw = document.querySelector('input[type="password"]').value;
-    //  firebase.auth().createUserWithEmailAndPassword(em, pw);
-     //
-    //  this.setState({emailin: em});
-    //  this.setState({pwin: pw});
-    //  return userInput;
    }
 
   /**
