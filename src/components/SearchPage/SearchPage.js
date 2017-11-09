@@ -170,6 +170,7 @@ class SearchPage extends React.Component {
         </div>
         <p onClick={this.openModal} className={style.filter}> Filter </p>
 
+        <div className={style.tagPrice_container}>
           {(this.state.tags != null && this.state.tags != '' && this.state.tags != undefined)
           ? (<div className={style.tags}>
               <PrintFilters callBack={this.tagRemoved} header="Tags:" content={this.state.tags} />
@@ -178,6 +179,8 @@ class SearchPage extends React.Component {
           ? (<div className={style.priceRange}>
               <PrintFilters callBack={this.tagRemoved} header="Price Range:" content={this.state.priceRange} />
             </div>) : null}
+        </div>
+
         <MuiThemeProvider>
           <SearchBar
             dataSource={auto}
