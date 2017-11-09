@@ -24,6 +24,8 @@ class AccountManagement extends React.Component {
 
   componentWillMount () {
     // Populat accountInformation here
+    //emil =
+    //phone =
   }
 
   /**
