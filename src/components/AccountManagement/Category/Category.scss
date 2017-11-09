@@ -1,0 +1,36 @@
+@import './../../_variables.scss';
+
+ .container {
+   position: fixed;
+   width: 40%;
+
+
+   .header {
+     text-align: center;
+     background-color: $containerGrey;
+     font-size: 15px;
+     color: white;
+     font-weight: 100;
+     padding: 10px;
+   }
+
+   .content {
+     font-size: 15px;
+     overflow-y: auto;
+     max-height: 60%;
+     position: fixed;
+     width: 40%;
+     border-width: 1px;
+     border-style: solid;
+     display: inline;
+     background-color:  #f2f2f2;
+     .text {
+       padding-left: 10px;
+       font-weight: 100;
+       .headers {
+         text-decoration: underline;
+         font-weight: 800;
+       }
+     }
+   }
+ }

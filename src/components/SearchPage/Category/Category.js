@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Category.scss';
-import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 /**
  * Category
@@ -16,7 +16,14 @@ class Category extends React.Component {
       <div className={style.container}>
         <div className={style.header}> {this.props.name} </div>
         <div className={style.tags}>
-          {this.props.tags.map((value) => (<p className={style.tag} key={value}>{value}</p>))}
+          {this.props.tags.map((value) => (
+            <Link to="/some/where/search" key={value}>
+              <p onClick={()=>{
+                sessionStorage.setItem("Category", value);
+                sessionStorage.setItem("userSearch", '');
+              }} className={style.tag} key={value}>{value}</p>
+            </Link>
+          ))}
         </div>
       </div>
     );
