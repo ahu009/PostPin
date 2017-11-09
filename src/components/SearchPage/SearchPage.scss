@@ -84,18 +84,28 @@ li {
 }
 
 .container {
+
+    .tagPrice_container {
+      position: absolute;
+      top: 13%;
+      left: 23%;
+      height: 5%;
+      width: 55%;
+    }
+
     .tags {
       position: absolute;
-      top: 12%;
-      left: 23.5%;
-      height: 100%;
+      top: 13%;
+      left: 0%;
+      width: 72%;
     }
 
     .priceRange {
       position: absolute;
-      top: 12%;
-      left: 60%;
-      padding-left: 10px;
+      top: 13%;
+      left: 72%;
+      width: 33%;
+      padding-left: 3%;
     }
 
 
