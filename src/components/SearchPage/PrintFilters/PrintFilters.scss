@@ -4,7 +4,7 @@
    position: absolute;
    width: 100%;
    display: inline-flex;
-   overflow: scroll;
+   overflow: auto;
 
    .header {
      text-align: center;
@@ -30,6 +30,7 @@
      border-radius: 4px;
      display: inline;
      white-space: nowrap;
+     overflow: auto;
 
      .glyph {
        display: inline;
