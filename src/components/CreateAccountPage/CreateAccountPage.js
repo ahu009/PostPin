@@ -3,6 +3,7 @@ import style from './CreateAccountPage.scss';
 import { ReactTextField, validator  } from 'react-textfield';
 import Button from './../Button';
 import { Link, Prompt } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import firebase from './../../firebase.js';
 
 const alphaNumericValidator = [
@@ -19,6 +20,12 @@ const alphaNumericValidator = [
         return false;
       },
     },
+    {
+      message: '*Required',
+      validator: value => {
+        return value != '' ? true : false
+      },
+    },
 ];
 
 const emailValidator = [
@@ -26,6 +33,12 @@ const emailValidator = [
       message: 'Not an email',
       validator: value => {
         return value != "" ? validator.isEmail(value) : true
+      },
+    },
+    {
+      message: '*Required',
+      validator: value => {
+        return value != '' ? true : false
       },
     },
 ];
@@ -65,36 +78,66 @@ class CreateAccountPage extends React.Component {
       showConfirm: false,
       emailin: '',
       pwin: '',
-
+      passwordsMatch: true,
+      shouldCreateAccount: null,
+      showError: null,
+      shouldCreateAccountFirebase: null,
+      firebaseErrorMessage: null
     };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.validatePassword = this.validatePassword.bind(this);
+    this.checkShowError = this.checkShowError.bind(this);
+  }
+
+  validatePassword () {
+    let password = document.querySelector('[name="Password"]').value;
+    let confirm = document.querySelector('[name="Confirm Password"]') ? document.querySelector('[name="Confirm Password"]').value : '';
+    if(confirm != password)
+      this.setState({passwordsMatch: false})
+    else
+      this.setState({passwordsMatch: true})
   }
 
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     });
+    this.checkShowError();
+  }
+
+  checkShowError() {
+    if (document.querySelector('span[class="ReactTextField-message ReactTextField--error"]')
+    || document.querySelector('p[id="Error"]')) {
+      this.setState({showError: true});
+    } else {
+      this.setState({showError: false});
+    }
   }
 
 
    checkSubmit () {
-     let canSubmit = document.querySelector('[class="ReactTextField-message ReactTextField--error"]') ? false : true;
-     this.setState({ canSubmit: canSubmit });
-     return canSubmit;
+     if (document.querySelector('span[class="ReactTextField-message ReactTextField--error"]')
+     || document.querySelector('p[id="Error"]')) {
+       this.setState({shouldCreateAccount: false})
+       return false;
+     } else {
+       this.setState({shouldCreateAccount: true})
+       return true;
+     }
    }
 
    handleSubmit(e) {
-     //e.preventDefault();
+     e.preventDefault();
      let em = document.querySelector('input[type="email"]').value;
      let pass = document.querySelector('input[type="password"]').value;
-     firebase.auth().createUserWithEmailAndPassword(em, pass).catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorMessage);
-      alert(errorMessage);
-     });
+     let firebaseAuth = this.checkSubmit();
+     if(firebaseAuth) {
+       firebase.auth().createUserWithEmailAndPassword(em, pass).catch((error) => {
+         this.setState({shouldCreateAccountFirebase: false, firebaseErrorMessage: error.message});
+       });
+     }
      this.setState({
        emailin: document.querySelector('input[type="email"]').value,
        pwin: document.querySelector('input[type="password"]').value,
@@ -107,26 +150,19 @@ class CreateAccountPage extends React.Component {
    * @return {JSX} Component to render
    */
   render () {
-    const passwordValidator = [
-        {
-          message: 'Passwords must match',
-          validator: value => {
-             let password = document.querySelector('[name="Password"]').value;
-             let confirm = document.querySelector('[name="Confirm Password"]').value;
-             this.checkSubmit();
-             if(confirm != password)
-              return false;
-             return true;
-          },
-        },
-    ];
-
     const showConfirm = [
+      {
+        message: '*Required',
+        validator: value => {
+          return value != '' ? true : false
+        },
+      },
         {
-          message: '',
+          message: 'Asshole',
           validator: value => {
              value != '' ? this.setState({showConfirm: true}) : this.setState({showConfirm: false})
-          },
+             return true;
+          }
         },
     ];
 
@@ -134,7 +170,7 @@ class CreateAccountPage extends React.Component {
       <div>
         <div className={style.fields}>
           <div>
-            Email:
+            <p className={style.fieldName}> Email: </p>
             <ReactTextField
               name="E-mail"
               type="email"
@@ -146,7 +182,7 @@ class CreateAccountPage extends React.Component {
           </div>
 
           <div>
-            PhoneNumber:
+            <p className={style.fieldName}> PhoneNumber: </p>
             <ReactTextField
               name="Phone Number"
               type="tel"
@@ -158,7 +194,7 @@ class CreateAccountPage extends React.Component {
           </div>
 
           <div>
-            Password:
+            <p className={style.fieldName}> Password: </p>
             <ReactTextField
               name="Password"
               type="password"
@@ -166,29 +202,22 @@ class CreateAccountPage extends React.Component {
               onChange={this.handleChange}
               value = {this.state.pwin}
               validators={showConfirm}
+              afterValidate={this.validatePassword}
             />
           </div>
-
           {this.state.showConfirm ?
           <div>
-            Confirm Password:
+            <p className={style.fieldName}> Confirm Password: </p>
             <ReactTextField
               name="Confirm Password"
               type="password"
               placeholder="Confirm Password"
-              validators={passwordValidator}
+              onChange={this.handleChange}
+              afterValidate={this.validatePassword}
             />
+            {this.state.passwordsMatch ? null : (<p id="error" className={style.error}> Passwords Must Match </p>)}
           </div>
           : null}
-          <div className={style.submit}>
-            <Link to="/some/where/AccountManagement">
-              <div onClick={this.handleSubmit}>
-                <Button
-                  buttonText="Submit"
-                />
-              </div>
-            </Link>
-          </div>
           </div>
 
           <div className={style.back}>
@@ -196,6 +225,21 @@ class CreateAccountPage extends React.Component {
               <Button buttonText="Cancel" />
             </Link>
           </div>
+
+          <div className={style.submit}>
+            <div onClick={this.handleSubmit}>
+              <Button
+                buttonText="Submit"
+              />
+            </div>
+            {(this.state.shouldCreateAccount && this.state.shouldCreateAccountFirebase)
+              ? <Redirect push to="/some/where/AccountManagement" />
+              : (this.state.shouldCreateAccount != null && this.state.shouldCreateAccount == false)
+               ? (<div className={style.reject}>
+                 Errors Exist on Page
+                 </div>) : null}
+          </div>
+          {this.state.firebaseErrorMessage ? <div className={style.fuck}> {this.state.firebaseErrorMessage} </div> : null}
         </div>
 
     );
