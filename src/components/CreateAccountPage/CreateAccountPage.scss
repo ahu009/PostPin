@@ -6,27 +6,42 @@
     left: 49%;
     margin-top: -174px;
     margin-left: -98px;
-    .submit {
-      position: relative;
-      left: 16%;
-      margin-top: 10%;
+    .fieldName {
+      margin-bottom: -5px;
     }
+    .error {
+      color: #ff3860;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 0px;
+    }
+ }
+
+ .submit {
+   position: absolute;
+    left: 49%;
+    top: 67%;
+    margin-left: -86px;
+
+    .reject {
+      margin-top: 49%;
+      color: #ff3860;
+      font-size: 12px;
+      text-align: center;
+    }
+ }
+ .fuck {
+   color: #ff3860;
+    font-size: 12px;
+    text-align: center;
+    position: absolute;
+    left: 49%;
+    top: 73%;
+    margin-left: -168px;
  }
 
  .back {
    position: absolute;
    left: 1.5%;
    bottom: 9%;
- }
-
- .signin {
-   top: 0px;
-   right: 1.5%;
-   position: absolute;
-   text-decoration: underline;
-   font-size: 18px;
-
-   &:hover {
-     cursor: pointer;
-   }
  }

@@ -35,8 +35,8 @@ class AccountIcon extends React.Component {
         <DropdownContent>
           <ul className="account-dropdown__quick-links account-dropdown__segment">
             <li className="account-dropdown__link">
+              <Glyphicon glyph="plus" style={{fontSize:'14px', display:'inline', paddingRight: '5px', color: '#393a3d'}}/>
               <Link to ="/accounts/create-account">
-                <Glyphicon glyph="plus" style={{fontSize:'14px', display:'inline', paddingRight: '5px', color: '#393a3d'}}/>
                   <div className="text" onClick={this.handleLinkClick}> Create Account </div>
                 </Link>
             </li>

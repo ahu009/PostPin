@@ -31,6 +31,7 @@ class AccountManagement extends React.Component {
     var that = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+        console.log(user);
         console.log("user exists")
         console.log(user.email)
         console.log(user.password)
