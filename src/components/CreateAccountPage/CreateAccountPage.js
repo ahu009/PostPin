@@ -82,7 +82,7 @@ class CreateAccountPage extends React.Component {
       shouldCreateAccount: null,
       showError: null,
       shouldCreateAccountFirebase: null,
-      firebaseErrorMessage: null
+      firebaseErrorMessage: ''
     };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -119,7 +119,7 @@ class CreateAccountPage extends React.Component {
 
    checkSubmit () {
      if (document.querySelector('span[class="ReactTextField-message ReactTextField--error"]')
-     || document.querySelector('p[id="Error"]')) {
+     || document.querySelector('p[id="error"]')) {
        this.setState({shouldCreateAccount: false})
        return false;
      } else {
@@ -132,9 +132,15 @@ class CreateAccountPage extends React.Component {
      e.preventDefault();
      let em = document.querySelector('input[type="email"]').value;
      let pass = document.querySelector('input[type="password"]').value;
+     console.log(em);
+     console.log(pass);
      let firebaseAuth = this.checkSubmit();
      if(firebaseAuth) {
-       firebase.auth().createUserWithEmailAndPassword(em, pass).catch((error) => {
+       firebase.auth().createUserWithEmailAndPassword(em, pass).then((response) => {
+         this.setState({shouldCreateAccountFirebase: true, firebaseErrorMessage: ''});
+       })
+       .catch((error) => {
+         console.log(error.message);
          this.setState({shouldCreateAccountFirebase: false, firebaseErrorMessage: error.message});
        });
      }
@@ -233,13 +239,10 @@ class CreateAccountPage extends React.Component {
               />
             </div>
             {(this.state.shouldCreateAccount && this.state.shouldCreateAccountFirebase)
-              ? <Redirect push to="/some/where/AccountManagement" />
-              : (this.state.shouldCreateAccount != null && this.state.shouldCreateAccount == false)
-               ? (<div className={style.reject}>
-                 Errors Exist on Page
-                 </div>) : null}
+              ? (<Redirect push to="/some/where/AccountManagement" />) : (this.state.shouldCreateAccount != null && this.state.shouldCreateAccount == false) ? (<div className={style.reject}> Errors Exist on Page </div>)
+                : (<div className={style.fuck}> {this.state.firebaseErrorMessage} </div>)}
           </div>
-          {this.state.firebaseErrorMessage ? <div className={style.fuck}> {this.state.firebaseErrorMessage} </div> : null}
+
         </div>
 
     );

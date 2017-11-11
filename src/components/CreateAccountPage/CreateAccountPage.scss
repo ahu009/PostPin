@@ -20,7 +20,7 @@
  .submit {
    position: absolute;
     left: 49%;
-    top: 67%;
+    top: 449px;
     margin-left: -86px;
 
     .reject {
@@ -29,16 +29,15 @@
       font-size: 12px;
       text-align: center;
     }
+    .fuck {
+      color: #ff3860;
+     font-size: 12px;
+     text-align: center;
+      margin-top: 27%;
+      margin-left: -94px;
+    }
  }
- .fuck {
-   color: #ff3860;
-    font-size: 12px;
-    text-align: center;
-    position: absolute;
-    left: 49%;
-    top: 73%;
-    margin-left: -168px;
- }
+
 
  .back {
    position: absolute;
