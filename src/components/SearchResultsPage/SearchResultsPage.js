@@ -63,8 +63,10 @@ class SearchResultsPage extends React.Component {
          {this.props.userSearch != '' ? (<p> There are x results for {this.props.userSearch} </p>) : null}
         </div>
         <hr className={style.line}/>
+
+
         <div className={style.postingContainer}>
-          <ul> <Posting title="Shit for sell" price="69420" hasImage={false}/> </ul>
+          <ul> <Link to="/some/where/search/posting"> <Posting title="Shit for sell" price="69420" hasImage={false}/> </Link> </ul>
         </div>
       </div>
     );
