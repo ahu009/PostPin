@@ -11,6 +11,7 @@ import SignInPage from './../SignInPage';
 import Logo from './../Logo';
 import SearchResultsPage from './../SearchResultsPage';
 import AccountManagement from './../AccountManagement';
+import ViewPost from './../ViewPost';
 
 
 /**
@@ -58,6 +59,9 @@ class App extends React.Component {
             )} />
             <Route exact={true} path="/some/where/search" render={()=> (
               <SearchResultsPage userSearch={sessionStorage.getItem("userSearch")} />
+            )} />
+            <Route exact={true} path="/some/where/search/posting" render={()=> (
+              <ViewPost />
             )} />
           </main>
         </div>

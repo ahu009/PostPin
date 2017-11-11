@@ -1,0 +1,65 @@
+@import './../_variables.scss';
+
+ .container {
+   width: 100%;
+   height: 100%;
+   font-size: 20px;
+   font-family: sans-serif;
+   letter-spacing: 1px;
+
+   .title {
+     font-weight: 900;
+     top: 13%;
+     left: 3%;
+     width: 60%;
+     position: absolute;
+   }
+
+   .price {
+     color: green;
+     left: 3%;
+     top: 13%;
+     margin-left: 659px;
+     width: 30%;
+     position: absolute;
+   }
+
+   .description {
+     top: 20%;
+     max-height: 40%;
+     height: 40%;
+     left: 3%;
+     width: 90%;
+     position: absolute;
+   }
+
+   .posterInfo {
+     top: 60%;
+     left: 3%;
+     margin-left: 655px;
+     width: 30%;
+     position: absolute;
+     .info {
+       font-size: 10px;
+       margin-left: 20px;
+       overflow-x: scroll;
+     }
+   }
+
+   .images {
+     position: absolute;
+     left: 3%;
+     max-width: 600px;
+     max-height: 454px;
+     height: 454px;
+     width: 600px;
+     overflow: scroll;
+     top: 56%;
+   }
+
+   .back {
+     left: 3%;
+     top: 90%;
+     position: fixed;
+   }
+ }
