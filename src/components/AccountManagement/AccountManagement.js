@@ -35,7 +35,16 @@ class AccountManagement extends React.Component {
         console.log("user exists")
         console.log(user.email)
         console.log(user.password)
-        that.setState({accountInformation: {email: user.email, password: user.password}});
+        var pass = firebase.database().ref('users/' + user.uid);
+        pass.on('value', function(snapshot){
+          var useremail = snapshot.val().Email;
+          var newpass = snapshot.val().Password;
+          var phones = snapshot.val().Phone;
+          console.log("newpass: " + newpass);
+          console.log("Phone: " + phones);
+          that.setState({accountInformation: {email: useremail, phone: phones, password: newpass}});
+        });
+
       } else {
         console.log("user does not exists")
       }
