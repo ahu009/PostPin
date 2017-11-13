@@ -75,14 +75,34 @@ class PostingPage extends React.Component {
    handleSubmit(e) {
      e.preventDefault();
      console.log("hello")
-     const usersPosts = firebase.database().ref('postings');
-     const Posts = {
-       title: document.querySelector('input[name="Title"]').value,
-       price: document.querySelector('input[name="Price"]').value,
-       description: document.querySelector('input[name="Body"]').value,
-       tags: document.querySelector('input[name="Tags"]').value
-     }
-     usersPosts.push(Posts);
+    //  const usersPosts = firebase.database().ref('postings');
+    //  const Posts = {
+    //    title: document.querySelector('input[name="Title"]').value,
+    //    price: document.querySelector('input[name="Price"]').value,
+    //    description: document.querySelector('input[name="Body"]').value,
+    //    tags: document.querySelector('input[name="Tags"]').value
+    //  }
+    //  usersPosts.push(Posts);
+    console.log(document.querySelector('input[name="Title"]').value)
+    let _title = document.querySelector('input[name="Title"]').value;
+    let _price = document.querySelector('input[name="Price"]').value;
+    let _description = document.querySelector('input[name="Body"]').value;
+    let _tag = document.querySelector('input[name="Tags"]').value;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log("user is: " + user.email);
+        const post = firebase.database().ref("users").child(user.uid).child("posts");
+        post.set({
+          title: _title,
+          price: _price,
+          description: _description,
+          tag: _tag
+        });
+      } else {
+        console.log("user does not exists")
+      }
+     });
+
      this.setState({
        titlein: document.querySelector('input[name="Title"]').value,
        pricein: document.querySelector('input[name="Price"]').value,
