@@ -44,6 +44,13 @@ class AccountManagement extends React.Component {
           console.log("Phone: " + phones);
           that.setState({accountInformation: {email: useremail, phone: phones, password: newpass}});
         });
+        var posts = firebase.database().ref('users/' + user.uid + '/posts');
+        posts.on('value', function(snapshot){
+          var theposts = snapshot.val().title;
+          console.log("posts title: " + theposts);
+          that.setState({userPosts: theposts});
+        });
+
 
       } else {
         console.log("user does not exists")
@@ -63,7 +70,7 @@ class AccountManagement extends React.Component {
           <Category name="Account Information" info={this.state.accountInformation} />
         </div>
         <div className={style.posts}>
-          <Category name="Your Posts" info={this.state.accountInformation} />
+          <Category name="Your Posts" info={this.state.userPosts} />
         </div>
       </div>
     );

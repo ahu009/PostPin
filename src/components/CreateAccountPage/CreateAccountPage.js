@@ -146,7 +146,8 @@ class CreateAccountPage extends React.Component {
                Email: em,
                Id: user.uid,
                Password: pass,
-               Phone: phone
+               Phone: phone,
+               Posts: 0
              });
            } else {
              console.log("user does not exists")

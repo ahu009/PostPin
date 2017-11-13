@@ -37,7 +37,7 @@ class PostingPage extends React.Component {
    */
   constructor (props) {
     super(props);
-    this.state = { canSubmit: false, pictures: [], showError: false, titlein: '', pricein: '', descriptionin: '',tagsin: '' };
+    this.state = { canSubmit: false, pictures: [], showError: false, titlein: '', pricein: '', descriptionin: '',tagsin: '',postnumber:'' };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.rejectSubmit = this.rejectSubmit.bind(this);
@@ -83,21 +83,43 @@ class PostingPage extends React.Component {
     //    tags: document.querySelector('input[name="Tags"]').value
     //  }
     //  usersPosts.push(Posts);
+    var that = this;
     console.log(document.querySelector('input[name="Title"]').value)
     let _title = document.querySelector('input[name="Title"]').value;
     let _price = document.querySelector('input[name="Price"]').value;
     let _description = document.querySelector('input[name="Body"]').value;
     let _tag = document.querySelector('input[name="Tags"]').value;
+    //var postnum;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log("user is: " + user.email);
-        const post = firebase.database().ref("users").child(user.uid).child("posts");
-        post.set({
-          title: _title,
-          price: _price,
-          description: _description,
-          tag: _tag
-        });
+        var postnum;
+        var getpostdata = firebase.database().ref('users/' + user.uid);
+        getpostdata.on('value',function(snapshot){
+          postnum = snapshot.val().Posts;
+          postnum = postnum + 1;
+          //getpostdata.update({Posts: postnum});
+          //that.setState({postnumber: postnum})
+          console.log("postnume: " + postnum)
+          //console.log("postnum: " + this.postnumber)
+          const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
+          //var once = require('once')
+          //firebase.database().ref('users/' + user.uid).set({Posts: postnum});
+          post.set({
+            title: _title,
+            price: _price,
+            description: _description,
+            tag: _tag
+          });
+        })
+        //console.log("newpost: " + postnum);
+        // const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
+        // post.set({
+        //   title: _title,
+        //   price: _price,
+        //   description: _description,
+        //   tag: _tag
+        // });
       } else {
         console.log("user does not exists")
       }
