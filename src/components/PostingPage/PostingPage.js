@@ -113,15 +113,6 @@ class PostingPage extends React.Component {
             tag: _tag
           });
         })
-        //getpostdata.set({Posts:2});
-        //console.log("newpost: " + postnum);
-        // const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
-        // post.set({
-        //   title: _title,
-        //   price: _price,
-        //   description: _description,
-        //   tag: _tag
-        // });
       } else {
         console.log("user does not exists")
       }

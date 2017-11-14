@@ -40,16 +40,33 @@ class AccountManagement extends React.Component {
           var useremail = snapshot.val().Email;
           var newpass = snapshot.val().Password;
           var phones = snapshot.val().Phone;
+          var numpost = snapshot.val().Posts;
           console.log("newpass: " + newpass);
           console.log("Phone: " + phones);
+          console.log("Possts: " + numpost)
           that.setState({accountInformation: {email: useremail, phone: phones, password: newpass}});
+          var j = numpost;
+          console.log("j: " + j)
+
+          if(numpost != 0)
+          {
+            for (var i = 1; j = numpost, i <= j; ++i)
+            {
+              console.log("i inside loop: " + i)
+              var dir = firebase.database().ref('users/' + user.uid + '/posts/' + i);
+              dir.once('value', function(snapshot){
+                var _title = snapshot.val().title;
+                console.log(_title)
+              });
+
+            }
+          }
         });
-        var posts = firebase.database().ref('users/' + user.uid + '/posts');
-        posts.on('value', function(snapshot){
-          var theposts = snapshot.val().title;
-          console.log("posts title: " + theposts);
-          that.setState({userPosts: theposts});
-        });
+        // var posts = firebase.database().ref('users/' + user.uid + '/posts');
+        // posts.on('value', function(snapshot){
+        //   var theposts = snapshot.val().title;
+        //   console.log("posts title: " + theposts);
+        //   that.setState({userPosts: theposts});
 
 
       } else {
