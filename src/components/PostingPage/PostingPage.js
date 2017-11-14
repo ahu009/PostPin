@@ -83,6 +83,7 @@ class PostingPage extends React.Component {
     //    tags: document.querySelector('input[name="Tags"]').value
     //  }
     //  usersPosts.push(Posts);
+    //https://stackoverflow.com/questions/40688268/why-does-firebase-lose-reference-outside-the-once-function
     var that = this;
     console.log(document.querySelector('input[name="Title"]').value)
     let _title = document.querySelector('input[name="Title"]').value;
@@ -95,7 +96,7 @@ class PostingPage extends React.Component {
         console.log("user is: " + user.email);
         var postnum;
         var getpostdata = firebase.database().ref('users/' + user.uid);
-        getpostdata.on('value',function(snapshot){
+        getpostdata.once('value',function(snapshot){
           postnum = snapshot.val().Posts;
           postnum = postnum + 1;
           //getpostdata.update({Posts: postnum});
@@ -104,7 +105,7 @@ class PostingPage extends React.Component {
           //console.log("postnum: " + this.postnumber)
           const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
           //var once = require('once')
-          //firebase.database().ref('users/' + user.uid).set({Posts: postnum});
+          firebase.database().ref('users/' + user.uid).update({Posts: postnum});
           post.set({
             title: _title,
             price: _price,
@@ -112,6 +113,7 @@ class PostingPage extends React.Component {
             tag: _tag
           });
         })
+        //getpostdata.set({Posts:2});
         //console.log("newpost: " + postnum);
         // const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
         // post.set({
