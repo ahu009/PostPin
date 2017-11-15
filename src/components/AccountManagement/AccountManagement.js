@@ -18,7 +18,7 @@ class AccountManagement extends React.Component {
 
     this.state = {
       accountInformation: {email: 'temp@temp.com', phone: '4086911969', password: 'Password'},
-      userPosts: null
+      userPosts: []
     };
   }
   componentWillMount () {
@@ -28,6 +28,7 @@ class AccountManagement extends React.Component {
     // var user = firebase.auth().currentUser;
     // this.state.email = user.email;
     // this.state.password = user.password;
+    let temparr = new Array()
     var that = this;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -56,6 +57,11 @@ class AccountManagement extends React.Component {
               var dir = firebase.database().ref('users/' + user.uid + '/posts/' + i);
               dir.once('value', function(snapshot){
                 var _title = snapshot.val().title;
+                var _des = snapshot.val().description;
+                var _price = snapshot.val().price;
+                var _tags = snapshot.val().tags;
+                temparr.push(_title);
+                that.setState({userPosts: temparr})
                 console.log(_title)
               });
 

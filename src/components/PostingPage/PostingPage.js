@@ -90,6 +90,7 @@ class PostingPage extends React.Component {
     let _price = document.querySelector('input[name="Price"]').value;
     let _description = document.querySelector('input[name="Body"]').value;
     let _tag = document.querySelector('input[name="Tags"]').value;
+    let _pictures = this.state.pictures;
     //var postnum;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -110,7 +111,8 @@ class PostingPage extends React.Component {
             title: _title,
             price: _price,
             description: _description,
-            tag: _tag
+            tag: _tag,
+            pictures: 'hi'
           });
         })
       } else {
