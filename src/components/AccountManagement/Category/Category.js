@@ -28,7 +28,7 @@ class Category extends React.Component {
             <div className={style.text}>
               <p className={style.headers}> Password: </p>
               <p>{this.props.info.password}</p>
-            </div></div>) : (<div> No Posts Found </div>)}
+            </div></div>) : (<div> {this.props.info} </div>)}
         </div>
       </div>
     );
