@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './CreateAccountPage.scss';
-import { ReactTextField, validator  } from 'react-textfield';
+import { ReactTextField, validator } from 'react-textfield';
 import Button from './../Button';
 import { Link, Prompt } from 'react-router-dom';
 import { Redirect } from 'react-router';
@@ -152,7 +152,7 @@ class CreateAccountPage extends React.Component {
            } else {
              console.log("user does not exists")
            }
-           
+
           });
       })//done delete
        .catch((error) => {
