@@ -55,42 +55,25 @@ class SearchResultsPage extends React.Component {
         console.log("snapshot key" + key); //prints out each key
         var newpostref = firebase.database().ref('users/' + key);
         var realpostref = firebase.database().ref('users/' + key + '/posts/')
+        var newkey = key;
         newpostref.once('value',function(snapshot){
-          var numpost = snapshot.val().Posts;
-          //console.log(snapshot.val().Email + "has " + numpost + " Posts")
-          if(numpost > 0)
-          {
-            var j = numpost;
-            // for(var i = 1; j = numpost, i <= j; ++i)
-            // {
-            //   var realpostref = firebase.database().ref('users/' + key + '/posts/' + i);
-            //   console.log("i is " + i)
-            //   realpostref.once('value', function(snapshot){
-            //     console.log(snapshot.val().title)
-            //     //console.log(snapshot.val().title)
-            //     // const postObject = {
-            //     //   title: snapshot.val().title,
-            //     //   price: snapshot.val().price,
-            //     //   hasImg: false,
-            //     //   postID: snapshot.val().description
-            //     // }
-            //     // temparr.push(postObject);
-            //     // that.setState({posts: temparr});
-            //   });
-            //
-            // }
-            for (var i = 1; j = numpost, i <= j; ++i)
-            {
-              console.log("Email is : " + snapshot.val().Email + "key is: " + key)
-              //var dir = firebase.database().ref('users/' + key + '/posts/' + i);
-              var newtemp = realpostref.child(i)
-              newtemp.once('value', function(snapshot){
-                var _title = snapshot.val().title;
-                console.log('title is: ' + _title)
-              });
-
+          var postnum = snapshot.val().Posts;
+          console.log('postnum is ' + postnum)
+        })
+        realpostref.once('value',function(snapshot){
+          //console.log(postnum)
+          snapshot.forEach(function(data){ //this function loops through all the posts in fire base
+            console.log(data.val().title) // data.val().title returns the post tile, we can implement a filter function that searches for the speicfic title here.....
+            const posting = {
+              title: data.val().title,
+              price: data.val().price,
+              hasImg: false,
+              postID: data.val().description
             }
-          }
+            temparr.push(posting);
+            that.setState({posts: temparr});
+          })
+
         });
       }
     });

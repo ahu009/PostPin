@@ -152,10 +152,6 @@ class CreateAccountPage extends React.Component {
            } else {
              console.log("user does not exists")
            }
-<<<<<<< HEAD
-=======
-
->>>>>>> 70b7820f79ec502396062418aff526956b45195d
           });
       })//done delete
        .catch((error) => {
