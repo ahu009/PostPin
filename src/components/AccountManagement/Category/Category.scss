@@ -4,6 +4,11 @@
    position: fixed;
    width: 40%;
 
+   .button {
+     top: 2%;
+     position: absolute;
+     right: 80px;
+   }
 
    .header {
      text-align: center;
@@ -16,7 +21,7 @@
 
    .content {
      font-size: 15px;
-     overflow-y: auto;
+     overflow-x: hidden;
      max-height: 60%;
      position: fixed;
      width: 40%;
@@ -24,6 +29,11 @@
      border-style: solid;
      display: inline;
      background-color:  #f2f2f2;
+     .error {
+       color: #ff3860;
+       font-size: 10px;
+       font-weight: 100;
+     }
      .text {
        padding-left: 10px;
        font-weight: 100;
