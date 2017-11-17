@@ -9,6 +9,7 @@ import { Link, Route } from 'react-router-dom';
 import Modal from 'react-modal';
 import Category from './Category';
 import PrintFilters from './PrintFilters';
+import ACCOUNT_AUTH from './../../public/account';
 
 
 const modalStyle = {
@@ -164,7 +165,7 @@ class SearchPage extends React.Component {
           </Link>
         </div>
         <div className={style.create}>
-          <Link to="/some/where/else">
+          <Link to={ACCOUNT_AUTH.status === "SIGNED_IN" ? "/some/where/else" : "/accounts/sign-in/"} >
             <Button buttonText={'Create Post'} />
           </Link>
         </div>
