@@ -84,6 +84,7 @@ class PostingPage extends React.Component {
     //  }
     //  usersPosts.push(Posts);
     //https://stackoverflow.com/questions/40688268/why-does-firebase-lose-reference-outside-the-once-function
+    //https://stackoverflow.com/questions/38965731/how-to-get-all-childs-data-in-firebase-database
     var that = this;
     console.log(document.querySelector('input[name="Title"]').value)
     let _title = document.querySelector('input[name="Title"]').value;

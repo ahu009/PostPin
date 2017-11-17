@@ -73,13 +73,12 @@ class AccountManagement extends React.Component {
         //   var theposts = snapshot.val().title;
         //   console.log("posts title: " + theposts);
         //   that.setState({userPosts: theposts});
-
-
       } else {
         console.log("user does not exists")
       }
     });
   }
+
 
   /**
    * Render function for UIComponent Component
