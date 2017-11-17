@@ -38,11 +38,7 @@ class SignInPage extends React.Component {
      this.handleSubmit = this.handleSubmit.bind(this);
      this.handleChange = this.handleChange.bind(this);
    }
-
-   onComponentWillMount () {
-     this.setState({errorMessage: '', shouldSignIn: false});
-   }
-
+   
    handleChange(e) {
      this.setState({
        [e.target.name]: e.target.value
