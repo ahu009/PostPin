@@ -16,10 +16,48 @@ class SearchResultsPage extends React.Component {
     super();
 
     this.state = {
-      enterClicked: false
+      enterClicked: false,
+      posts: [
+      /* post array firebase here maybe */
+      {
+        title: 'This is a test',
+        price: '69',
+        hasImg: true,
+        postID: '69696969'
+      },
+      {
+        title: 'I love steven',
+        price: '420',
+        hasImg: true,
+        postID: '8===D'
+      },
+      {
+        title: 'I love steven',
+        price: '420',
+        hasImg: true,
+        postID: '8===D'
+      },
+      {
+        title: 'I love steven',
+        price: '420',
+        hasImg: true,
+        postID: '8===D'
+      },
+      {
+        title: 'I love steven',
+        price: '420',
+        hasImg: true,
+        postID: '8===D'
+      },
+      ]
     };
 
     this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
+  }
+
+  onComponentWillMount () {
+    // Enter firebase code here
+    this.setState();
   }
 
   toggleEnterClicked () {
@@ -60,13 +98,19 @@ class SearchResultsPage extends React.Component {
         />
       </MuiThemeProvider>
         <div className={style.header}>
-         {this.props.userSearch != '' ? (<p> There are x results for {this.props.userSearch} </p>) : null}
+         {this.props.userSearch != '' ? (<p> There are {this.state.posts.length} results for {this.props.userSearch} </p>) : null}
         </div>
         <hr className={style.line}/>
 
 
         <div className={style.postingContainer}>
-          <ul> <Link to="/some/where/search/posting"> <Posting title="Shit for sell" price="69420" hasImage={false}/> </Link> </ul>
+          {this.state.posts.map((value) => {
+            return (<ul>
+              <Link to="/some/where/search/posting">
+                <Posting title={value.title} price={value.price} hasImage={value.hasImg}/>
+              </Link>
+            </ul>)
+          })}
         </div>
       </div>
     );
