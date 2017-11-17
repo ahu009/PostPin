@@ -6,6 +6,7 @@ import style from './SearchResultsPage.scss';
 import Posting from './Posting';
 import auto from './../SearchPage/TempAutoFill';
 import { Link } from 'react-router-dom';
+import firebase from './../../firebase.js';
 
 /**
  * UI Component
@@ -37,27 +38,62 @@ class SearchResultsPage extends React.Component {
         hasImg: true,
         postID: '8===D'
       },
-      {
-        title: 'I love steven',
-        price: '420',
-        hasImg: true,
-        postID: '8===D'
-      },
-      {
-        title: 'I love steven',
-        price: '420',
-        hasImg: true,
-        postID: '8===D'
-      },
       ]
     };
 
     this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
   }
 
-  onComponentWillMount () {
+  componentWillMount () {
     // Enter firebase code here
-    this.setState();
+    console.log("in willmount")
+    let temparr = new Array();
+    var that = this;
+    var postref = firebase.database().ref('users');
+    postref.once('value',function(snapshot){
+      for(var key in snapshot.val()){
+        console.log("snapshot key" + key); //prints out each key
+        var newpostref = firebase.database().ref('users/' + key);
+        var realpostref = firebase.database().ref('users/' + key + '/posts/')
+        newpostref.once('value',function(snapshot){
+          var numpost = snapshot.val().Posts;
+          //console.log(snapshot.val().Email + "has " + numpost + " Posts")
+          if(numpost > 0)
+          {
+            var j = numpost;
+            // for(var i = 1; j = numpost, i <= j; ++i)
+            // {
+            //   var realpostref = firebase.database().ref('users/' + key + '/posts/' + i);
+            //   console.log("i is " + i)
+            //   realpostref.once('value', function(snapshot){
+            //     console.log(snapshot.val().title)
+            //     //console.log(snapshot.val().title)
+            //     // const postObject = {
+            //     //   title: snapshot.val().title,
+            //     //   price: snapshot.val().price,
+            //     //   hasImg: false,
+            //     //   postID: snapshot.val().description
+            //     // }
+            //     // temparr.push(postObject);
+            //     // that.setState({posts: temparr});
+            //   });
+            //
+            // }
+            for (var i = 1; j = numpost, i <= j; ++i)
+            {
+              console.log("Email is : " + snapshot.val().Email + "key is: " + key)
+              //var dir = firebase.database().ref('users/' + key + '/posts/' + i);
+              var newtemp = realpostref.child(i)
+              newtemp.once('value', function(snapshot){
+                var _title = snapshot.val().title;
+                console.log('title is: ' + _title)
+              });
+
+            }
+          }
+        });
+      }
+    });
   }
 
   toggleEnterClicked () {
