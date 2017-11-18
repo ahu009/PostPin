@@ -28,7 +28,19 @@ class Category extends React.Component {
             <div className={style.text}>
               <p className={style.headers}> Password: </p>
               <p>{this.props.info.password}</p>
-            </div></div>) : (<div> {this.props.info} </div>)}
+            </div></div>) : (
+              <div><div className={style.text}>
+                <div>
+                {this.props.info.map(function(listValue){
+                  return <p className={style.headers}>{listValue}</p>
+                })}
+                </div>
+              </div></div>
+
+
+
+
+            )}
         </div>
       </div>
     );
