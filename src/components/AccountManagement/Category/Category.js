@@ -158,7 +158,16 @@ class Category extends React.Component {
                       validators={passwordValidator}
                     />)
               }
-            </div></div>) : (<div> {this.props.info} </div>)}
+              </div></div>) : (
+                <div><div className={style.text}>
+                  <div>
+                  {this.props.info.map(function(listValue){
+                    return <p className={style.headers}>{listValue}</p>
+                  })}
+                  </div>
+                </div></div>
+
+              )}
         </div>
       </div>
     );
