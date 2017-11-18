@@ -30,17 +30,15 @@ class SignInPage extends React.Component {
        emailin: '',
        pwin: '',
        errorMessage: '',
-       shouldSignIn: false
+       shouldSignIn: false,
+       signInButton: true,
+       signOutButton: false
      };
      //this.checkSubmit = this.checkSubmit.bind(this);
      this.handleSubmit = this.handleSubmit.bind(this);
      this.handleChange = this.handleChange.bind(this);
    }
-
-   onComponentWillMount () {
-     this.setState({errorMessage: '', shouldSignIn: false});
-   }
-
+   
    handleChange(e) {
      this.setState({
        [e.target.name]: e.target.value
@@ -64,8 +62,8 @@ class SignInPage extends React.Component {
       })
       .catch((error) => {
         this.setState({errorMessage: error.message, shouldSignIn: false})
-
       });
+
     }
 
 
