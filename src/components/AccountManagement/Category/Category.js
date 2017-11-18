@@ -148,7 +148,6 @@ class Category extends React.Component {
             </div>
             <div className={style.text}>
               <p className={style.headers}> Password: </p>
-=======
               {
                 !this.state.isEdit
                 ? (<p> {this.props.info.password} </p>)
