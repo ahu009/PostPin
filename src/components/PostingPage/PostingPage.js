@@ -84,6 +84,7 @@ class PostingPage extends React.Component {
     //  }
     //  usersPosts.push(Posts);
     //https://stackoverflow.com/questions/40688268/why-does-firebase-lose-reference-outside-the-once-function
+    //https://stackoverflow.com/questions/38965731/how-to-get-all-childs-data-in-firebase-database
     var that = this;
     console.log(document.querySelector('input[name="Title"]').value)
     let _title = document.querySelector('input[name="Title"]').value;
@@ -100,12 +101,8 @@ class PostingPage extends React.Component {
         getpostdata.once('value',function(snapshot){
           postnum = snapshot.val().Posts;
           postnum = postnum + 1;
-          //getpostdata.update({Posts: postnum});
-          //that.setState({postnumber: postnum})
           console.log("postnume: " + postnum)
-          //console.log("postnum: " + this.postnumber)
           const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
-          //var once = require('once')
           firebase.database().ref('users/' + user.uid).update({Posts: postnum});
           post.set({
             title: _title,

@@ -6,6 +6,7 @@ import style from './SearchResultsPage.scss';
 import Posting from './Posting';
 import auto from './../SearchPage/TempAutoFill';
 import { Link } from 'react-router-dom';
+import firebase from './../../firebase.js';
 
 /**
  * UI Component
@@ -37,27 +38,45 @@ class SearchResultsPage extends React.Component {
         hasImg: true,
         postID: '8===D'
       },
-      {
-        title: 'I love steven',
-        price: '420',
-        hasImg: true,
-        postID: '8===D'
-      },
-      {
-        title: 'I love steven',
-        price: '420',
-        hasImg: true,
-        postID: '8===D'
-      },
       ]
     };
 
     this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
   }
 
-  onComponentWillMount () {
+  componentWillMount () {
     // Enter firebase code here
-    this.setState();
+    console.log("in willmount")
+    let temparr = new Array();
+    var that = this;
+    var postref = firebase.database().ref('users');
+    postref.once('value',function(snapshot){
+      for(var key in snapshot.val()){
+        console.log("snapshot key" + key); //prints out each key
+        var newpostref = firebase.database().ref('users/' + key);
+        var realpostref = firebase.database().ref('users/' + key + '/posts/')
+        var newkey = key;
+        newpostref.once('value',function(snapshot){
+          var postnum = snapshot.val().Posts;
+          console.log('postnum is ' + postnum)
+        })
+        realpostref.once('value',function(snapshot){
+          //console.log(postnum)
+          snapshot.forEach(function(data){ //this function loops through all the posts in fire base
+            console.log(data.val().title) // data.val().title returns the post tile, we can implement a filter function that searches for the speicfic title here.....
+            const posting = {
+              title: data.val().title,
+              price: data.val().price,
+              hasImg: false,
+              postID: data.val().description
+            }
+            temparr.push(posting);
+            that.setState({posts: temparr});
+          })
+
+        });
+      }
+    });
   }
 
   toggleEnterClicked () {
