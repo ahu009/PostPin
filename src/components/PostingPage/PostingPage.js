@@ -92,7 +92,6 @@ class PostingPage extends React.Component {
     let _description = document.querySelector('input[name="Body"]').value;
     let _tag = document.querySelector('input[name="Tags"]').value;
     let _pictures = this.state.pictures;
-    //var postnum;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log("user is: " + user.email);

@@ -63,7 +63,7 @@ class SearchResultsPage extends React.Component {
         realpostref.once('value',function(snapshot){
           //console.log(postnum)
           snapshot.forEach(function(data){ //this function loops through all the posts in fire base
-            console.log(data.val().title) // data.val().title returns the post tile, we can implement a filter function that searches for the speicfic title here.....
+            console.log(data.val().title) // data.val().title returns the post title, we can implement a filter function that searches for the speicfic title here.....
             const posting = {
               title: data.val().title,
               price: data.val().price,
