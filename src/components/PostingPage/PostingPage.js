@@ -37,7 +37,16 @@ class PostingPage extends React.Component {
    */
   constructor (props) {
     super(props);
-    this.state = { canSubmit: false, pictures: [], showError: false, titlein: '', pricein: '', descriptionin: '',tagsin: '',postnumber:'' };
+    this.state = {
+      canSubmit: false,
+      pictures: [],
+      showError: false,
+      titlein: '',
+      pricein: '',
+      descriptionin: '',
+      tagsin: '',
+      postnumber:''
+    };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.rejectSubmit = this.rejectSubmit.bind(this);
@@ -46,14 +55,16 @@ class PostingPage extends React.Component {
   }
 
   onDrop(picture) {
-        this.setState({
-            pictures: this.state.pictures.concat(picture),
-        });
-        setTimeout(() => {
-          let elementtoscroll = document.querySelectorAll('div[class="uploadPictureContainer"]')[document.querySelectorAll('div[class="uploadPictureContainer"]').length - 1];
-          elementtoscroll.scrollIntoView({behavior: 'smooth'});
-        }, 50);
+    if (picture) {
+      this.setState({
+        pictures: this.state.pictures.concat(picture)
+      });
+      setTimeout(() => {
+        let elementtoscroll = document.querySelectorAll('div[class="uploadPictureContainer"]')[document.querySelectorAll('div[class="uploadPictureContainer"]').length - 1];
+        elementtoscroll.scrollIntoView({behavior: 'smooth'});
+      }, 50);
     }
+  }
 
     handleChange(e) {
       this.setState({
@@ -74,17 +85,6 @@ class PostingPage extends React.Component {
 
    handleSubmit(e) {
      e.preventDefault();
-     console.log("hello")
-    //  const usersPosts = firebase.database().ref('postings');
-    //  const Posts = {
-    //    title: document.querySelector('input[name="Title"]').value,
-    //    price: document.querySelector('input[name="Price"]').value,
-    //    description: document.querySelector('input[name="Body"]').value,
-    //    tags: document.querySelector('input[name="Tags"]').value
-    //  }
-    //  usersPosts.push(Posts);
-    //https://stackoverflow.com/questions/40688268/why-does-firebase-lose-reference-outside-the-once-function
-    //https://stackoverflow.com/questions/38965731/how-to-get-all-childs-data-in-firebase-database
     var that = this;
     console.log(document.querySelector('input[name="Title"]').value)
     let _title = document.querySelector('input[name="Title"]').value;
@@ -93,7 +93,6 @@ class PostingPage extends React.Component {
     let _tag = document.querySelector('input[name="Tags"]').value;
     let _school = sessionStorage.getItem("schoolName");
     let _pictures = this.state.pictures;
-    //var postnum;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log("user is: " + user.email);
@@ -111,10 +110,34 @@ class PostingPage extends React.Component {
             school: _school,
             description: _description,
             tag: _tag,
-            pictures: 'hi'
+            pictures: _pictures.length
           });
+          //creates storage reference
+          for (var i = 0; i < _pictures.length; i++) {
+            console.log(_pictures[i][0]);
+            var pics = firebase.storage().ref(user.uid).child(postnum.toString()).child(i.toString());
+            var currpic = pics.put(_pictures[i][0]);
+            currpic.on('state_changed',
+            function progress(snapshot) {
+              if (snapshot.bytesTransferred == snapshot.totalbytes) {
+                console.log("Image Successfully Uploaded!");
+              }
+              else {
+                console.log("uploading...");
+              }
+            },
+            function error(err) {
+              console.log("errrorrssssss");
+            },
+            function complete() {
+              console.log("success!");
+            }
+            );
+          }
+
         })
-      } else {
+      }
+      else {
         console.log("user does not exists")
       }
      });

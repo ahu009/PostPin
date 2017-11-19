@@ -23,11 +23,6 @@ class AccountManagement extends React.Component {
   }
   componentDidMount () {
     // Populat accountInformation here
-    //emil =
-    //phone =
-    // var user = firebase.auth().currentUser;
-    // this.state.email = user.email;
-    // this.state.password = user.password;
     let temparr = new Array()
     var that = this;
     firebase.auth().onAuthStateChanged(function(user) {
@@ -64,15 +59,9 @@ class AccountManagement extends React.Component {
                 that.setState({userPosts: temparr})
                 console.log(_title)
               });
-
             }
           }
         });
-        // var posts = firebase.database().ref('users/' + user.uid + '/posts');
-        // posts.on('value', function(snapshot){
-        //   var theposts = snapshot.val().title;
-        //   console.log("posts title: " + theposts);
-        //   that.setState({userPosts: theposts});
       } else {
         console.log("user does not exists")
       }

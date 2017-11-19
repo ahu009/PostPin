@@ -76,13 +76,10 @@ class Category extends React.Component {
                         ? document.querySelector('input[name="phone"]').value
                         : document.querySelector('input[name="phone"]').placeholder
 
+
         user.updateEmail(email).then((response) => {
           user.updatePassword(password).then((response) => {
-            account.set({
-              Email: email,
-              Password: password,
-              Phone: phone
-            });
+            firebase.database().ref('users/' + user.uid).update({Email: email, Password: password, Phone: phone});
             self.setState({showError: false});
           })
         })
