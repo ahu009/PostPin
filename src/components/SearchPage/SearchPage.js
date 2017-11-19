@@ -74,6 +74,11 @@ class SearchPage extends React.Component {
     this.retrieveTags = this.retrieveTags.bind(this);
     this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
     this.tagRemoved = this.tagRemoved.bind(this);
+    this.refreshParent = this.refreshParent.bind(this);
+  }
+
+  refreshParent () {
+    this.forceUpdate();
   }
 
   tagRemoved (value, isTag) {
@@ -151,16 +156,16 @@ class SearchPage extends React.Component {
     return (
       <div className={style.container}>
         <div className={style.housing}>
-          <Category name="Housing" tags={housing} />
+          <Category name="Housing" tags={housing} refreshParent={this.refreshParent} />
         </div>
         <div className={style.forsale}>
-          <Category name="For Sale" tags={forSale} />
+          <Category name="For Sale" tags={forSale} refreshParent={this.refreshParent} />
         </div>
         <div className={style.jobs}>
-          <Category name="Jobs" tags={jobs} />
+          <Category name="Jobs" tags={jobs} refreshParent={this.refreshParent} />
         </div>
         <div className={style.community}>
-          <Category name="Community" tags={community} />
+          <Category name="Community" tags={community} refreshParent={this.refreshParent} />
         </div>
 
         <Link to="/some/where/search">
