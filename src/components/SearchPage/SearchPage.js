@@ -11,7 +11,6 @@ import Category from './Category';
 import PrintFilters from './PrintFilters';
 import ACCOUNT_AUTH from './../../public/account';
 
-
 const modalStyle = {
   overlay : {
     position          : 'fixed',
@@ -78,7 +77,10 @@ class SearchPage extends React.Component {
   }
 
   tagRemoved (value, isTag) {
-    return isTag ? this.setState({tags: this.state.tags.filter(function(i) { return i != value })}) : this.setState({priceRange: this.state.priceRange.filter(function(i) { return i != value })});
+    isTag
+        ? sessionStorage.setItem("userTags", JSON.stringify(JSON.parse(sessionStorage.getItem("userTags")).filter(function(i) { return i != value })))
+        : sessionStorage.setItem("userPrice", JSON.stringify(JSON.parse(sessionStorage.getItem("userPrice")).filter(function(i) { return i != value })))
+    this.forceUpdate();
   }
 
   retrieveTags () {
@@ -86,10 +88,16 @@ class SearchPage extends React.Component {
     for(let i = 0; i < tagArray.length; i++) {
       if (tagArray[i] != undefined && tagArray[i] != null)
         tagArray[i] = tagArray[i].replace(/\s/g, '').toLowerCase();
+      if (tagArray[i] === '') {
+        tagArray.splice(i,1);
+        i--;
+      }
     }
     tagArray = Array.from(new Set(tagArray));
     this.setState({tags: tagArray,
                   priceRange: [`$${document.querySelector('input[name="min_in"]').value} - $${document.querySelector('input[name="max_in"]').value}`]});
+    sessionStorage.setItem("userTags", JSON.stringify(tagArray));
+    sessionStorage.setItem("userPrice", JSON.stringify([`$${document.querySelector('input[name="min_in"]').value} - $${document.querySelector('input[name="max_in"]').value}`]));
     this.closeModal();
   }
 
@@ -108,7 +116,7 @@ class SearchPage extends React.Component {
 
   toggleEnterClicked () {
     document.getElementById("navigate").click();
-    sessionStorage.setItem("userSearch",`'${document.querySelector('input[autocomplete="off"]').value}'`);
+    sessionStorage.setItem("userSearch", document.querySelector('input[autocomplete="off"]').value);
     sessionStorage.setItem("Category", '');
   }
 
@@ -172,13 +180,13 @@ class SearchPage extends React.Component {
         <p onClick={this.openModal} className={style.filter}> Filter </p>
 
         <div className={style.tagPrice_container}>
-          {(this.state.tags != null && this.state.tags != '' && this.state.tags != undefined)
+          {(JSON.parse(sessionStorage.getItem("userTags")) != null && JSON.parse(sessionStorage.getItem("userTags")) != '' && JSON.parse(sessionStorage.getItem("userTags")) != undefined)
           ? (<div className={style.tags}>
-              <PrintFilters callBack={this.tagRemoved} header="Tags:" content={this.state.tags} />
+              <PrintFilters callBack={this.tagRemoved} header="Tags:" content={JSON.parse(sessionStorage.getItem("userTags"))} />
             </div>) : null}
-          {(this.state.priceRange != null && this.state.priceRange[0] != undefined && this.state.priceRange[0].replace(/\s/g, '') != '$-$')
+          {(JSON.parse(sessionStorage.getItem("userPrice")) != null && JSON.parse(sessionStorage.getItem("userPrice"))[0] != undefined && JSON.parse(sessionStorage.getItem("userPrice"))[0].replace(/\s/g, '') != '$-$')
           ? (<div className={style.priceRange}>
-              <PrintFilters callBack={this.tagRemoved} header="Price Range:" content={this.state.priceRange} />
+              <PrintFilters callBack={this.tagRemoved} header="Price Range:" content={JSON.parse(sessionStorage.getItem("userPrice"))} />
             </div>) : null}
         </div>
 

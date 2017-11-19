@@ -18,60 +18,43 @@ class SearchResultsPage extends React.Component {
 
     this.state = {
       enterClicked: false,
-      posts: [
-      /* post array firebase here maybe */
-      {
-        title: 'This is a test',
-        price: '69',
-        hasImg: true,
-        postID: '69696969'
-      },
-      {
-        title: 'I love steven',
-        price: '420',
-        hasImg: true,
-        postID: '8===D'
-      },
-      {
-        title: 'I love steven',
-        price: '420',
-        hasImg: true,
-        postID: '8===D'
-      },
-      ]
+      posts: []
     };
 
     this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
+    this.queryKeyword = this.queryKeyword.bind(this);
+    this.queryTags = this.queryTags.bind(this);
+    this.queryPriceRange = this.queryPriceRange.bind(this);
+    this.querySchool = this.querySchool.bind(this);
   }
 
   componentWillMount () {
     // Enter firebase code here
-    console.log("in willmount")
     let temparr = new Array();
     var that = this;
     var postref = firebase.database().ref('users');
     postref.once('value',function(snapshot){
       for(var key in snapshot.val()){
-        console.log("snapshot key" + key); //prints out each key
         var newpostref = firebase.database().ref('users/' + key);
         var realpostref = firebase.database().ref('users/' + key + '/posts/')
         var newkey = key;
         newpostref.once('value',function(snapshot){
           var postnum = snapshot.val().Posts;
-          console.log('postnum is ' + postnum)
         })
         realpostref.once('value',function(snapshot){
-          //console.log(postnum)
           snapshot.forEach(function(data){ //this function loops through all the posts in fire base
-            console.log(data.val().title) // data.val().title returns the post title, we can implement a filter function that searches for the speicfic title here.....
             const posting = {
               title: data.val().title,
               price: data.val().price,
               hasImg: false,
-              postID: data.val().description
+              postID: data.val().description,
+              tags: data.val().tag,
+              school: data.val().school,
             }
-            temparr.push(posting);
-            that.setState({posts: temparr});
+            if (that.queryPriceRange(posting) && that.queryKeyword(posting) && that.queryTags(posting) && that.querySchool(posting)) {
+              temparr.push(posting);
+              that.setState({posts: temparr});
+            }
           })
 
         });
@@ -80,10 +63,49 @@ class SearchResultsPage extends React.Component {
   }
 
   toggleEnterClicked () {
-    sessionStorage.setItem("userSearch",`'${document.querySelector('input[autocomplete="off"]').value}'`);
+    sessionStorage.setItem("userSearch", document.querySelector('input[type="text"]').value);
     document.getElementById("navigate").click();
+    this.setState({posts: []});
+    this.componentWillMount();
   }
 
+  queryKeyword (posting) {
+    return posting.title.toLowerCase().includes(sessionStorage.getItem("userSearch").toLowerCase());
+  }
+
+  queryTags (posting) {
+    if (sessionStorage.getItem("userTags") != null
+        && JSON.parse(sessionStorage.getItem("userTags")).length != 0) {
+      let searchTags = JSON.parse(sessionStorage.getItem("userTags"));
+      let postingTags = posting.tags.replace(/\s/g, '') != '' ? posting.tags.replace(/\s/g, '').toLowerCase().split(",") : [];
+      for (let i = 0; i < searchTags.length; i++) {
+        if (postingTags.includes(searchTags[i])) {
+          return true;
+        }
+      }
+      return false;
+    }
+    return true;
+  }
+
+  querySchool (posting) {
+    return posting.school === sessionStorage.getItem("schoolName");
+  }
+
+  queryPriceRange (posting) {
+    if (sessionStorage.getItem("userPrice") != null
+        && JSON.parse(sessionStorage.getItem("userPrice")).length != 0
+        && sessionStorage.getItem("userPrice") != '["$ - $"]') {
+          console.log(sessionStorage.getItem("userPrice"));
+      let tempPrice = sessionStorage.getItem("userPrice");
+      tempPrice = tempPrice.replace(/["$\s]/gi, '').replace(/[\[\]']+/g, '');
+      tempPrice = tempPrice.split("-");
+      let higherNum = Math.max(Number(tempPrice[0]), Number(tempPrice[1]));
+      let lowerNum = Math.min(Number(tempPrice[0]), Number(tempPrice[1]));
+      return (posting.price  <= higherNum && posting.price >= lowerNum) ? true : false
+    }
+    return true;
+  }
 
 
   /**
@@ -105,8 +127,8 @@ class SearchResultsPage extends React.Component {
       <MuiThemeProvider>
         <SearchBar
           dataSource={auto}
-          onChange={() => console.log('onChange')}
           onRequestSearch={() => this.toggleEnterClicked()}
+          onChange={() => {}}
           placeholder={placeHolderText}
           style={{
             width: '55%',
@@ -117,7 +139,7 @@ class SearchResultsPage extends React.Component {
         />
       </MuiThemeProvider>
         <div className={style.header}>
-         {this.props.userSearch != '' ? (<p> There are {this.state.posts.length} results for {this.props.userSearch} </p>) : null}
+         {this.props.userSearch != null ? (<p> There are {this.state.posts.length} results for {`'${this.props.userSearch}'`} </p>) : null}
         </div>
         <hr className={style.line}/>
 

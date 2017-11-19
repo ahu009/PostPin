@@ -91,6 +91,7 @@ class PostingPage extends React.Component {
     let _price = document.querySelector('input[name="Price"]').value;
     let _description = document.querySelector('input[name="Body"]').value;
     let _tag = document.querySelector('input[name="Tags"]').value;
+    let _school = sessionStorage.getItem("schoolName");
     let _pictures = this.state.pictures;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -106,6 +107,7 @@ class PostingPage extends React.Component {
           post.set({
             title: _title,
             price: _price,
+            school: _school,
             description: _description,
             tag: _tag,
             pictures: _pictures.length
