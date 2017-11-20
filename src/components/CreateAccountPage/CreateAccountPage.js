@@ -133,26 +133,26 @@ class CreateAccountPage extends React.Component {
      let em = document.querySelector('input[type="email"]').value;
      let pass = document.querySelector('input[type="password"]').value;
      let phone = document.querySelector('input[type="tel"]').value;
+
      console.log(em);
      console.log(pass);
      let firebaseAuth = this.checkSubmit();
      if(firebaseAuth) {
        firebase.auth().createUserWithEmailAndPassword(em, pass).then((response) => {
          this.setState({shouldCreateAccountFirebase: true, firebaseErrorMessage: ''});
-         firebase.auth().onAuthStateChanged(function(user) {
-           if (user) {
-             const account = firebase.database().ref("users").child(user.uid);
-             account.set({
-               Email: em,
-               Id: user.uid,
-               Password: pass,
-               Phone: phone,
-               Posts: 0
-             });
-           } else {
-             console.log("user does not exists")
-           }
-          });
+         let user = firebase.auth().currentUser;
+         if (user) {
+           const account = firebase.database().ref("users").child(user.uid);
+           account.set({
+             Email: em,
+             Id: user.uid,
+             Password: pass,
+             Phone: phone,
+             Posts: 0
+           });
+         } else {
+           console.log("user does not exists")
+         }
       })//done delete
        .catch((error) => {
          console.log(error.message);
