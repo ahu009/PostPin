@@ -90,7 +90,7 @@ class Category extends React.Component {
         // ^^ May cause problems later.
       }
       });
-      setTimeout(() => {callback();}, 1500);
+      setTimeout(() => {callback();}, 200);
     }
 
   toggleEdit () {
@@ -114,7 +114,6 @@ class Category extends React.Component {
                 ? (<div className={style.button} onClick={() => {
                     if (!document.querySelector('span[class="ReactTextField-message ReactTextField--error"]'))
                       this.updateInfo(this.toggleEdit);
-                      this.props.rerenderParent();
                 }}> <SmallButton buttonText="submit" /> </div>)
                 : (<div className={style.button} onClick={() => this.toggleEdit()}> <SmallButton buttonText="edit" /> </div>)
               }
