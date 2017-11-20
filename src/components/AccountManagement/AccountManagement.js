@@ -17,9 +17,11 @@ class AccountManagement extends React.Component {
     super();
 
     this.state = {
-      accountInformation: {email: 'temp@temp.com', phone: '4086911969', password: 'Password'},
+      accountInformation: {email: '', phone: '', password: ''},
       userPosts: []
     };
+
+    this.rerender = this.rerender.bind(this);
   }
   componentDidMount () {
     // Populat accountInformation here
@@ -68,6 +70,9 @@ class AccountManagement extends React.Component {
     });
   }
 
+  rerender () {
+    this.forceUpdate();
+  }
 
   /**
    * Render function for UIComponent Component
@@ -78,7 +83,7 @@ class AccountManagement extends React.Component {
     return (
       <div className={style.container}>
         <div className={style.info}>
-          <Category name="Account Information" info={this.state.accountInformation} />
+          <Category name="Account Information" info={this.state.accountInformation} rerenderParent={this.rerender}/>
         </div>
         <div className={style.posts}>
           <Category name="Your Posts" info={this.state.userPosts} />
