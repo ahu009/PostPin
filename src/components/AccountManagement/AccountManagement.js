@@ -21,7 +21,6 @@ class AccountManagement extends React.Component {
       userPosts: []
     };
 
-    this.rerender = this.rerender.bind(this);
   }
   componentDidMount () {
     // Populat accountInformation here
@@ -70,10 +69,6 @@ class AccountManagement extends React.Component {
     });
   }
 
-  rerender () {
-    this.forceUpdate();
-  }
-
   /**
    * Render function for UIComponent Component
    * @return {JSX} Component to render
@@ -83,7 +78,7 @@ class AccountManagement extends React.Component {
     return (
       <div className={style.container}>
         <div className={style.info}>
-          <Category name="Account Information" info={this.state.accountInformation} rerenderParent={this.rerender}/>
+          <Category name="Account Information" info={this.state.accountInformation} />
         </div>
         <div className={style.posts}>
           <Category name="Your Posts" info={this.state.userPosts} />
