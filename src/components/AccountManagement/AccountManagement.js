@@ -51,7 +51,7 @@ class AccountManagement extends React.Component {
                   title: snapshot.val().title,
                   des: snapshot.val().description,
                   price: snapshot.val().price,
-                  tags: snapshot.val().tags,
+                  tags: snapshot.val().tag,
                   postID: snapshot.val().PostID
               }
                 temparr.push(posting);
