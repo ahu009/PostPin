@@ -32,15 +32,15 @@ class ViewPost extends React.Component {
       <div className={style.container}>
 
         <div className = {style.title}>
-          CSS SLAVE FOR SALE
+          {this.props.title}
         </div>
 
         <div className={style.price}>
-          $FREE
+          ${this.props.price}
         </div>
 
         <div className={style.description}>
-          PLS TAKE MY CSS SLAVE
+          {this.props.description}
         </div>
 
         <div className={style.images}>
@@ -50,8 +50,7 @@ class ViewPost extends React.Component {
         <div className={style.posterInfo}>
           Poster Information:
           <div className={style.info}>
-            <p> Email: ahu009@ucr.edu </p>
-            <p> Phone Number: 408-691-1969 </p>
+            <p> Email: {this.props.posterEmail} </p>
           </div>
         </div>
 

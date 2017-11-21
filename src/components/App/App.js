@@ -12,6 +12,7 @@ import Logo from './../Logo';
 import SearchResultsPage from './../SearchResultsPage';
 import AccountManagement from './../AccountManagement';
 import ViewPost from './../ViewPost';
+import routes from './../SearchResultsPage/SearchResultsPage';
 
 
 /**
@@ -23,7 +24,24 @@ class App extends React.Component {
   // Initialize Firebase
   constructor(props) {
     super(props);
+
+    this.state = {
+      postsToRoute: [],
+    }
+
+    this.refresh = this.refresh.bind(this);
+    this.collectPosts = this.collectPosts.bind(this);
+  };
+
+  collectPosts (posts) {
+    this.setState({postsToRoute: posts});
   }
+
+  refresh (posts) {
+    this.setState({postsToRoute: posts});
+    this.forceUpdate();
+  }
+
 
   /**
    * Render function for App Component
@@ -43,7 +61,7 @@ class App extends React.Component {
           )} />
           <main>
             <Route exact={true} path="/some/where" render={()=> (
-              <SearchPage />
+              <SearchPage refresh={this.refresh} />
             )} />
             <Route exact={true} path="/some/where/AccountManagement" render={()=> (
               <AccountManagement />
@@ -58,11 +76,18 @@ class App extends React.Component {
               <SignInPage />
             )} />
             <Route exact={true} path="/some/where/search" render={()=> (
-              <SearchResultsPage userSearch={sessionStorage.getItem("userSearch")} />
+              <SearchResultsPage userSearch={sessionStorage.getItem("userSearch")} refresh={this.refresh} />
             )} />
             <Route exact={true} path="/some/where/search/posting" render={()=> (
               <ViewPost />
             )} />
+            {
+              this.state.postsToRoute.map((value) => {
+                return (<Route exact={true} path={`/some/where/${value.postID}`} render={() => (
+                  <ViewPost title={value.title} price={value.price} description={value.description} posterEmail={value.posterEmail}/>
+                )} />)
+              })
+            }
           </main>
         </div>
       </Router>
