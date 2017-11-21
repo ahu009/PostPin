@@ -110,15 +110,24 @@ class PostingPage extends React.Component {
             school: _school,
             description: _description,
             tag: _tag,
-            pictures: _pictures.length,
+            pictures: "hi",
             posterEmail: user.email,
-            PostID: postnum
+            numPics: _pictures.length,
+            posterID: user.uid,
+            postNum: postnum,
+            postID: postnum
           });
           //creates storage reference
           for (var i = 0; i < _pictures.length; i++) {
             console.log(_pictures[i][0]);
             var pics = firebase.storage().ref(user.uid).child(postnum.toString()).child(i.toString());
             var currpic = pics.put(_pictures[i][0]);
+            //pics.getDownloadURL().then(function(url) {
+              //console.log(url);
+              //post.update({
+                //pictureURLS: pictureURLS.concat(url)
+              //});
+            //});
             currpic.on('state_changed',
             function progress(snapshot) {
               if (snapshot.bytesTransferred == snapshot.totalbytes) {
@@ -135,8 +144,9 @@ class PostingPage extends React.Component {
               console.log("success!");
             }
             );
-          }
 
+
+          }
         })
       }
       else {
