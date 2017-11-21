@@ -1,10 +1,10 @@
 import React from 'react';
-import style from './PostingPage.scss';
+import style from './EditPosting.scss';
 import { ReactTextField, validator  } from 'react-textfield';
-import Button from './../Button';
+import Button from './../../Button';
 import { Link, Prompt } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
-import firebase from './../../firebase.js';
+import firebase from './../../../firebase.js';
 
 const style1 = {
   container: {
@@ -29,7 +29,7 @@ const style1 = {
  * UI Component
  * @type {Class}
  */
-class PostingPage extends React.Component {
+class EditPosting extends React.Component {
   /**
    * Constructor for UI Component
    * @param  {Object} props  Props passed to this class
@@ -86,58 +86,20 @@ class PostingPage extends React.Component {
    handleSubmit(e) {
      e.preventDefault();
     var that = this;
-    console.log(document.querySelector('input[name="Title"]').value)
-    let _title = document.querySelector('input[name="Title"]').value;
-    let _price = document.querySelector('input[name="Price"]').value;
-    let _description = document.querySelector('input[name="Body"]').value;
-    let _tag = document.querySelector('input[name="Tags"]').value;
+    let _title = document.querySelector('input[name="Title"]').value != '' ? document.querySelector('input[name="Title"]').value : document.querySelector('input[name="Title"]').placeholder;
+    let _price = document.querySelector('input[name="Price"]').value != '' ? document.querySelector('input[name="Price"]').value : document.querySelector('input[name="Price"]').placeholder;
+    let _description = document.querySelector('input[name="Body"]').value != '' ? document.querySelector('input[name="Body"]').value : document.querySelector('input[name="Body"]').placeholder;
+    let _tag = document.querySelector('input[name="Tags"]').value != '' ? document.querySelector('input[name="Tags"]').value : document.querySelector('input[name="Tags"]').placeholder;
     let _school = sessionStorage.getItem("schoolName");
     let _pictures = this.state.pictures;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log("user is: " + user.email);
         var postnum;
-        var getpostdata = firebase.database().ref('users/' + user.uid);
-        getpostdata.once('value',function(snapshot){
-          postnum = snapshot.val().Posts;
-          postnum = postnum + 1;
-          console.log("postnume: " + postnum)
-          const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
-          firebase.database().ref('users/' + user.uid).update({Posts: postnum});
-          post.set({
-            title: _title,
-            price: _price,
-            school: _school,
-            description: _description,
-            tag: _tag,
-            pictures: _pictures.length,
-            posterEmail: user.email,
-            PostID: postnum
-          });
-          //creates storage reference
-          for (var i = 0; i < _pictures.length; i++) {
-            console.log(_pictures[i][0]);
-            var pics = firebase.storage().ref(user.uid).child(postnum.toString()).child(i.toString());
-            var currpic = pics.put(_pictures[i][0]);
-            currpic.on('state_changed',
-            function progress(snapshot) {
-              if (snapshot.bytesTransferred == snapshot.totalbytes) {
-                console.log("Image Successfully Uploaded!");
-              }
-              else {
-                console.log("uploading...");
-              }
-            },
-            function error(err) {
-              console.log("errrorrssssss");
-            },
-            function complete() {
-              console.log("success!");
-            }
-            );
-          }
+        let postingID = JSON.parse(sessionStorage.getItem("postEdit")).postID;
+        //firebase.database().ref('users/' + user.uid).update({Posts: postnum});
+        firebase.database().ref('users/' + user.uid + '/posts/' + postingID).update({title: _title, price: _price, description: _description, tag: _tag, school:_school});
 
-        })
       }
       else {
         console.log("user does not exists")
@@ -184,7 +146,7 @@ class PostingPage extends React.Component {
             name="Title"
             type="text"
             validators={emptyValidator}
-            placeholder="Title"
+            placeholder={JSON.parse(sessionStorage.getItem("postEdit")).title}
             style = {style1}
             onChange={this.handleChange}
             value = {this.state.titlein}
@@ -198,7 +160,7 @@ class PostingPage extends React.Component {
             name="Price"
             type="text"
             validators={priceValidator}
-            placeholder="Price"
+            placeholder={JSON.parse(sessionStorage.getItem("postEdit")).price}
             style = {style1}
             onChange={this.handleChange}
             value = {this.state.pricein}
@@ -212,7 +174,7 @@ class PostingPage extends React.Component {
             name="Body"
             type="text"
             validators={emptyValidator}
-            placeholder="Body"
+            placeholder={JSON.parse(sessionStorage.getItem("postEdit")).des}
             style = {style1}
             onChange={this.handleChange}
             value = {this.state.descriptionin}
@@ -225,7 +187,7 @@ class PostingPage extends React.Component {
           <ReactTextField
             name="Tags"
             type="text"
-            placeholder="Tags separated by commas (e.g Art, Cars, Phones)"
+            placeholder={JSON.parse(sessionStorage.getItem("postEdit")).tags}
             onChange={this.handleChange}
             value = {this.state.tagsin}
             style = {style1}
@@ -251,8 +213,8 @@ class PostingPage extends React.Component {
           </Link>
         </div>
         <div className={style.back}>
-          <Link to="/some/where">
-            <Button buttonText="Back" />
+          <Link to="/some/where/AccountManagement">
+            <Button buttonText="Cancel" />
           </Link>
         </div>
       </div>
@@ -260,4 +222,4 @@ class PostingPage extends React.Component {
   }
 }
 
-export default PostingPage;
+export default EditPosting;
