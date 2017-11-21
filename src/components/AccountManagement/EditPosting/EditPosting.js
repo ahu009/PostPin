@@ -96,46 +96,10 @@ class EditPosting extends React.Component {
       if (user) {
         console.log("user is: " + user.email);
         var postnum;
-        var getpostdata = firebase.database().ref('users/' + user.uid);
-        getpostdata.once('value',function(snapshot){
-          postnum = snapshot.val().Posts;
-          postnum = postnum + 1;
-          console.log("postnume: " + postnum)
-          const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
-          firebase.database().ref('users/' + user.uid).update({Posts: postnum});
-          post.set({
-            title: _title,
-            price: _price,
-            school: _school,
-            description: _description,
-            tag: _tag,
-            pictures: _pictures.length,
-            posterEmail: user.email
-          });
-          //creates storage reference
-          for (var i = 0; i < _pictures.length; i++) {
-            console.log(_pictures[i][0]);
-            var pics = firebase.storage().ref(user.uid).child(postnum.toString()).child(i.toString());
-            var currpic = pics.put(_pictures[i][0]);
-            currpic.on('state_changed',
-            function progress(snapshot) {
-              if (snapshot.bytesTransferred == snapshot.totalbytes) {
-                console.log("Image Successfully Uploaded!");
-              }
-              else {
-                console.log("uploading...");
-              }
-            },
-            function error(err) {
-              console.log("errrorrssssss");
-            },
-            function complete() {
-              console.log("success!");
-            }
-            );
-          }
+        let postingID = JSON.parse(sessionStorage.getItem("postEdit")).postID;
+        //firebase.database().ref('users/' + user.uid).update({Posts: postnum});
+        firebase.database().ref('users/' + user.uid + '/posts/' + postingID).update({title: _title, price: _price, description: _description, tag: _tag, school:_school});
 
-        })
       }
       else {
         console.log("user does not exists")

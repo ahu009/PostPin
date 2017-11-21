@@ -111,7 +111,8 @@ class PostingPage extends React.Component {
             description: _description,
             tag: _tag,
             pictures: _pictures.length,
-            posterEmail: user.email
+            posterEmail: user.email,
+            PostID: postnum
           });
           //creates storage reference
           for (var i = 0; i < _pictures.length; i++) {
