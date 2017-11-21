@@ -52,13 +52,14 @@ class AccountManagement extends React.Component {
               console.log("i inside loop: " + i)
               var dir = firebase.database().ref('users/' + user.uid + '/posts/' + i);
               dir.once('value', function(snapshot){
-                var _title = snapshot.val().title;
-                var _des = snapshot.val().description;
-                var _price = snapshot.val().price;
-                var _tags = snapshot.val().tags;
-                temparr.push(_title);
+                const posting = {
+                  title: snapshot.val().title,
+                  des: snapshot.val().description,
+                  price: snapshot.val().price,
+                  tags: snapshot.val().tags,
+              }
+                temparr.push(posting);
                 that.setState({userPosts: temparr})
-                console.log(_title)
               });
             }
           }

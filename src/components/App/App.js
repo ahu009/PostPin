@@ -6,6 +6,7 @@ import style from './App.scss';
 import SearchPage from './../SearchPage';
 import StartPage from './../StartPage';
 import PostingPage from './../PostingPage';
+import EditPosting from './../AccountManagement/EditPosting';
 import CreateAccountPage from './../CreateAccountPage';
 import SignInPage from './../SignInPage';
 import Logo from './../Logo';
@@ -68,6 +69,9 @@ class App extends React.Component {
             )} />
             <Route exact={true} path="/some/where/else" render={()=> (
               <PostingPage />
+            )} />
+            <Route exact={true} path="/some/where/else/edit" render={()=> (
+              <EditPosting />
             )} />
             <Route exact={true} path="/accounts/create-account" render={()=> (
               <CreateAccountPage />
