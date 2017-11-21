@@ -88,7 +88,7 @@ class App extends React.Component {
             {
               this.state.postsToRoute.map((value) => {
                 return (<Route exact={true} path={`/some/where/${value.postID}`} render={() => (
-                  <ViewPost title={value.title} price={value.price} description={value.description} posterEmail={value.posterEmail}/>
+                  <ViewPost title={value.title} price={value.price} description={value.description} posterEmail={value.posterEmail} numPics={value.numPics} posterID={value.posterID} postNum={value.postNum}/>
                 )} />)
               })
             }

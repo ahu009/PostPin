@@ -18,9 +18,35 @@ class ViewPost extends React.Component {
    */
   constructor (props) {
     super(props);
-    this.state = { canSubmit: false, pictures: [], showError: false, titlein: '', pricein: '', descriptionin: '',tagsin: '' };
+    this.state = {
+      canSubmit: false,
+      pictures: [],
+      picIndex: 0,
+      showError: false,
+      titlein: '',
+      pricein: '',
+      descriptionin: '',
+      tagsin: ''
+    };
+    this.changeImage = this.changeImage.bind(this);
+  }
 
-    // this.checkSubmit = this.checkSubmit.bind(this);
+  componentDidMount() {
+    for (var i = 0; i < this.props.numPics; ++i) {
+      var pics = firebase.storage().ref(this.props.posterID).child(this.props.postNum.toString()).child(i.toString());
+      pics.getDownloadURL().then(function(url){
+        this.setState ({pictures: this.state.pictures.concat(url)});
+      }.bind(this))
+    }
+  }
+
+  changeImage() {
+    if (this.state.picIndex < this.props.numPics - 1) {
+      this.setState({picIndex: this.state.picIndex + 1});
+    }
+    else {
+      this.setState({picIndex: 0});
+    }
   }
 
   /**
@@ -44,7 +70,12 @@ class ViewPost extends React.Component {
         </div>
 
         <div className={style.images}>
-          <Image src={require('./../../../Steven.jpg')} height={454} width={600} />
+          {console.log(this.state.pictures)}
+          <img src={this.state.pictures[this.state.picIndex]} height={454} width={600} />
+        </div>
+
+        <div className= {style.picture} onClick={this.changeImage}>
+          <Button buttonText="Next Image"/>
         </div>
 
         <div className={style.posterInfo}>
