@@ -54,6 +54,9 @@ class SearchResultsPage extends React.Component {
               school: data.val().school,
               description: data.val().description,
               posterEmail: data.val().posterEmail,
+              numPics: data.val().numPics,
+              posterID: data.val().posterID,
+              postNum: data.val().postNum
             }
             if (that.queryPriceRange(posting) && that.queryKeyword(posting) && that.queryTags(posting) && that.querySchool(posting)) {
               temparr.push(posting);
