@@ -57,6 +57,11 @@ class Category extends React.Component {
 
     this.toggleEdit = this.toggleEdit.bind(this);
     this.updateInfo = this.updateInfo.bind(this);
+    this.populateEdit = this.populateEdit.bind(this);
+  }
+
+  populateEdit (post) {
+    sessionStorage.setItem("postEdit", post);
   }
 
   updateInfo (callback) {
@@ -159,7 +164,11 @@ class Category extends React.Component {
                 <div><div className={style.text}>
                   <div>
                   {this.props.info.map(function(listValue){
-                    return <p className={style.headers}>{listValue}</p>
+                    return (
+                      <Link to="/some/where/else/edit">
+                        <p onClick={() => {sessionStorage.setItem("postEdit", JSON.stringify(listValue));}} className={style.headers}>{listValue.title}</p>
+                      </Link>
+                    )
                   })}
                   </div>
                 </div></div>

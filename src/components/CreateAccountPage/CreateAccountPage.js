@@ -180,7 +180,7 @@ class CreateAccountPage extends React.Component {
         },
       },
         {
-          message: 'Asshole',
+          message: '',
           validator: value => {
              value != '' ? this.setState({showConfirm: true}) : this.setState({showConfirm: false})
              return true;

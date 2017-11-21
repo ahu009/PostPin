@@ -18,9 +18,9 @@
  }
 
  .submit {
-   position: absolute;
+   position: fixed;
     left: 49%;
-    top: 449px;
+    top: 70%;
     margin-left: -86px;
 
     .reject {
@@ -38,9 +38,8 @@
     }
  }
 
-
  .back {
    position: absolute;
    left: 1.5%;
-   bottom: 9%;
+   bottom: 12%;
  }

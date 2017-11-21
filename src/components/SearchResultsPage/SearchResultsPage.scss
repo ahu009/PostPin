@@ -3,6 +3,12 @@
  .container {
    overflow: hidden;
    width: 100%;
+
+   .back {
+     position: fixed;
+     right: 10%;
+     bottom: 12%;
+   }
    .header {
      margin-top: 7%;
      padding-top: .7em;

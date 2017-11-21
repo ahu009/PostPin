@@ -10,6 +10,7 @@ import Modal from 'react-modal';
 import Category from './Category';
 import PrintFilters from './PrintFilters';
 import ACCOUNT_AUTH from './../../public/account';
+import firebase from './../../firebase.js';
 
 const modalStyle = {
   overlay : {
@@ -63,7 +64,8 @@ class SearchPage extends React.Component {
       canApply: true,
       showError: false,
       tags: null,
-      priceRange: null
+      priceRange: null,
+      userLoggedIn: null,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -75,6 +77,11 @@ class SearchPage extends React.Component {
     this.toggleEnterClicked = this.toggleEnterClicked.bind(this);
     this.tagRemoved = this.tagRemoved.bind(this);
     this.refreshParent = this.refreshParent.bind(this);
+  }
+
+  componentDidMount () {
+    let user = firebase.auth().currentUser;
+    user ? this.setState({userLoggedIn: true}) : this.setState({userLoggedIn: false})
   }
 
   refreshParent () {
@@ -178,7 +185,7 @@ class SearchPage extends React.Component {
           </Link>
         </div>
         <div className={style.create}>
-          <Link to={ACCOUNT_AUTH.status === "SIGNED_IN" ? "/some/where/else" : "/accounts/sign-in/"} >
+          <Link to={this.state.userLoggedIn ? "/some/where/else" : "/accounts/sign-in/"} >
             <Button buttonText={'Create Post'} />
           </Link>
         </div>
