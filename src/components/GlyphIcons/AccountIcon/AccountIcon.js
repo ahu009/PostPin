@@ -33,9 +33,6 @@ class AccountIcon extends React.Component {
   signOut () {
     this.refs.dropdown.hide();
     firebase.auth().signOut();
-    firebase.auth().onAuthStateChanged((user) => {
-      user ? console.log("User Exists") : console.log("User Signed out")
-    });
   }
 
   userSignedIn () {
