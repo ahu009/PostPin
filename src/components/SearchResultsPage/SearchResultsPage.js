@@ -3,6 +3,7 @@ import SearchBar from 'material-ui-search-bar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
+import Button from './../Button';
 import style from './SearchResultsPage.scss';
 import Posting from './Posting';
 import ViewPost from './../ViewPost';
@@ -127,6 +128,7 @@ class SearchResultsPage extends React.Component {
       <Link to="/some/where/search">
         <button id="navigate" className={style.navigate}/>
       </Link>
+
       <MuiThemeProvider>
         <SearchBar
           dataSource={auto}
@@ -152,6 +154,11 @@ class SearchResultsPage extends React.Component {
               <Posting title={value.title} price={value.price} hasImage={value.hasImg} id={value.postID} />
             </ul>)
           })}
+        </div>
+        <div className={style.back}>
+          <Link to="/some/where">
+            <Button buttonText="Back" />
+          </Link>
         </div>
       </div>
     );
