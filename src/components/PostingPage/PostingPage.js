@@ -93,7 +93,7 @@ class PostingPage extends React.Component {
     let _tag = document.querySelector('input[name="Tags"]').value;
     let _school = sessionStorage.getItem("schoolName");
     let _pictures = this.state.pictures;
-    firebase.auth().onAuthStateChanged(function(user) {
+    let user = firebase.auth().currentUser;
       if (user) {
         console.log("user is: " + user.email);
         var postnum;
@@ -152,7 +152,6 @@ class PostingPage extends React.Component {
       else {
         console.log("user does not exists")
       }
-     });
 
      this.setState({
        titlein: document.querySelector('input[name="Title"]').value,

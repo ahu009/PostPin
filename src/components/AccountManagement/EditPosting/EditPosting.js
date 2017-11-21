@@ -92,7 +92,7 @@ class EditPosting extends React.Component {
     let _tag = document.querySelector('input[name="Tags"]').value != '' ? document.querySelector('input[name="Tags"]').value : document.querySelector('input[name="Tags"]').placeholder;
     let _school = sessionStorage.getItem("schoolName");
     let _pictures = this.state.pictures;
-    firebase.auth().onAuthStateChanged(function(user) {
+    let user = firebase.auth().currentUser;
       if (user) {
         console.log("user is: " + user.email);
         var postnum;
@@ -208,7 +208,7 @@ class EditPosting extends React.Component {
 
         <div className={style.submit} onClick={this.handleSubmit}>
           {this.state.showError ? <div className={style.error}> Errors Exist on Page </div> : null}
-          <Link to={this.state.canSubmit ? "/some/where" : "/some/where/else"}>
+          <Link to={this.state.canSubmit ? "/some/where/edit" : "/some/where/AccountManagement"}>
             <Button buttonText="Submit" />
           </Link>
         </div>
