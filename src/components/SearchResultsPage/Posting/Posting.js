@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './Posting.scss';
+import { Link } from 'react-router-dom';
 
 /**
  * UI Component
@@ -14,7 +15,9 @@ class Posting extends React.Component {
     let hasImageText = this.props.hasImage ? "w/ img" : "no img";
     return (
       <div className={style.container}>
-        <p className={style.text}> {this.props.title} -- {`$${this.props.price}`} [{hasImageText}] </p>
+        <Link to={`/some/where/${this.props.id}`}>
+          <p className={style.text}> {this.props.title} -- {`$${this.props.price}`} [{hasImageText}] </p>
+        </Link>
       </div>
     );
   }

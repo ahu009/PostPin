@@ -40,7 +40,7 @@ class AccountManagement extends React.Component {
           var numpost = snapshot.val().Posts;
           console.log("newpass: " + newpass);
           console.log("Phone: " + phones);
-          console.log("Possts: " + numpost)
+          console.log("Posts: " + numpost)
           that.setState({accountInformation: {email: useremail, phone: phones, password: newpass}});
           var j = numpost;
           console.log("j: " + j)

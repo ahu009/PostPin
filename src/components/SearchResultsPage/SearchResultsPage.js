@@ -1,12 +1,14 @@
 import React from 'react';
 import SearchBar from 'material-ui-search-bar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 import style from './SearchResultsPage.scss';
 import Posting from './Posting';
+import ViewPost from './../ViewPost';
 import auto from './../SearchPage/TempAutoFill';
-import { Link } from 'react-router-dom';
 import firebase from './../../firebase.js';
+
 
 /**
  * UI Component
@@ -47,16 +49,17 @@ class SearchResultsPage extends React.Component {
               title: data.val().title,
               price: data.val().price,
               hasImg: false,
-              postID: data.val().description,
+              postID: `${data.val().price}+${data.val().school.replace(/\s/g, '')}+${data.val().tags}+${data.val().description}`,
               tags: data.val().tag,
               school: data.val().school,
+              description: data.val().description,
+              posterEmail: data.val().posterEmail,
             }
             if (that.queryPriceRange(posting) && that.queryKeyword(posting) && that.queryTags(posting) && that.querySchool(posting)) {
               temparr.push(posting);
-              that.setState({posts: temparr});
             }
           })
-
+          that.setState({posts: temparr});
         });
       }
     });
@@ -143,13 +146,10 @@ class SearchResultsPage extends React.Component {
         </div>
         <hr className={style.line}/>
 
-
         <div className={style.postingContainer}>
           {this.state.posts.map((value) => {
-            return (<ul>
-              <Link to="/some/where/search/posting">
-                <Posting title={value.title} price={value.price} hasImage={value.hasImg}/>
-              </Link>
+            return (<ul onClick={() => setTimeout(this.props.refresh(this.state.posts))}>
+              <Posting title={value.title} price={value.price} hasImage={value.hasImg} id={value.postID} />
             </ul>)
           })}
         </div>
