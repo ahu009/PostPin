@@ -17,7 +17,7 @@
 
    .price {
      color: green;
-     left: 3%;
+     left: 1%;
      top: 13%;
      margin-left: 659px;
      width: 30%;
@@ -34,8 +34,8 @@
    }
 
    .posterInfo {
-     top: 60%;
-     left: 3%;
+     top: 30%;
+     left: 1%;
      margin-left: 655px;
      width: 30%;
      position: absolute;
@@ -54,7 +54,13 @@
      height: 454px;
      width: 600px;
      overflow: scroll;
-     top: 56%;
+     top: 33%;
+   }
+
+   .picture {
+     right: 48%;
+     bottom: 12%;
+     position: fixed;
    }
 
    .back {
