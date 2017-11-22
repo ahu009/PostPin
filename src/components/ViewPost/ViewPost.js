@@ -69,13 +69,27 @@ class ViewPost extends React.Component {
           {this.props.description}
         </div>
 
+
         <div className={style.images}>
-          {console.log(this.state.pictures)}
-          <img src={this.state.pictures[this.state.picIndex]} height={454} width={600} />
+        {
+          this.props.numPics < 1
+          ?
+           null
+          :
+          <img src={this.state.pictures[this.state.picIndex]} height={454} width={600}/>
+        }
         </div>
 
-        <div className= {style.picture} onClick={this.changeImage}>
-          <Button buttonText="Next Image"/>
+        <div>
+        {
+          this.props.numPics <= 1
+          ?
+          null
+          :
+          <div className= {style.picture} onClick={this.changeImage}>
+            <Button buttonText="Next Image"/>
+          </div>
+        }
         </div>
 
         <div className={style.posterInfo}>

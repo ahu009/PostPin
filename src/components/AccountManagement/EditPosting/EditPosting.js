@@ -45,19 +45,34 @@ class EditPosting extends React.Component {
       pricein: '',
       descriptionin: '',
       tagsin: '',
-      postnumber:''
+      postnumber:'',
+      picturesUpload: [],
     };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.onDrop = this.onDrop.bind(this);
     this.rejectSubmit = this.rejectSubmit.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.displayImages = this.displayImages.bind(this);
+    this.deleteImages = this.deleteImages.bind(this);
+  }
+
+  componentDidMount () {
+    let postNum = JSON.parse(sessionStorage.getItem("postEdit")).postID;
+    let numPics = JSON.parse(sessionStorage.getItem("postEdit")).numPics;
+    let posterID = JSON.parse(sessionStorage.getItem("postEdit")).posterID;
+    for (var i = 0; i < numPics; ++i) {
+      var pics = firebase.storage().ref(posterID).child(postNum.toString()).child(i.toString());
+      pics.getDownloadURL().then(function(url){
+        this.setState ({pictures: this.state.pictures.concat(url)});
+      }.bind(this))
+    }
   }
 
   onDrop(picture) {
     if (picture) {
       this.setState({
-        pictures: this.state.pictures.concat(picture)
+        picturesUpload: this.state.picturesUpload.concat(picture)
       });
       setTimeout(() => {
         let elementtoscroll = document.querySelectorAll('div[class="uploadPictureContainer"]')[document.querySelectorAll('div[class="uploadPictureContainer"]').length - 1];
@@ -91,7 +106,7 @@ class EditPosting extends React.Component {
     let _description = document.querySelector('input[name="Body"]').value != '' ? document.querySelector('input[name="Body"]').value : document.querySelector('input[name="Body"]').placeholder;
     let _tag = document.querySelector('input[name="Tags"]').value != '' ? document.querySelector('input[name="Tags"]').value : document.querySelector('input[name="Tags"]').placeholder;
     let _school = sessionStorage.getItem("schoolName");
-    let _pictures = this.state.pictures;
+    let _pictures = this.state.picturesUpload;
     let user = firebase.auth().currentUser;
       if (user) {
         console.log("user is: " + user.email);
@@ -99,12 +114,39 @@ class EditPosting extends React.Component {
         let postingID = JSON.parse(sessionStorage.getItem("postEdit")).postID;
         //firebase.database().ref('users/' + user.uid).update({Posts: postnum});
         firebase.database().ref('users/' + user.uid + '/posts/' + postingID).update({title: _title, price: _price, description: _description, tag: _tag, school:_school});
-
-      }
-      else {
-        console.log("user does not exists")
       }
 
+      var getpostdata = firebase.database().ref('users/' + user.uid);
+      getpostdata.once('value',function(snapshot){
+        postnum = snapshot.val().Posts;
+        let numPics = JSON.parse(sessionStorage.getItem("postEdit")).numPics;
+        for (var i = 0; i < _pictures.length; i++) {
+          var pics = firebase.storage().ref(user.uid).child(postnum.toString()).child((i+numPics).toString());
+          var currpic = pics.put(_pictures[i][0]);
+          currpic.on('state_changed',
+          function progress(snapshot) {
+            if (snapshot.bytesTransferred == snapshot.totalbytes) {
+              console.log("Image Successfully Uploaded!");
+            }
+            else {
+              console.log("uploading...");
+            }
+          },
+          function error(err) {
+            console.log("errrorrssssss");
+          },
+          function complete() {
+            console.log("success!");
+          }
+          );
+
+
+        }
+        const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
+        post.update({
+          numPics: _pictures.length + numPics
+        });
+      })
      this.setState({
        titlein: document.querySelector('input[name="Title"]').value,
        pricein: document.querySelector('input[name="Price"]').value,
@@ -112,6 +154,26 @@ class EditPosting extends React.Component {
        tagsin: document.querySelector('input[name="Tags"]').value
      });
    }
+
+    displayImages () {
+      this.state.pictures.map((value) => {
+        return (<img src={value} height={100} width={120} />)
+      })
+
+    }
+
+    deleteImages () {
+      let postNum = JSON.parse(sessionStorage.getItem("postEdit")).postID;
+      let numPics = JSON.parse(sessionStorage.getItem("postEdit")).numPics;
+      let posterID = JSON.parse(sessionStorage.getItem("postEdit")).posterID;
+      for (var i = 0; i < numPics; ++i) {
+        var pics = firebase.storage().ref(posterID).child(postNum.toString()).child(i.toString());
+        pics.delete().then(function() {
+          console.log("DELETED BITCH");
+        }.bind(this))
+      }
+      this.setState({pictures: []})
+    }
 
   /**
    * Render function for UIComponent Component
@@ -138,7 +200,17 @@ class EditPosting extends React.Component {
 
     return (
       <div className={style.container}>
+      <div className={style.delete} onClick={this.deleteImages}>
+        Clear
+      </div>
 
+      <div className={style.picsOrDidntHappen}>
+        {
+          this.state.pictures.map((value) => {
+            return (<img src={value} height={100} width={120} />)
+          })
+        }
+      </div>
         <div className = {style.title}>
           Title
           <ReactTextField
