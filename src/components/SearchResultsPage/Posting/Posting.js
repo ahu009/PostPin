@@ -16,7 +16,7 @@ class Posting extends React.Component {
     return (
       <div className={style.container}>
         <Link to={`/some/where/${this.props.id}`}>
-          <p className={style.text}> {this.props.title} -- {`$${this.props.price}`} [{hasImageText}] </p>
+          <p className={style.text}> {this.props.title} -- {`$${this.props.price}`} </p>
         </Link>
       </div>
     );
