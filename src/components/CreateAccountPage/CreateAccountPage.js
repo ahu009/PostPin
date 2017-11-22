@@ -140,6 +140,18 @@ class CreateAccountPage extends React.Component {
      if(firebaseAuth) {
        firebase.auth().createUserWithEmailAndPassword(em, pass).then((response) => {
          this.setState({shouldCreateAccountFirebase: true, firebaseErrorMessage: ''});
+
+
+         var euser = firebase.auth().currentUser;
+
+         euser.sendEmailVerification().then(function() {
+           // Email sent.
+           console.log("account created for: " + euser.email);
+         }).catch(function(error) {
+           // An error happened.
+           console.log("cannot send eamil creation");
+         });
+
          let user = firebase.auth().currentUser;
          if (user) {
            const account = firebase.database().ref("users").child(user.uid);

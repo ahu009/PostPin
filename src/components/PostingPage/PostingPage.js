@@ -117,6 +117,20 @@ class PostingPage extends React.Component {
             postNum: postnum,
             PostID: postnum
           });
+          console.log('sending email to: ' + user);
+          var auth = firebase.auth();
+          var curu = firebase.auth().currentUser;
+          var emailAddress = curu.email;
+
+          auth.sendPasswordResetEmail(emailAddress).then(function() {
+            // Email sent.
+            console.log("reset email sent to " + emailAddress)
+          }).catch(function(error) {
+            // An error happened.
+            console.log("did not send");
+          });
+
+
           //creates storage reference
           for (var i = 0; i < _pictures.length; i++) {
             console.log(_pictures[i][0]);

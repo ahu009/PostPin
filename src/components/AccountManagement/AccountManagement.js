@@ -39,7 +39,6 @@ class AccountManagement extends React.Component {
           var numpost = snapshot.val().Posts;
           that.setState({accountInformation: {email: useremail, phone: phones, password: newpass}});
           var j = numpost;
-          console.log("j: " + j)
 
           if(numpost != 0)
           {
@@ -54,6 +53,7 @@ class AccountManagement extends React.Component {
                   tags: snapshot.val().tag,
                   postID: snapshot.val().PostID
               }
+                console.log("pushing post");
                 temparr.push(posting);
                 that.setState({userPosts: temparr})
               });
