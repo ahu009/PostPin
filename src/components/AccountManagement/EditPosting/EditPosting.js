@@ -173,6 +173,11 @@ class EditPosting extends React.Component {
         }.bind(this))
       }
       this.setState({pictures: []})
+      let user = firebase.auth().currentUser;
+      const post = firebase.database().ref("users").child(user.uid).child("posts").child(postNum);
+      post.update({
+        numPics: 0
+      });
     }
 
   /**
