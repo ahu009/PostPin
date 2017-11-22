@@ -7,6 +7,25 @@
    font-family: sans-serif;
    letter-spacing: 1px;
 
+   .picsOrDidntHappen {
+     position: absolute;
+     width: 50%;
+     background-color: white;
+     top: 60%;
+     left: 50%;
+     box-shadow: none !important;
+   }
+
+   .delete {
+     top: 55%;
+     position: absolute;
+     left: 50%;
+     text-decoration: underline;
+     &:hover {
+       cursor: pointer;
+     }
+   }
+
    .title {
      top: 11%;
      left: 19%;
@@ -38,7 +57,7 @@
 
    .upload {
      position: absolute;
-     width: 100%;
+     width: 50%;
      background-color: white;
      top: 60%;
      box-shadow: none !important;
