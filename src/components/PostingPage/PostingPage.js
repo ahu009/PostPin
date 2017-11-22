@@ -115,7 +115,7 @@ class PostingPage extends React.Component {
             numPics: _pictures.length,
             posterID: user.uid,
             postNum: postnum,
-            postID: postnum
+            PostID: postnum
           });
           //creates storage reference
           for (var i = 0; i < _pictures.length; i++) {
