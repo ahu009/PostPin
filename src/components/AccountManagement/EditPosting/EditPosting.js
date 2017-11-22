@@ -104,7 +104,6 @@ class EditPosting extends React.Component {
       else {
         console.log("user does not exists")
       }
-     });
 
      this.setState({
        titlein: document.querySelector('input[name="Title"]').value,
