@@ -47,6 +47,7 @@ class EditPosting extends React.Component {
       tagsin: '',
       postnumber:'',
       picturesUpload: [],
+      clearedPictures: false,
     };
     this.checkSubmit = this.checkSubmit.bind(this);
     this.onDrop = this.onDrop.bind(this);
@@ -61,6 +62,7 @@ class EditPosting extends React.Component {
     let postNum = JSON.parse(sessionStorage.getItem("postEdit")).postID;
     let numPics = JSON.parse(sessionStorage.getItem("postEdit")).numPics;
     let posterID = JSON.parse(sessionStorage.getItem("postEdit")).posterID;
+    this.setState({clearedPictures: false});
     for (var i = 0; i < numPics; ++i) {
       var pics = firebase.storage().ref(posterID).child(postNum.toString()).child(i.toString());
       pics.getDownloadURL().then(function(url){
@@ -121,7 +123,9 @@ class EditPosting extends React.Component {
         postnum = snapshot.val().Posts;
         let numPics = JSON.parse(sessionStorage.getItem("postEdit")).numPics;
         for (var i = 0; i < _pictures.length; i++) {
-          var pics = firebase.storage().ref(user.uid).child(postnum.toString()).child((i+numPics).toString());
+          var pics = that.state.clearedPictures
+                      ? firebase.storage().ref(user.uid).child(postnum.toString()).child((i).toString())
+                      : firebase.storage().ref(user.uid).child(postnum.toString()).child((i+numPics).toString())
           var currpic = pics.put(_pictures[i][0]);
           currpic.on('state_changed',
           function progress(snapshot) {
@@ -143,8 +147,9 @@ class EditPosting extends React.Component {
 
         }
         const post = firebase.database().ref("users").child(user.uid).child("posts").child(postnum);
+        let updatedNumPics = that.state.pictures.length;
         post.update({
-          numPics: _pictures.length + numPics
+          numPics: _pictures.length + updatedNumPics
         });
       })
      this.setState({
@@ -172,12 +177,7 @@ class EditPosting extends React.Component {
           console.log("DELETED BITCH");
         }.bind(this))
       }
-      this.setState({pictures: []})
-      let user = firebase.auth().currentUser;
-      const post = firebase.database().ref("users").child(user.uid).child("posts").child(postNum);
-      post.update({
-        numPics: 0
-      });
+      this.setState({pictures: [], clearedPictures: true})
     }
 
   /**

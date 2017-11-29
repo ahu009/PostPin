@@ -12,7 +12,6 @@ class Posting extends React.Component {
    * @return {JSX} Component to render
    */
   render () {
-    let hasImageText = this.props.hasImage ? "w/ img" : "no img";
     return (
       <div className={style.container}>
         <Link to={`/some/where/${this.props.id}`}>
