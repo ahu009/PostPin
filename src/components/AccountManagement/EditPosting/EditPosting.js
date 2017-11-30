@@ -276,7 +276,7 @@ class EditPosting extends React.Component {
                   withIcon={true}
                   buttonText='Choose images'
                   onChange={this.onDrop}
-                  imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                  imgExtension={['.JPG', '.jpg', '.png', '.PNG','.gif', '.GIF']}
                   maxFileSize={5242880}
                   label='Max file size: 5mb, Accepted: jpg, gif, png, gif'
             />
