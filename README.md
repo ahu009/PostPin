@@ -1,6 +1,6 @@
-# DoodlyDoo
+# PostPin
 #### Mobile App to organize your appointments
-##### -- React Native, Firebase, Bootstrap, Webpack
+##### -- React, Firebase, Bootstrap, Webpack
 
 <img src="https://i.imgur.com/rMnXxkj.gif" height="300"/>
 
