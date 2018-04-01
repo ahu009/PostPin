@@ -32,7 +32,7 @@ npm start;
 - Search screen (Search engine, filters, post button)
 - Post screen (Post your shit, upload images)
 
-### Features (Add whatever you want, need to narrow to 8)
+### Features
 1. Location/School based searching
 2. Auto email (confirmation after post)
 3. Search Engine
