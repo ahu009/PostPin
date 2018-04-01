@@ -1,8 +1,10 @@
-Technologies we will be using:
-- Firebase or couchbase for backend
-- React + JavaScript for front end
+# DoodlyDoo
+#### Mobile App to organize your appointments
+##### -- React Native, Firebase, Bootstrap, Webpack
 
-### Shit you need
+<img src="https://i.imgur.com/rMnXxkj.gif" height="300"/>
+
+### Requirements to run
 - Yarn and npm (google how to install with brew)
 - node version 6.9.2 (```npm install -g n; n 6.9.2```)
 
@@ -22,7 +24,8 @@ For npm:
 npm install;
 npm start;
 ```
-- Starter Kit should run a simple 'Hello World' app on port: http://127.0.0.1:8888/
+
+- App will run on port: http://127.0.0.1:8888/
 
 ### Screens
 - School screen (Select which school you attend)
