@@ -1,5 +1,5 @@
 # PostPin
-#### Mobile App to organize your appointments
+#### Web App for college students to buy, sell, and trade
 ##### -- React, Firebase, Bootstrap, Webpack
 
 <img src="https://i.imgur.com/rMnXxkj.gif" height="300"/>
